@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兩個房間和一個炸彈 (Two Rooms and a Boom) - 繁體中文規則</title>
+    <style>
+        :root {
+            --red-team: #e74c3c;
+            --blue-team: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px; /* Space for bottom nav if needed, or just breathing room */
+        }
+        header {
+            background: linear-gradient(135deg, var(--red-team) 0%, var(--blue-team) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            color: #34495e;
+        }
+        h3 {
+            color: #555;
+            margin-top: 1.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .highlight-box {
+            background-color: #e8f6f3;
+            border-left: 5px solid #1abc9c;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .red-text { color: var(--red-team); font-weight: bold; }
+        .blue-text { color: var(--blue-team); font-weight: bold; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        /* Navigation */
+        .floating-nav-container {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-nav-container.collapsed {
+            transform: translateY(-50%) translateX(calc(100% - 40px)); /* Keep button visible */
+        }
+        
+        /* Mobile adjustment: if screen is narrow, maybe collapsing logic differs, 
+           but for now "translateX" works well if the button sticks out */
+
+        .nav-toggle-btn {
+            background: var(--blue-team);
+            color: white;
+            border: none;
+            padding: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px 0 0 5px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+            width: 40px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-nav-content {
+            background: white;
+            padding: 1rem;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0 0 0 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            min-width: 120px;
+        }
+
+        .nav-link-item {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.95rem;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            display: block;
+        }
+
+        .nav-link-item:hover {
+            background-color: #f0f0f0;
+            color: var(--blue-team);
+        }
+
+        .nav-link-item.active {
+            background-color: var(--blue-team);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Cheat Sheet Table */
+        .cheat-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        .cheat-table th, .cheat-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .cheat-table th {
+            background-color: #34495e;
+            color: white;
+            font-weight: normal;
+        }
+        .cheat-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .cheat-table .player-col {
+            font-weight: bold;
+            background-color: #ecf0f1;
+            width: 25%;
+        }
+        .cheat-table .disabled-round {
+            background-color: #ddd;
+            color: #999;
+        }
+
+        .role-icon {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.8em;
+        }
+        .role-red { background-color: var(--red-team); }
+        .role-blue { background-color: var(--blue-team); }
+        .role-gray { background-color: #7f8c8d; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>兩個房間和一個炸彈</h1>
+    <p>Two Rooms and a Boom - 繁體中文規則</p>
+    <div style="margin-top: 10px;">
+        <a href="../index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 20px; margin-right: 10px;">🏠 返回首頁</a>
+        <a href="characters.html" style="color: white; text-decoration: underline; font-weight: bold; font-size: 1.1rem; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; margin-right: 10px;">🔍 角色能力查詢</a>
+        <a href="setup.html" style="color: white; text-decoration: underline; font-weight: bold; font-size: 1.1rem; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px;">📋 遊戲配置查詢</a>
+    </div>
+</header>
+
+<div class="floating-nav-container" id="floatingNav">
+    <button class="nav-toggle-btn" onclick="toggleNav()">
+        ☰
+    </button>
+    <div class="floating-nav-content">
+        <a href="#intro" class="nav-link-item" data-target="intro">遊戲簡介</a>
+        <a href="#setup" class="nav-link-item" data-target="setup">設置</a>
+        <a href="#basic-rules" class="nav-link-item" data-target="basic-rules">基本規則</a>
+        <a href="#leaders" class="nav-link-item" data-target="leaders">隊長與人質</a>
+        <a href="#gameplay" class="nav-link-item" data-target="gameplay">遊戲流程</a>
+        <a href="#winning" class="nav-link-item" data-target="winning">勝利條件</a>
+        <a href="#advanced" class="nav-link-item" data-target="advanced">進階規則</a>
+    </div>
+</div>
+
+<script>
+    function toggleNav() {
+        const nav = document.getElementById('floatingNav');
+        nav.classList.toggle('collapsed');
+        const btn = nav.querySelector('.nav-toggle-btn');
+        if (nav.classList.contains('collapsed')) {
+             btn.innerHTML = "☰"; // Menu icon
+        } else {
+             btn.innerHTML = "✕"; // Close icon
+        }
+    }
+    
+    // Auto collapse on mobile
+    document.querySelectorAll('.nav-link-item').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                toggleNav();
+            }
+        });
+    });
+
+    // Active Section Highlighting
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = ['intro', 'setup', 'basic-rules', 'leaders', 'gameplay', 'winning', 'advanced'];
+        const navLinks = document.querySelectorAll('.nav-link-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Trigger when section is near top/middle
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active from all
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    // Add active to current
+                    const activeLink = document.querySelector(`.nav-link-item[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) observer.observe(section);
+        });
+        
+        // Handle "box-content" which isn't in nav but between intro and setup
+        // We might want to just let "intro" stay active or observe box-content and map it to intro?
+        // Let's keep it simple for now.
+    });
+</script>
+
+<div class="container">
+    <!-- Old nav removed -->
+
+    <div id="intro" class="card">
+        <h2>遊戲概述</h2>
+        <p><strong>人數：</strong> 6-30人 | <strong>時間：</strong> 7-20分鐘 | <strong>年齡：</strong> 8歲以上</p>
+        <p>在《兩個房間和一個炸彈》中，有兩個陣營（<span class="red-text">紅隊</span>與<span class="blue-text">藍隊</span>）和兩個房間。
+        藍隊擁有<span class="role-icon role-blue">總統</span>，紅隊擁有<span class="role-icon role-red">炸彈客</span>。</p>
+        <p>玩家最初被平均分配到兩個獨立的遊戲區域（通常是兩個分開的房間），這兩個區域的玩家不能互相交流。</p>
+        <div class="highlight-box">
+            <strong>目標：</strong><br>
+            遊戲結束時：<br>
+            如果 <span class="role-icon role-red">炸彈客</span> 和 <span class="role-icon role-blue">總統</span> 在同一個房間 -> <span class="red-text">紅隊獲勝</span>（炸彈爆炸！）<br>
+            如果他們在不同房間 -> <span class="blue-text">藍隊獲勝</span>（總統安全！）
+        </div>
+    </div>
+
+    <div id="box-content" class="card">
+        <h2>盒內配件</h2>
+        <ul>
+            <li><strong>基本角色卡 (x17)：</strong> 總統、炸彈客、紅隊隊員 x7、藍隊隊員 x7、賭徒。</li>
+            <li><strong>進階角色卡 (x93)：</strong> 熟悉基本規則後使用的特殊能力卡。</li>
+            <li><strong>隊長卡 (x2)：</strong> 每個房間一張，由隊長持有。</li>
+            <li><strong>計時器：</strong> 不包含在盒內，請使用手機或手錶。</li>
+        </ul>
+    </div>
+
+    <div id="setup" class="card">
+        <h2>遊戲設置</h2>
+        <ol>
+            <li><strong>準備角色牌庫：</strong> 取出炸彈客、總統，以及相同數量的紅隊與藍隊卡片，總數等於玩家人數。（奇數玩家時加入賭徒）。洗混牌庫。</li>
+            <li><strong>分房：</strong> 將玩家隨機且盡可能平均地分成兩個房間。房間之間不能互相聽見對話。</li>
+            <li><strong>發牌：</strong> 每位玩家發一張面朝下的角色卡。卡片均為隱藏資訊，但在遊戲中可以展示。</li>
+            <li><strong>開始計時：</strong> 遊戲開始！</li>
+        </ol>
+        <p><strong>回合時間：</strong></p>
+        <ul>
+            <li>第一回合：3 分鐘</li>
+            <li>第二回合：2 分鐘</li>
+            <li>第三回合：1 分鐘</li>
+        </ul>
+    </div>
+
+    <div id="basic-rules" class="card">
+        <h2>4條基本規則</h2>
+        <ol>
+            <li><strong>時間公開：</strong> 計時器對所有人公開，這不是秘密。</li>
+            <li><strong>留在房內：</strong> 你不能隨意走去另一個房間。</li>
+            <li><strong>房間之間禁言：</strong> 禁止對另一個房間大喊、竊聽或使用手語。</li>
+            <li><strong>卡片歸你：</strong> 你可以向任何人（或所有人）展示你的卡片，也可以不給任何人看。
+                <ul>
+                    <li><strong>禁止交換：</strong> 不能與他人交換卡片。</li>
+                    <li><strong>全展示：</strong> 要展示就要展示整張卡，不能只露出一角或只說顏色（基本規則下）。</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div id="leaders" class="card">
+        <h2>隊長 (Leaders) & 人質 (Hostages)</h2>
+        <h3>隊長 (Leader)</h3>
+        <p>每個房間選出一名隊長。隊長由玩家任命（指著某人說「我選你當隊長！」）。第一位被任命的人獲得隊長卡。</p>
+        <ul>
+            <li><strong>職責：</strong> 隊長負責挑選回合結束時要交換的人質。</li>
+            <li><strong>限制：</strong> 隊長自己不能成為人質。</li>
+        </ul>
+
+        <h3>更換隊長</h3>
+        <p>如果你不喜歡現任隊長，可以發起篡位！</p>
+        <ul>
+            <li><strong>讓位：</strong> 現任隊長可以自願將隊長卡交給亦願意的玩家。</li>
+            <li><strong>篡位：</strong> 舉起一隻手，並用另一隻手指向你想推舉的新隊長。當房間內<strong>超過半數</strong>玩家指向同一人時，該玩家立即成為新隊長。</li>
+        </ul>
+
+        <h3>人質 (Hostages)</h3>
+        <p>回合結束時，隊長必須挑選指定數量的人質送到對面房間。</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>玩家人數</th>
+                    <th>第一回合 (3分)</th>
+                    <th>第二回合 (2分)</th>
+                    <th>第三回合 (1分)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>6-10</td>
+                    <td>1 人質</td>
+                    <td>1 人質</td>
+                    <td>1 人質</td>
+                </tr>
+                <tr>
+                    <td>11-21</td>
+                    <td>2 人質</td>
+                    <td>1 人質</td>
+                    <td>1 人質</td>
+                </tr>
+                <tr>
+                    <td>22+</td>
+                    <td>3 人質</td>
+                    <td>2 人質</td>
+                    <td>1 人質</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="gameplay" class="card">
+        <h2>回合結束流程</h2>
+        <p>每回合時間到時，隊長必須按順序執行以下步驟：</p>
+        <ol>
+            <li><strong>隊長挑選人質：</strong> 向大家宣佈誰是人質。一旦選定不能更改。</li>
+            <li><strong>隊長交涉 (Parley)：</strong> 雙方隊長走到房間中間（走廊）會面。人質不隨行。</li>
+            <li><strong>開始下一回合計時：</strong> 隊長們一起啟動下一回合的計時器（如果是最後一回合則跳過）。</li>
+            <li><strong>交換人質：</strong> 隊長呼喚各自選定的人質過來，進行交換。</li>
+            <li><strong>返回房間：</strong> 帶著新的人質回到各自房間。</li>
+        </ol>
+    </div>
+
+    <div id="winning" class="card">
+        <h2>遊戲結束 (Game Over)</h2>
+        <p>最後一次人質交換（第三回合結束）後，遊戲結束。所有人亮出卡片！</p>
+        <div class="highlight-box" style="text-align: center;">
+            <p><span class="role-icon role-red">炸彈客</span> 與 <span class="role-icon role-blue">總統</span> 在同一房間？</p>
+            <h3 class="red-text">💥 炸彈爆炸！紅隊獲勝！ 💥</h3>
+            <hr>
+            <p>他們在不同房間？</p>
+            <h3 class="blue-text">🛡️ 總統生還！藍隊獲勝！ 🛡️</h3>
+        </div>
+        
+        <h3>灰色角色：賭徒 (The Gambler)</h3>
+        <p>如果有奇數玩家，會加入<span class="role-icon role-gray">賭徒</span>。</p>
+        <p>遊戲結束最後一刻，在大家亮牌前，賭徒先亮牌並暫停遊戲。賭徒必須預測哪一隊會贏。如果猜對了，賭徒獲勝（獨贏）！</p>
+    </div>
+
+    <div id="advanced" class="card">
+        <h2>進階規則</h2>
+        <p>熟悉基本遊戲後，可以加入以下規則：</p>
+        <ul>
+            <li><strong>顏色展示 (Color Share/Reveal)：</strong> 10人以上遊戲時，允許只展示卡片的一角（顏色），而不展示具體角色文字。</li>
+            <li><strong>更多角色：</strong> 加入進階角色卡。若角色卡敘述與基本規則衝突，以角色卡為準。</li>
+            <li><strong>更多回合：</strong> 可以增加5分鐘和4分鐘的回合（共5回合），適合人數多的局。</li>
+        </ul>
+        <h3>詞彙表</h3>
+        <ul>
+            <li><strong>埋牌 (Burying)：</strong> 故意多發一張牌並將多餘的一張蓋住不使用，增加不確定性。</li>
+            <li><strong>展示 (Reveal)：</strong> 單方面給別人看。</li>
+            <li><strong>分享 (Share)：</strong> 雙方互看（我給你看，你也給我看）。</li>
+        </ul>
+    </div>
+
+    <!-- Cheat Sheet Section -->
+    <div id="cheatsheet" class="card" style="border-top: 5px solid #2c3e50;">
+        <h2>速查表：每倫人質交換數量</h2>
+        <div style="overflow-x: auto;">
+            <table class="cheat-table">
+                <thead>
+                    <tr>
+                        <th>玩家人數</th>
+                        <th>Round 1<br>(5 min)</th>
+                        <th>Round 2<br>(4 min)</th>
+                        <th>Round 3<br>(3 min)</th>
+                        <th>Round 4<br>(2 min)</th>
+                        <th>Round 5<br>(1 min)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="player-col">6-10 人<br><span style="font-size:0.8em; color:#7f8c8d;">僅進行 3 輪</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td class="disabled-round">-</td>
+                        <td class="disabled-round">-</td>
+                    </tr>
+                    <tr>
+                        <td class="player-col">11-13 人</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td class="player-col">14-17 人</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td class="player-col">18-21 人</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td class="player-col">22+ 人</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+            <strong>註：</strong> 11人以下通常只進行 3 輪遊戲，且建議不進行顏色揭露 (Color Reveal)。
+        </p>
+    </div>
+
+    <footer style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 2rem;">
+        <p>非官方繁體中文翻譯規則 | 基於 Two Rooms and a Boom Rulebook V3.pdf 製作</p>
+        <p>翻譯與製作：AI Agent (Antigravity)</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

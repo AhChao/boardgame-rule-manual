@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色查詢 - 兩個房間和一個炸彈</title>
+    <style>
+        :root {
+            --red-team: #e74c3c;
+            --blue-team: #3498db;
+            --grey-team: #95a5a6;
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--red-team) 0%, var(--blue-team) 100%);
+            color: white;
+            padding: 1rem; /* Compact header for subpage */
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            float: left;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin: 1rem 0 2rem 0;
+            position: sticky;
+            top: 70px; /* Below header */
+            z-index: 90;
+            background: var(--bg-color);
+            padding: 10px 0;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            border-color: var(--blue-team);
+            outline: none;
+        }
+
+        /* Character Grid */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .char-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-top: 5px solid #ccc;
+            transition: transform 0.2s;
+        }
+        .char-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .char-card.team-blue { border-top-color: var(--blue-team); }
+        .char-card.team-red { border-top-color: var(--red-team); }
+        .char-card.team-grey { border-top-color: var(--grey-team); }
+        .char-card.team-green { border-top-color: #27ae60; } /* Special */
+
+        .char-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        .char-names h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .char-names span {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        .char-desc {
+            font-size: 0.95rem;
+            color: #444;
+        }
+        
+        .badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            color: white;
+            background: #999;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link">← 回到規則</a>
+    <h1>角色能力查詢</h1>
+</header>
+
+<div class="container">
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜尋角色名稱 (中/英) 或能力...">
+    </div>
+
+    <div class="char-grid" id="charGrid">
+        <!-- Cards will be injected here JS -->
+    </div>
+
+</div>
+
+<script>
+    const characters = [
+        {
+            en: "President",
+            zh: "總統",
+            team: "blue",
+            desc: "藍隊核心。如果遊戲結束時你與炸彈客在同一房間，藍隊輸，紅隊贏。若不在同一房間，藍隊贏。"
+        },
+        {
+            en: "Bomber",
+            zh: "炸彈客",
+            team: "red",
+            desc: "紅隊核心。如果遊戲結束時你與總統在同一房間，炸彈爆炸，紅隊贏。"
+        },
+        {
+            en: "Blue Team",
+            zh: "藍隊隊員",
+            team: "blue",
+            desc: "保護總統，確保總統不與炸彈客在同一房間。"
+        },
+        {
+            en: "Red Team",
+            zh: "紅隊隊員",
+            team: "red",
+            desc: "協助炸彈客，確保炸彈客與總統在同一房間。"
+        },
+        {
+            en: "Gambler",
+            zh: "賭徒",
+            team: "grey",
+            desc: "在最後一回合結束前亮牌暫停遊戲，猜測哪一隊會贏。猜對即獲勝。"
+        },
+        {
+            en: "Innocent",
+            zh: "無辜路人",
+            team: "grey",
+            desc: "沒有特殊能力，只能希望自己不要被波及。"
+        },
+        /* Advanced Characters */
+        {
+            en: "Agent",
+            zh: "特務",
+            team: "blue",
+            desc: "能力：每回合一次，你可以私下向一名玩家展示你的卡片，並強迫對方與你「分享卡片」。"
+        },
+        {
+            en: "Ambassador",
+            zh: "大使",
+            team: "blue",
+            desc: "獲得卡片時立即公開身份。你有「免疫」狀態，可在房間這自由走動，不佔人數，不參與投票，不能當人質。"
+        },
+        {
+            en: "Agoraphobe",
+            zh: "恐曠症患者",
+            team: "grey",
+            desc: "只要你從未離開過初始房間，你即獲勝。"
+        },
+        {
+            en: "Angel",
+            zh: "天使",
+            team: "blue",
+            desc: "如果總統沒有獲得「死亡」狀態，你獲勝。(通常這就是藍隊勝利條件)"
+        },
+        {
+            en: "Blind",
+            zh: "盲人",
+            team: "grey",
+            desc: "你有「失明」狀態。必須全程閉著眼睛玩遊戲。"
+        },
+        {
+            en: "Bouncer",
+            zh: "保鑣",
+            team: "grey",
+            desc: "能力：如果你所在房間人數多於另一間，你可以私下向某人展示卡片並說「出去！」，該玩家必須立即換房間。"
+        },
+        {
+            en: "Butler",
+            zh: "管家",
+            team: "grey",
+            desc: "如果遊戲結束時你與「女僕」和「總統」在同一房間，你獲勝。"
+        },
+        {
+            en: "Maid",
+            zh: "女僕",
+            team: "grey",
+            desc: "如果遊戲結束時你與「管家」和「總統」在同一房間，你獲勝。"
+        },
+        {
+            en: "Clown",
+            zh: "小丑",
+            team: "grey",
+            desc: "請全程保持微笑。"
+        },
+        {
+            en: "Conman",
+            zh: "騙子",
+            team: "grey",
+            desc: "能力：當玩家同意與你「顏色分享」時，改為私下展示(Private Reveal)。對方也必須向你私下展示。"
+        },
+        {
+            en: "Coy Boy",
+            zh: "害羞鬼",
+            team: "blue",
+            desc: "你有「害羞(Coy)」狀態。只能進行「顏色分享」，除非被強制。"
+        },
+        {
+            en: "Criminal",
+            zh: "罪犯",
+            team: "red",
+            desc: "能力：任何與你分享卡片的人獲得「靦腆(Shy)」狀態（不能向任何人展示卡片）。"
+        },
+        {
+            en: "Cupid",
+            zh: "邱比特",
+            team: "red",
+            desc: "每場遊戲一次，私下向兩名玩家展示卡片，說「你們相愛了」。他們獲得「相愛」狀態（必須在同一房間才能贏）。"
+        },
+        {
+            en: "Dealer",
+            zh: "發牌員",
+            team: "red",
+            desc: "能力：任何與你分享卡片的人獲得「愚蠢(Foolish)」狀態（永遠不能拒絕分享請求）。"
+        },
+        {
+            en: "Demon",
+            zh: "惡魔",
+            team: "red",
+            desc: "你有「說謊者」狀態。必須口頭說謊。"
+        },
+        {
+            en: "Doctor",
+            zh: "醫生",
+            team: "blue",
+            desc: "藍隊額外勝利條件：總統必須在遊戲結束前與醫生分享卡片，否則藍隊輸。"
+        },
+        {
+            en: "Engineer",
+            zh: "工程師",
+            team: "red",
+            desc: "紅隊額外勝利條件：炸彈客必須在遊戲結束前與工程師分享卡片，否則紅隊輸。"
+        },
+        {
+            en: "Drunk",
+            zh: "醉漢",
+            team: "grey",
+            desc: "遊戲開始前抽出一個「清醒」角色卡放在一旁。最後一回合開始時，醉漢必須去交換該卡，並變成該角色。"
+        },
+        {
+            en: "Dr. Boom",
+            zh: "布姆博士",
+            team: "red",
+            desc: "能力(BOOM)：如果你與總統「分享卡片」，和你同房間的所有人立即獲得「死亡」狀態，遊戲結束。"
+        },
+        {
+            en: "Enforcer",
+            zh: "執行者",
+            team: "red",
+            desc: "能力：每回合一次，私下向兩人展示卡片，強迫他們「互相」展示卡片。"
+        },
+        {
+            en: "Eris",
+            zh: "厄里斯",
+            team: "red",
+            desc: "每場遊戲一次，私下向兩人展示，讓他們獲得「仇恨」狀態（必須在不同房間才能贏）。"
+        },
+        {
+            en: "Hot Potato",
+            zh: "雷包 (Hot Potato)",
+            team: "grey",
+            desc: "能力：任何與你分享卡片或顏色的玩家，必須立即與你「交換卡片」。遊戲結束時持有此卡者輸。"
+        },
+        {
+            en: "Intern",
+            zh: "實習生",
+            team: "blue",
+            desc: "如果遊戲結束時你與總統在同一房間，你獲勝。"
+        },
+        {
+            en: "Victim",
+            zh: "受害者",
+            team: "blue",
+            desc: "如果遊戲結束時你與總統在同一房間，你獲勝。"
+        },
+        {
+            en: "Juliet",
+            zh: "茱麗葉",
+            team: "grey",
+            desc: "如果遊戲結束時你與「羅密歐」和「炸彈客」在同一房間，你獲勝。"
+        },
+        {
+            en: "Romeo",
+            zh: "羅密歐",
+            team: "grey",
+            desc: "如果遊戲結束時你與「茱麗葉」和「總統」在同一房間，你獲勝。"
+        },
+        {
+            en: "Leprechaun",
+            zh: "小精靈",
+            team: "green",
+            desc: "你有「愚蠢」狀態。能力：任何與你分享的人必須與你交換卡片。遊戲結束時持有此卡者獲勝。"
+        },
+        {
+            en: "Invincible",
+            zh: "無敵",
+            team: "blue",
+            desc: "你有「免疫」狀態，免疫所有能力與狀態。"
+        },
+        {
+            en: "Martyr",
+            zh: "烈士",
+            team: "red",
+            desc: "如果這局炸彈客卡片被「埋藏」，你代替成為炸彈客執行任務。"
+        },
+        {
+            en: "President's Daughter",
+            zh: "總統女兒",
+            team: "blue",
+            desc: "如果這局總統卡片被「埋藏」，你代替成為總統執行任務。"
+        },
+        {
+            en: "Mayor",
+            zh: "市長",
+            team: "grey",
+            desc: "篡位投票時，你的票算2票。（需公開展示）"
+        },
+        {
+            en: "Mastermind",
+            zh: "首腦",
+            team: "grey",
+            desc: "最後一回合結束時，你若是房間隊長，且曾經當過對面房間的隊長，你獲勝。"
+        },
+        {
+            en: "MI6",
+            zh: "軍情六處",
+            team: "blue",
+            desc: "如果你與總統和炸彈客都有分享過卡片，你輸。如果都沒有，且其他條件達成，你單獨獲勝。"
+        },
+        {
+            en: "Mime",
+            zh: "默劇演員",
+            team: "grey",
+            desc: "全程不能説話，盡量比手畫腳。"
+        },
+        {
+            en: "Mistress",
+            zh: "情婦",
+            team: "grey",
+            desc: "如果遊戲結束時你與總統在同一房間，且「妻子」不在，你獲勝。"
+        },
+        {
+            en: "Wife",
+            zh: "妻子",
+            team: "blue",
+            desc: "如果遊戲結束時你與總統在同一房間，且「情婦」不在，你獲勝。"
+        },
+        {
+            en: "Medic",
+            zh: "醫官",
+            team: "blue",
+            desc: "能力：與你分享卡片的人，解除所有異常狀態。"
+        },
+        {
+            en: "Mummy",
+            zh: "木乃伊",
+            team: "red",
+            desc: "能力：與你分享卡片的人獲得「詛咒」狀態（不能説話）。"
+        },
+        {
+            en: "Negotiator",
+            zh: "談判專家",
+            team: "blue",
+            desc: "你有「精明(Savvy)」狀態。只能進行「卡片分享」，不能展示或顏色分享。"
+        },
+        {
+            en: "Nuclear Tyrant",
+            zh: "核武暴君",
+            team: "red",
+            desc: "被孤立的暴君。如果你在最後成功讓總統和炸彈客都不曾與你分享卡片，你單獨獲勝。"
+        },
+        {
+            en: "Ahab",
+            zh: "亞哈",
+            team: "grey",
+            desc: "如果遊戲結束時「莫比」與炸彈客在同一房間，且你不在，你獲勝。"
+        },
+        {
+            en: "Moby",
+            zh: "莫比",
+            team: "grey",
+            desc: "如果遊戲結束時「亞哈」與炸彈客在同一房間，且你不在，你獲勝。"
+        },
+        {
+            en: "Paparazzo",
+            zh: "狗仔隊",
+            team: "red",
+            desc: "請盡力偷聽、干擾私下談話。"
+        },
+        {
+            en: "Paranoid",
+            zh: "被害妄想狂",
+            team: "blue",
+            desc: "你有「妄想」狀態。整場遊戲只能分享一次卡片。"
+        },
+        {
+            en: "Nurse",
+            zh: "護士",
+            team: "blue",
+            desc: "醫生的替補。如果醫生被埋藏，你接替職責。"
+        },
+        {
+            en: "Private Eye",
+            zh: "私家偵探",
+            team: "grey",
+            desc: "最後一回合結束時，如果你能指出哪張卡是被埋藏的卡，你獲勝。"
+        },
+        {
+            en: "Psychologist",
+            zh: "心理學家",
+            team: "blue",
+            desc: "如果你向有心理狀態（害羞、妄想等）的人展示卡片，他們可以與你分享並解除狀態。"
+        },
+        {
+            en: "Queen",
+            zh: "皇后",
+            team: "red",
+            desc: "如果遊戲結束時你「沒有」與總統或炸彈客在同一房間，你獲勝。"
+        },
+        {
+            en: "Security",
+            zh: "保全",
+            team: "blue",
+            desc: "能力(TACKLE)：公開展示卡片並指定一人說「你不准走」。該回合該人不能變成人質。"
+        },
+        {
+            en: "Robot",
+            zh: "機器人",
+            team: "grey",
+            desc: "如果有玩家與你分享，如果他沒贏，你才贏。你依賴第一位分享者的失敗而活。"
+        },
+        {
+            en: "Rival",
+            zh: "對手",
+            team: "grey",
+            desc: "如果遊戲結束時你與總統「不在」同一房間，你獲勝。"
+        },
+        {
+            en: "Survivor",
+            zh: "倖存者",
+            team: "grey",
+            desc: "如果遊戲結束時你與炸彈客「不在」同一房間，你獲勝。"
+        },
+        {
+            en: "Sniper",
+            zh: "狙擊手",
+            team: "grey",
+            desc: "最後必須公開宣布射殺一名玩家。如果該玩家是「目標(Target)」，你獲勝。"
+        },
+        {
+            en: "Target",
+            zh: "目標",
+            team: "grey",
+            desc: "如果狙擊手最後射殺了你，你獲勝。"
+        },
+        {
+            en: "Decoy",
+            zh: "誘餌",
+            team: "grey",
+            desc: "如果狙擊手最後射殺了你，你也獲勝（同時狙擊手輸）。"
+        },
+        {
+            en: "Shy Guy",
+            zh: "靦腆鬼",
+            team: "blue",
+            desc: "你有「靦腆(Shy)」狀態。不能向任何人展示卡片。"
+        },
+        {
+            en: "Spy",
+            zh: "間諜",
+            team: "red",
+            desc: "卡片顏色是藍色的，但其實你是紅隊。"
+        },
+        {
+            en: "Thug",
+            zh: "暴徒",
+            team: "red",
+            desc: "能力：與你分享卡片的人獲得「害羞(Coy)」狀態（只能顏色分享）。"
+        },
+        {
+            en: "Tinkerer",
+            zh: "修補匠",
+            team: "red",
+            desc: "工程師的替補。如果工程師被埋藏，你接替職責。"
+        },
+        {
+            en: "Traveler",
+            zh: "旅人",
+            team: "blue",
+            desc: "如果在大多數回合結束時你都被換到不同房間，你獲勝。"
+        },
+        {
+            en: "Tuesday Knight",
+            zh: "週二騎士",
+            team: "green",
+            desc: "能力(HUG)：如果你與炸彈客分享卡片，同房間除了總統以外所有人死亡，遊戲結束。"
+        },
+        {
+            en: "Usurper",
+            zh: "篡位者",
+            team: "grey",
+            desc: "能力：公開展示卡片並立即成為隊長。每遊戲限一次。"
+        },
+        {
+            en: "Zombie",
+            zh: "殭屍",
+            team: "green",
+            desc: "你有「殭屍」狀態。任何與你分享的人也變成殭屍。如果最後沒有死亡的人全是殭屍，殭屍隊獲勝。"
+        }
+    ];
+
+    const grid = document.getElementById('charGrid');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderChars(filter = "") {
+        grid.innerHTML = "";
+        const lowerFilter = filter.toLowerCase();
+        
+        characters.forEach(char => {
+            if (char.en.toLowerCase().includes(lowerFilter) || 
+                char.zh.includes(filter) || 
+                char.desc.includes(filter)) {
+                
+                const card = document.createElement('div');
+                card.className = `char-card team-${char.team}`;
+                
+                let teamName = "";
+                if(char.team === "blue") teamName = "藍隊";
+                else if(char.team === "red") teamName = "紅隊";
+                else if(char.team === "grey") teamName = "灰隊";
+                else if(char.team === "green") teamName = "特殊";
+
+                card.innerHTML = `
+                    <div class="char-header">
+                        <div class="char-names">
+                            <h3>${char.zh}</h3>
+                            <span>${char.en}</span>
+                        </div>
+                        <span class="badge" style="background:${getVarColor(char.team)}">${teamName}</span>
+                    </div>
+                    <div class="char-desc">
+                        ${char.desc}
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        });
+    }
+
+    function getVarColor(team) {
+        if(team === 'blue') return '#3498db';
+        if(team === 'red') return '#e74c3c';
+        if(team === 'grey') return '#95a5a6';
+        if(team === 'green') return '#27ae60';
+        return '#333';
+    }
+
+    searchInput.addEventListener('input', (e) => {
+        renderChars(e.target.value);
+    });
+
+    // Initial render
+    renderChars();
+
+</script>
+
+</body>
+</html>

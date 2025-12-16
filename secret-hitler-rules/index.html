@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秘密希特勒 (Secret Hitler) - 繁體中文規則</title>
+    <style>
+        :root {
+            --fascist-red: #c0392b;
+            --liberal-blue: #2980b9;
+            --bg-color: #f6ecdc; /* Kraft paper / vintage paper color */
+            --text-color: #2c2925;
+            --card-bg: #ffffff;
+            --header-bg: #2c2925;
+            --gold-accent: #f1c40f;
+        }
+        body {
+            font-family: "Courier New", Courier, "Noto Sans TC", sans-serif; /* Typewriter style for theme */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px;
+        }
+        header {
+            background-color: var(--header-bg);
+            color: var(--bg-color);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--fascist-red);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        h2 {
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            color: var(--header-bg);
+            text-transform: uppercase;
+        }
+        h3 {
+            color: #555;
+            margin-top: 1.5rem;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #ccc;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .highlight-box {
+            background-color: #e3dccb;
+            border-left: 5px solid var(--header-bg);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        .text-fascist { color: var(--fascist-red); font-weight: bold; }
+        .text-liberal { color: var(--liberal-blue); font-weight: bold; }
+        .text-hitler { color: #8e44ad; font-weight: bold; } /* Distinct purple or deep red for Hitler if needed, but usually just Fascist Red */
+        
+        ol, ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Navigation */
+        .floating-nav-container {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-nav-container.collapsed {
+            transform: translateY(-50%) translateX(calc(100% - 40px));
+        }
+        
+        .nav-toggle-btn {
+            background: var(--header-bg);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px 0 0 5px;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+        }
+
+        .floating-nav-content {
+            background: var(--bg-color);
+            padding: 1rem;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+            border-radius: 0 0 0 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #000;
+            min-width: 120px;
+        }
+
+        .nav-link-item {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            display: block;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .nav-link-item:hover {
+            background-color: rgba(0,0,0,0.05);
+            color: var(--fascist-red);
+        }
+
+        .nav-link-item.active {
+            background-color: var(--header-bg);
+            color: var(--bg-color);
+            font-weight: bold;
+        }
+
+        /* Responsive Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="position: absolute; top: 1rem; left: 1rem;">
+        <a href="../index.html" style="color: var(--bg-color); text-decoration: none; font-weight: bold; border: 1px solid var(--bg-color); padding: 5px 10px; border-radius: 5px;">🏠 返回</a>
+    </div>
+    <h1>秘密希特勒</h1>
+    <p>Secret Hitler - 繁體中文規則</p>
+</header>
+
+<div class="floating-nav-container" id="floatingNav">
+    <button class="nav-toggle-btn" onclick="toggleNav()">
+        ☰
+    </button>
+    <div class="floating-nav-content">
+        <a href="#intro" class="nav-link-item" data-target="intro">遊戲簡介</a>
+        <a href="#setup" class="nav-link-item" data-target="setup">遊戲設置</a>
+        <a href="#object" class="nav-link-item" data-target="object">遊戲目標</a>
+        <a href="#gameplay" class="nav-link-item" data-target="gameplay">遊戲流程</a>
+        <a href="#election" class="nav-link-item" data-target="election">選舉</a>
+        <a href="#legislative" class="nav-link-item" data-target="legislative">立法階段</a>
+        <a href="#executive" class="nav-link-item" data-target="executive">行政行動</a>
+        <a href="#powers" class="nav-link-item" data-target="powers">總統權力</a>
+        <a href="#veto" class="nav-link-item" data-target="veto">否決權</a>
+        <a href="#strategy" class="nav-link-item" data-target="strategy">策略提示</a>
+    </div>
+</div>
+
+<script>
+    function toggleNav() {
+        const nav = document.getElementById('floatingNav');
+        nav.classList.toggle('collapsed');
+        const btn = nav.querySelector('.nav-toggle-btn');
+        btn.innerHTML = nav.classList.contains('collapsed') ? "☰" : "✕";
+    }
+    
+    document.querySelectorAll('.nav-link-item').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) toggleNav();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = ['intro', 'setup', 'object', 'gameplay', 'election', 'legislative', 'executive', 'powers', 'veto', 'strategy'];
+        const navLinks = document.querySelectorAll('.nav-link-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.nav-link-item[href="#${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) observer.observe(section);
+        });
+    });
+</script>
+
+<div class="container">
+
+    <div id="intro" class="card">
+        <h2>遊戲概述</h2>
+        <p>年份是1932年。地點是二戰前的德國。在《秘密希特勒》中，玩家扮演試圖維持脆弱的<span class="text-liberal">自由派 (Liberal)</span> 政府的德國政治家，並阻止<span class="text-fascist">法西斯 (Fascist)</span> 浪潮的興起。但要小心——你們之中潛伏著秘密的法西斯分子，而其中一人就是<strong>希特勒 (Secret Hitler)</strong>。</p>
+        <div class="highlight-box">
+            <strong>角色分配：</strong>
+            <br>
+            • <span class="text-liberal">自由派 (Liberal)</span>：擁有多數席位，但彼此互不認識。<br>
+            • <span class="text-fascist">法西斯 (Fascist)</span>：人數較少，但彼此認識（也知道希特勒是誰）。<br>
+            • <strong>希特勒 (Hitler)</strong>：屬於法西斯陣營，但他<strong>不知道</strong>其他法西斯是誰，必須嘗試找出隊友。
+        </div>
+    </div>
+
+    <div id="object" class="card">
+        <h2>遊戲目標</h2>
+        <p><strong><span class="text-liberal">自由派</span>獲勝條件（達成任一）：</strong></p>
+        <ul>
+            <li>通過 5 個自由派法案 (Liberal Policies)。</li>
+            <li>暗殺希特勒。</li>
+        </ul>
+        <br>
+        <p><strong><span class="text-fascist">法西斯</span>獲勝條件（達成任一）：</strong></p>
+        <ul>
+            <li>通過 6 個法西斯法案 (Fascist Policies)。</li>
+            <li>在通過 3 個法西斯法案後，成功選舉希特勒為總理 (Chancellor)。</li>
+        </ul>
+    </div>
+
+    <div id="setup" class="card">
+        <h2>遊戲設置</h2>
+        <p><strong>配件：</strong> 17張法案板塊（6張自由派，11張法西斯），角色卡，黨籍卡，投票卡（Ja! 與 Nein），總統與總理標記。</p>
+        <p><strong>設置：</strong> 將相應人數的法西斯軌道板放置在桌上。將所有法案板塊洗混成為牌庫。</p>
+        
+        <h3>角色分配表</h3>
+        <table>
+            <tr>
+                <th>人數</th>
+                <th>自由派</th>
+                <th>法西斯</th>
+                <th>希特勒</th>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>3</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>4</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>4</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>5</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>6</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+        </table>
+        
+        <p><strong>開局確認身份：</strong></p>
+        <ul>
+            <li><strong>5-6人局：</strong> 所有人閉眼。法西斯與希特勒睜眼互認。</li>
+            <li><strong>7-10人局：</strong> 所有人閉眼握拳伸出。所有法西斯（不含希特勒）睜眼互認。希特勒保持閉眼但豎起大拇指，讓法西斯確認誰是希特勒。</li>
+        </ul>
+    </div>
+
+    <div id="gameplay" class="card">
+        <h2>遊戲流程</h2>
+        <p>遊戲以輪 (Round) 進行，每輪包含三個階段：</p>
+        <ol>
+            <li><strong>選舉 (Election)</strong>：推舉新政府。</li>
+            <li><strong>立法 (Legislative Session)</strong>：總統與總理通過法案。</li>
+            <li><strong>行政行動 (Executive Action)</strong>：總統行使權力（若有）。</li>
+        </ol>
+    </div>
+
+    <div id="election" class="card">
+        <h2>1. 選舉 (Election)</h2>
+        <ol>
+            <li><strong>傳遞總統職位：</strong> 總統標記順時針傳給下一位玩家（新總統候選人）。</li>
+            <li><strong>提名總理：</strong> 總統候選人提名一位總理候選人。
+                <ul>
+                    <li><em>任期限制：</em> 上一任當選的總統和總理不能被提名為總理。（5人局時只有上一任總理受限）。</li>
+                </ul>
+            </li>
+            <li><strong>投票：</strong> 全體玩家討論後，同時舉牌投票（Ja! 或 Nein）。
+                <ul>
+                    <li><strong>多數決 (超過50%)：</strong> 當選！兩位候選人正式成為總統與總理。</li>
+                    <li><strong>平票或否決：</strong> 選舉失敗。選舉追蹤器 (Election Tracker) 前進一格。總統職位下移。</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="highlight-box">
+            <strong>選舉混亂 (Chaos)：</strong> 若連續三次選舉失敗（追蹤器滿三格），群眾暴動！直接翻開牌庫頂第一張法案並強制通過。此時無視任何總統權力，所有任期限制重置。
+        </div>
+    </div>
+
+    <div id="legislative" class="card">
+        <h2>2. 立法階段</h2>
+        <ol>
+            <li><strong>總統抽牌：</strong> 總統抽取 3 張法案，秘密棄掉 1 張，將剩下 2 張傳給總理。</li>
+            <li><strong>總理通過：</strong> 總理看這 2 張，秘密棄掉 1 張，將剩下 1 張公開展示並放在對應的軌道上。</li>
+        </ol>
+        <p class="text-fascist">注意：總統與總理在傳遞法案時嚴禁交流或打暗號。</p>
+    </div>
+
+    <div id="executive" class="card">
+        <h2>3. 行政行動 (Executive Action)</h2>
+        <p>如果通過的是<span class="text-fascist">法西斯法案</span>，且覆蓋了有特殊圖標的格子，總統<strong>必須</strong>立即使用該權力。</p>
+        <p>權力是一次性的，使用後回合才結束。</p>
+    </div>
+
+    <div id="powers" class="card">
+        <h2>總統權力說明</h2>
+        <ul>
+            <li><strong>調查身份 (Investigate Loyalty)：</strong> 總統選擇一名玩家，查看其<strong>黨籍卡</strong>（不是角色卡！也就是只知道是自由派還是法西斯，不知道是不是希特勒）。總統可以選擇公開結果（或說謊）。</li>
+            <li><strong>特別選舉 (Call Special Election)：</strong> 總統指定任何一名玩家（除了自己）作為下一任總統候選人。特別選舉後，總統職位會回到原本的順位（不會打亂原順序）。</li>
+            <li><strong>政策偷看 (Policy Peek)：</strong> 總統秘密查看牌庫頂的 3 張法案。</li>
+            <li><strong>處決 (Execution)：</strong> 總統選擇一名玩家處死。該玩家出局（不能說話、投票）。
+                <br><em>如果被處決的是希特勒，自由派立即獲勝！</em>（若是普通法西斯或自由派，遊戲繼續，且不公開身份）。
+            </li>
+        </ul>
+    </div>
+
+    <div id="veto" class="card">
+        <h2>否決權 (Veto Power)</h2>
+        <p>當<span class="text-fascist">5個法西斯法案</span>通過後，否決權解鎖。</p>
+        <p>在立法階段，如果總統給總理 2 張法西斯法案，總理可以詢問：「你要否決嗎？」</p>
+        <ul>
+            <li>如果總統同意：兩張法案都棄掉，選舉追蹤器前進一格。</li>
+            <li>如果總統不同意：總理必須照常通過一張。</li>
+        </ul>
+    </div>
+
+    <div id="strategy" class="card">
+        <h2>策略提示</h2>
+        <ul>
+            <li><strong>自由派：</strong> 說真話，試圖拼湊資訊。多數優勢是你們的武器。</li>
+            <li><strong>法西斯：</strong> 盡量表現得像自由派。製造混亂，在關鍵時刻通過法西斯法案，並陷害別人。</li>
+            <li><strong>希特勒：</strong> 表現得最像自由派 (Liberal-plus)。你需要贏得信任被選為總理。</li>
+        </ul>
+    </div>
+    
+    <footer style="text-align: center; font-size: 0.8rem; color: #555; margin-top: 2rem; border-top: 1px solid #ccc; padding-top: 1rem;">
+        <p>非官方繁體中文翻譯規則 | 基於 Secret Hitler Rules</p>
+        <p>翻譯與製作：AI Agent (Antigravity)</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+- [/] Parse content from `files/TwoRooms_Rulebook_v3.pdf` <!-- id: 0 -->
+    - [x] Create venv and install `pypdf`
+    - [x] Extract text from PDF
+- [x] Translate extracted text to Traditional Chinese <!-- id: 1 -->
+- [x] Design HTML layout (Mobile Friendly) <!-- id: 2 -->
+- [x] Implement `two_rooms_rules.html` <!-- id: 3 -->
+- [x] Verify content and layout <!-- id: 4 -->
+- [x] Implement floating collapsible navigation <!-- id: 5 -->
+- [x] Implement active section highlighting <!-- id: 6 -->
+- [x] Parse `files/TwoRooms_CharacterGuide_v3.pdf` <!-- id: 7 -->
+- [x] Translate character names and abilities <!-- id: 8 -->
+- [x] Create `characters.html` with search feature <!-- id: 9 -->
+- [x] Update `index.html` header with link <!-- id: 10 -->
+- [x] Verify character search and navigation <!-- id: 11 -->
+- [x] Parse `files/suggested-setup.md` and map names <!-- id: 12 -->
+- [x] Create `setup.html` with search feature <!-- id: 13 -->
+- [x] Update `index.html` header with setup link <!-- id: 14 -->
+- [x] Verify setup page <!-- id: 15 -->
+- [x] Refine setup description formatting (bullets) <!-- id: 16 -->
+- [x] Implement cheat sheet table in `index.html` <!-- id: 17 -->

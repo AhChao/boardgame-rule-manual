@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置查詢 - 兩個房間和一個炸彈</title>
+    <style>
+        :root {
+            --red-team: #e74c3c;
+            --blue-team: #3498db;
+            --grey-team: #95a5a6;
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --highlight-color: #f1c40f;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--red-team) 0%, var(--blue-team) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-link {
+            color: white;
+            text-decoration: none;
+            float: left;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin: 1rem 0 2rem 0;
+            position: sticky;
+            top: 70px;
+            z-index: 90;
+            background: var(--bg-color);
+            padding: 10px 0;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            border-color: var(--blue-team);
+            outline: none;
+        }
+
+        /* Setup Grid */
+        .setup-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--highlight-color);
+        }
+        
+        .setup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        .setup-title {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+        .setup-badge {
+            background: var(--highlight-color);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #835c00;
+        }
+        
+        .setup-list ul {
+            list-style: none; /* No bullets for card list */
+            padding-left: 0;
+            margin: 0.5rem 0;
+        }
+        .setup-desc {
+            font-size: 0.95rem;
+            color: #555;
+            background: #f9f9f9;
+            padding: 10px 20px; /* More side padding for bullets */
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .setup-desc ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .setup-desc li {
+            margin-bottom: 0.5rem;
+        }
+        .setup-desc li:last-child {
+            margin-bottom: 0;
+        }
+        .player-count-badge {
+             background: #34495e;
+             color: white;
+             padding: 2px 8px;
+             border-radius: 4px;
+             font-size: 0.8rem;
+             margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link">← 回到規則</a>
+    <h1>遊戲配置查詢</h1>
+</header>
+
+<div class="container">
+    
+    <div class="search-container">
+        <input type="number" id="searchInput" class="search-input" placeholder="輸入玩家人數 (例如: 6, 12)...">
+    </div>
+    
+    <div style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        提示：輸入人數後將顯示適合該人數或更少人數的教學配置。
+    </div>
+
+    <div id="setupGrid">
+        <!-- Cards will be injected here JS -->
+    </div>
+
+</div>
+
+<script>
+    // Data from suggested-setup.md
+    // Normalized names: 
+    // 牛仔 -> 害羞鬼 (Coy Boy)
+    // 談判員 -> 談判專家 (Negotiator)
+    // 總統的女兒 -> 總統女兒 (President's Daughter)
+    // 丑角 -> 小丑 (Clown)
+    // 狗仔 -> 狗仔隊 (Paparazzo)
+    // 爆炸先生 -> 布姆博士 (Dr. Boom)
+    // 星期二騎士 -> 週二騎士 (Tuesday Knight)
+    // 工匠 -> 修補匠 (Tinkerer)
+    // 軍醫 -> 醫官 (Medic)
+    // 教授 -> 教授 (Professor? Kept as is, but noted as likely mistranslation or specific card not in standard set if not found. 
+    
+    const setups = [
+        {
+            title: "1) 我的第一次埋葬",
+            minPlayers: 6, // Base recommendation
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個次要角色 (總統女兒及烈士)",
+                "1 個賭徒 (只用在偶數人數的遊戲上)",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--在所有卡片發完後應該會多 1 張卡片。正面朝下放置這張卡片，這是被「埋葬」的卡片。"
+        },
+        {
+            title: "2) 我的第一次卡片分享",
+            minPlayers: 6,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個談判專家",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--現在玩家了解如何進行埋葬卡片及加入一張灰色卡，如果進行奇數人數的遊戲，可以選擇埋葬一張卡片，或者加入一個賭徒。\n--這時候，玩家可以用他們的卡片做想做的事。用這個介紹的角色組合，玩家學會如何「卡片分享」。\n--這也介紹玩家「狀態」的運作方式，因為談判專家在遊戲一開始會有「精通」(savvy) 的狀態。\n--這時候，在這個遊戲教程中，所有形式的顏色揭露都必須禁止 (即使超過 10 人進行遊戲)。"
+        },
+        {
+            title: "3) 卡片分享的樂趣",
+            minPlayers: 7, 
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個次要角色 (總統女兒及烈士) *只在如果有埋葬一張卡片時加入",
+                "2 個主要協助角色 (醫生及工程師)",
+                "2 個次要協助角色 (護士及修補匠) *只在如果有埋葬一張卡片時加入",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--現在玩家學習到引入角色如何改變遊戲的進行。\n--這個教程同時也促使玩家了解如果要贏的話，卡片分享的必要性。\n--這時候，在這個遊戲教程中，所有形式的顏色揭露都必須禁止 (即使超過 10 人進行遊戲)。"
+        },
+        {
+            title: "4) 猝死卡片分享",
+            minPlayers: 8,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個次要角色 (總統女兒及烈士) *只在如果有埋葬一張卡片時加入",
+                "2 個主要協助角色 (醫生及工程師)",
+                "2 個次要協助角色 (護士及修補匠) *只在如果有埋葬一張卡片時加入",
+                "2 個立即勝利/失敗 (週二騎士及布姆博士)",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--這時候，如果玩家想要更深入的體驗，而且有 10 人以上的玩家，試試看 5 輪遊戲，而不是 3 輪遊戲。\n-- 這個教程會促使玩家猶豫是否要分享他們的卡片，因為這會導致立即的失敗。\n--這時候，在這個遊戲教程中，所有形式的顏色揭露都必須禁止 (即使超過 10 人進行遊戲)。"
+        },
+        {
+            title: "5) 我的第一次顏色分享",
+            minPlayers: 6,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個害羞鬼", 
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--用這個介紹的角色組合，玩家學會如何「顏色分享」。\n--「不要問，不要展示」(Don't Ask, Don't Show) 的討論應該要解釋一下。這是遊戲的禮儀聲明，建議玩家如果他們不想分享他們卡片的顏色，不應該問另一位玩家：「你想分享顏色嗎？」。沒有「不要問，不要展示」的討論，當有些玩家展示他們的顏色卻沒有得到回報時，他們會生氣。\n--這時候，在這個遊戲教程中，所有形式的顏色揭露都允許 (即使超過 10 人進行遊戲或少於10人進行遊戲)。通常 10 人遊戲或少於 10 人的遊戲不能揭露顏色，但這是個學習的過程。"
+        },
+        {
+            title: "6) 顏色分享的樂趣",
+            minPlayers: 6,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個害羞鬼",
+                "2 個間諜",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--用這個介紹的角色組合，玩家將越來越熟悉顏色分享。\n--這時候，在這個遊戲教程中，所有形式的顏色揭露都允許 (即使超過 10 人進行遊戲或少於10人進行遊戲)。通常 10 人遊戲或少於 10 人的遊戲不能揭露顏色，但這是個學習的過程。"
+        },
+        {
+            title: "7) 我的第一次演戲",
+            minPlayers: 6,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個狗仔隊",
+                "2 個小丑",
+                "2 個天使 (如果進行 8 人遊戲或 8 人以上的遊戲)",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--以非常簡單的角色介紹玩家，只改變玩家的表現方式。\n--這時候，在這個遊戲教程中，只要是進行 11 人或 11 人以上的遊戲，所有形式的顏色揭露都允許。"
+        },
+        {
+            title: "8) 我的第一次卡片分享能力",
+            minPlayers: 11,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個次要角色 (總統女兒及烈士) *只在如果有埋葬一張卡片時加入",
+                "2 個主要協助角色 (醫生及工程師)",
+                "2 個次要協助角色 (護士及修補匠) *只在如果有埋葬一張卡片時加入",
+                "2 個心理學家(教授)",
+                "2 個間諜",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--用這個介紹的角色組合，玩家學習到角色能力以及獲得狀態的影響。\n--教授角色卡有一個當卡片分享時會提供「精通」狀態的能力。如果有玩家詢問，任何有這個狀態的玩家，不能拒絕分享他們的卡片或顏色。\n--這時候，在這個遊戲教程中，只要是進行 11 人或 11 人以上的遊戲，所有形式的顏色揭露都允許。"
+        },
+        {
+            title: "9) 我的第一次淨化",
+            minPlayers: 6,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個教授",
+                "2 個醫官",
+                "2 個木乃伊 (如果進行 8 人遊戲或 8 人以上的遊戲)",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--用這個介紹的角色組合，玩家學習到他們如何藉由淨化清除所有獲得的狀態。\n--醫官角色會提供卡片分享時淨化一個角色的能力。這意指一個被淨化的角色回到遊戲的初期。"
+        },
+        {
+            title: "10) 我的第一次私下及公開揭露",
+            minPlayers: 11, // Suggested 11+
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "2 個特務",
+                "2 個保全",
+                "2 個談判專家 (如果進行 8 人遊戲或 8 人以上的遊戲)",
+                "2 個被害妄想狂 (如果進行 10 人遊戲或 10 人以上的遊戲)",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--用這個介紹的角色組合，玩家學習到如何運作「私下揭露」及「公開揭露」。\n--這組角色也介紹了有趣的角色組合，因為特務以及被害妄想狂只有在一起進場時才有特殊規則 (因為特務的能力無法在一個已經使用他們能力的被害妄想狂角色上運作)。\n--特務角色的能力每輪一次，可以在他們對目標玩家私下揭露後，迫使目標玩家和他們分享卡片。不過，被害妄想狂角色整場遊戲只允許分享 1 張卡片。如果有特務企圖對已經分享過卡片的被害妄想狂使用他的能力時，這個能力就浪費了。\n--保全的角色在他們公開揭露後，會提供「被逮捕」(tackled) 狀態的能力。他們整場遊戲只能使用這個能力一次。因為他們的卡片在使用能力之後會保持公開揭露的狀態。獲得「被逮捕」狀態的玩家這輪不能被選為當作人質。保全角色的設計是為了增加遊戲更多的策略性，並避免遊戲的最後一輪淪為猜測另一間房間要送出來的人質是誰的遊戲。"
+        },
+        {
+            title: "11) 灰色典禮",
+            minPlayers: 7,
+            content: [
+                "2 個主要角色 (總統及炸彈客)",
+                "1 個狙擊手",
+                "1 個目標",
+                "1 個誘餌",
+                "1 個受害者",
+                "1 個實習生",
+                "? 張隊伍卡 (藍隊及紅隊)"
+            ],
+            desc: "--這組角色是設計給讓玩家更加熟悉不同的灰色角色會如何影響遊戲。\n--重要：狙擊手、目標，以及誘餌角色是有鏈結的。這意指你不能埋葬任何一個這樣的角色。如果你仍然想要埋葬一張卡，只需要先把狙擊手、目標，以及誘餌角色卡先從牌庫裡分出來，然後洗混剩餘的牌，隨機從牌庫選擇一張角色卡埋葬。之後，把狙擊手、目標，以及誘餌洗回剩餘的牌庫哩，並按照一般方式發給每個玩家角色卡。"
+        }
+    ];
+
+    const grid = document.getElementById('setupGrid');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderSetups(playerCount) {
+        grid.innerHTML = "";
+        
+        setups.forEach(setup => {
+            // Show all if explicitly 0 or empty, otherwise filter by minPlayers <= playerCount
+            
+            const pCount = parseInt(playerCount);
+            if (!playerCount || (Number.isInteger(pCount) && pCount >= setup.minPlayers)) {
+                
+                const card = document.createElement('div');
+                card.className = 'setup-card';
+
+                // Process content list
+                const listItems = setup.content.map(item => `<li>${item}</li>`).join('');
+
+                // Process description to bullet points
+                // Split by "--", filter empty, and wrap in li
+                const descItems = setup.desc.split('--')
+                    .map(item => item.trim())
+                    .filter(item => item.length > 0)
+                    .map(item => `<li>${item}</li>`)
+                    .join('');
+
+                card.innerHTML = `
+                    <div class="setup-header">
+                        <h3 class="setup-title">${setup.title} <span class="player-count-badge">Min: ${setup.minPlayers}+ 人</span></h3>
+                        <span class="setup-badge">教學</span>
+                    </div>
+                    <div class="setup-list">
+                        <ul>${listItems}</ul>
+                    </div>
+                    ${descItems ? `
+                    <div class="setup-desc">
+                        <ul>${descItems}</ul>
+                    </div>` : ''}
+                `;
+                grid.appendChild(card);
+            }
+        });
+        
+        if (grid.innerHTML === "") {
+             grid.innerHTML = "<p style='text-align:center; color:#7f8c8d;'>沒有找到適合此人數的教學配置。</p>";
+        }
+    }
+
+    searchInput.addEventListener('input', (e) => {
+        renderSetups(e.target.value);
+    });
+
+    // Initial render
+    renderSetups();
+
+</script>
+
+</body>
+</html>

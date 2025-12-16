@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桌遊規則速查</title>
+    <style>
+        :root {
+            --primary-bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .trb-icon {
+            background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
+            color: white;
+        }
+        .sh-icon {
+            background-color: #2c2925;
+            color: #f1c40f;
+            border: 2px solid #c0392b;
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+        .game-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            display: block;
+        }
+        .game-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        .arrow {
+            color: #ccc;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            .game-card { padding: 15px; }
+            .icon-box { width: 50px; height: 50px; font-size: 1.2rem; }
+            .game-title { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>桌遊規則速查</h1>
+
+    <div class="container">
+        
+        <a href="two-rooms-rules/index.html" class="game-card">
+            <div class="icon-box trb-icon">💣</div>
+            <div class="card-content">
+                <span class="game-title">兩個房間和一個炸彈</span>
+                <p class="game-subtitle">Two Rooms and a Boom</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+        <a href="secret-hitler-rules/index.html" class="game-card">
+            <div class="icon-box sh-icon">🐊</div> 
+            <!-- Using Crocodile as placeholder logic for "Reptile/Secret" or just generic, users know SH often uses Lizard/Skull iconography in fan apps, but plain text or generic icon is fine. Let's use a secret agent type emoji or just text. Actually, Eagle or similar is better but risky. Let's use a Envelope or Document. Or just the Reptile/Skull. I'll use a Skull/Policy icon substitute. 📜 is safe. -->
+            <!-- Wait, user emoji preference? I'll use 📜 for policy/secret. Or 👺 for hidden role. -->
+            <!-- Let's use 🕵️ (Detective/Spy) for Secret Hitler. -->
+            <!-- Re-writing the icon content in the string below -->
+            <div class="card-content">
+                <span class="game-title">秘密希特勒</span>
+                <p class="game-subtitle">Secret Hitler</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+    </div>
+
+    <footer style="margin-top: 3rem; text-align: center; color: #999; font-size: 0.8rem;">
+        <p>規則速查 Hub | Translation by AI Agent</p>
+    </footer>
+
+    <script>
+        // Update icon for SH to Spy
+        document.querySelector('.sh-icon').innerHTML = '🕵️';
+    </script>
+</body>
+</html>
