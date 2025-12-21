@@ -162,7 +162,79 @@
             color: #ccc;
             font-weight: bold;
             font-size: 1.2rem;
+            pointer-events: none;
         }
+
+        /* Pin Functionality */
+        .game-card {
+            position: relative;
+        }
+        .pin-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+            opacity: 0;
+            color: #ccc;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .game-card:hover .pin-btn {
+            opacity: 1;
+        }
+        .pin-btn:hover {
+            transform: scale(1.1);
+            background: #fff;
+            color: #f1c40f;
+        }
+        .pin-btn.pinned {
+            opacity: 1;
+            color: #f1c40f;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .game-card.is-pinned {
+            border: 1px solid #f1c40f;
+            background: #fffdf5;
+        }
+
+        /* Toast Styles */
+        #toast-container {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            pointer-events: none;
+        }
+        .toast {
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            transform: translateY(20px);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .toast-icon { color: #f1c40f; }
         
         @media (max-width: 480px) {
             h1 { font-size: 1.5rem; }
@@ -315,7 +387,8 @@
 
     <div class="container" id="gameContainer">
         
-        <a href="two-rooms-rules/index.html" class="game-card">
+        <a href="two-rooms-rules/index.html" class="game-card" data-id="two-rooms">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box trb-icon">💣</div>
             <div class="card-content">
                 <span class="game-title">兩個房間和一個炸彈</span>
@@ -324,7 +397,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="secret-hitler-rules/index.html" class="game-card">
+        <a href="secret-hitler-rules/index.html" class="game-card" data-id="secret-hitler">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box sh-icon">🕵️</div>
             <div class="card-content">
                 <span class="game-title">揭密希特勒</span>
@@ -333,7 +407,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="tragedy-looper/index.html" class="game-card">
+        <a href="tragedy-looper/index.html" class="game-card" data-id="tragedy-looper">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box tl-icon">🎭</div>
             <div class="card-content">
                 <span class="game-title">慘劇輪迴</span>
@@ -342,7 +417,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="medium-rules/index.html" class="game-card">
+        <a href="medium-rules/index.html" class="game-card" data-id="medium">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box medium-icon">🔮</div>
             <div class="card-content">
                 <span class="game-title">超感官同步</span>
@@ -351,7 +427,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="decrypto-rules/index.html" class="game-card">
+        <a href="decrypto-rules/index.html" class="game-card" data-id="decrypto">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box decrypto-icon">📡</div>
             <div class="card-content">
                 <span class="game-title">截碼戰</span>
@@ -360,7 +437,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="codenames-rules/index.html" class="game-card">
+        <a href="codenames-rules/index.html" class="game-card" data-id="codenames">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box codenames-icon">🕵️‍♂️</div>
             <div class="card-content">
                 <span class="game-title">機密代號</span>
@@ -369,7 +447,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="just-one-rules/index.html" class="game-card">
+        <a href="just-one-rules/index.html" class="game-card" data-id="just-one">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box just-one-icon">📝</div>
             <div class="card-content">
                 <span class="game-title">獨家暗語</span>
@@ -378,7 +457,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="harmonies-rules/index.html" class="game-card">
+        <a href="harmonies-rules/index.html" class="game-card" data-id="harmonies">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box harmonies-icon">🌿</div>
             <div class="card-content">
                 <span class="game-title">和諧之森</span>
@@ -387,7 +467,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="infiltraitors-rules/index.html" class="game-card">
+        <a href="infiltraitors-rules/index.html" class="game-card" data-id="infiltraitors">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box infiltraitors-icon">🔍</div>
             <div class="card-content">
                 <span class="game-title">滲透因子</span>
@@ -396,7 +477,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="blades-and-rose-rules/index.html" class="game-card">
+        <a href="blades-and-rose-rules/index.html" class="game-card" data-id="blades-rose">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box blades-rose-icon">🌹</div>
             <div class="card-content">
                 <span class="game-title">刀與薔薇</span>
@@ -405,7 +487,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="lotr-duel-rules/index.html" class="game-card">
+        <a href="lotr-duel-rules/index.html" class="game-card" data-id="lotr-duel">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box lotr-duel-icon">🗡️</div>
             <div class="card-content">
                 <span class="game-title">魔戒：中洲對決</span>
@@ -414,7 +497,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="flip7-rules/index.html" class="game-card">
+        <a href="flip7-rules/index.html" class="game-card" data-id="flip7">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box flip7-icon">🎰</div>
             <div class="card-content">
                 <span class="game-title">Flip 7</span>
@@ -423,7 +507,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="quest-rules/index.html" class="game-card">
+        <a href="quest-rules/index.html" class="game-card" data-id="quest">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box quest-icon">🗡️</div>
             <div class="card-content">
                 <span class="game-title">Quest</span>
@@ -432,7 +517,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="hanabi-rules/index.html" class="game-card">
+        <a href="hanabi-rules/index.html" class="game-card" data-id="hanabi">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box hanabi-icon">🎆</div>
             <div class="card-content">
                 <span class="game-title">花火</span>
@@ -441,7 +527,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="exploding-kittens-rules/index.html" class="game-card">
+        <a href="exploding-kittens-rules/index.html" class="game-card" data-id="exploding-kittens">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box exploding-kittens-icon">🙀</div>
             <div class="card-content">
                 <span class="game-title">爆炸貓：厄運食譜</span>
@@ -450,7 +537,8 @@
             <div class="arrow">›</div>
         </a>
 
-        <a href="the-crew-deep-sea-rules/index.html" class="game-card">
+        <a href="the-crew-deep-sea-rules/index.html" class="game-card" data-id="the-crew">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box the-crew-icon">⚓</div>
             <div class="card-content">
                 <span class="game-title">星際探險隊：深海任務</span>
@@ -458,8 +546,9 @@
             </div>
             <div class="arrow">›</div>
         </a>
-
     </div>
+
+    <div id="toast-container"></div>
 
     <footer>
         <p class="footer-disclaimer">⚠️ 多數規則為 AI 協助翻譯與查詢，可能有誤，所有誤差請以規則書為準</p>
@@ -538,6 +627,77 @@
         if (savedLayout) {
             setLayout(parseInt(savedLayout));
         }
+
+        // Pinning Logic
+        const toastContainer = document.getElementById('toast-container');
+        let pinnedGames = JSON.parse(localStorage.getItem('hub_pinned_games') || '[]');
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<span class="toast-icon">⚠️</span><span>${message}</span>`;
+            toastContainer.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Remove after 3s
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function updateCardOrder() {
+            const container = document.getElementById('gameContainer');
+            const cards = Array.from(gameCards);
+            
+            // Sort: pinned first, then original order (by data-id or appearance)
+            // Actually, easier to just move pinned ones to top
+            cards.sort((a, b) => {
+                const aPinned = pinnedGames.includes(a.dataset.id);
+                const bPinned = pinnedGames.includes(b.dataset.id);
+                if (aPinned && !bPinned) return -1;
+                if (!aPinned && bPinned) return 1;
+                return 0; // Keep relative order
+            });
+
+            cards.forEach(card => {
+                const isPinned = pinnedGames.includes(card.dataset.id);
+                card.classList.toggle('is-pinned', isPinned);
+                card.querySelector('.pin-btn').classList.toggle('pinned', isPinned);
+                container.appendChild(card);
+            });
+        }
+
+        gameCards.forEach(card => {
+            const pinBtn = card.querySelector('.pin-btn');
+            pinBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const gameId = card.dataset.id;
+                const index = pinnedGames.indexOf(gameId);
+
+                if (index > -1) {
+                    // Unpin
+                    pinnedGames.splice(index, 1);
+                } else {
+                    // Pin
+                    if (pinnedGames.length >= 3) {
+                        showToast('最多只能釘選 3 個遊戲，請先取消釘選其他遊戲');
+                        return;
+                    }
+                    pinnedGames.push(gameId);
+                }
+
+                localStorage.setItem('hub_pinned_games', JSON.stringify(pinnedGames));
+                updateCardOrder();
+            });
+        });
+
+        // Initial order update
+        updateCardOrder();
     </script>
 </body>
 </html>
