@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>機密代號 (Codenames) 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --card-bg: #fff;
+            --accent-red: #e74c3c;
+            --accent-blue: #3498db;
+            --accent-neutral: #d35400;
+            --accent-assassin: #2c3e50;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #2c3e50;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.05) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            border-bottom: 5px solid var(--accent-red);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-hub {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--accent-assassin);
+            padding-bottom: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-red { background: var(--accent-red); }
+        .badge-blue { background: var(--accent-blue); }
+        .badge-neutral { background: var(--accent-neutral); }
+        .badge-assassin { background: var(--accent-assassin); }
+
+        .rules-list {
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 12px;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid var(--accent-assassin);
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-nav a.active {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        .highlight-red { color: var(--accent-red); font-weight: bold; }
+        .highlight-blue { color: var(--accent-blue); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>機密代號</h1>
+    <div class="subtitle">Codenames: Top Secret Mission</div>
+</header>
+
+<div class="container">
+    <a href="../index.html" class="nav-hub">🏠 返回首頁</a>
+
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <div class="card">
+            <p>《機密代號》（Codenames）是一款分隊競爭的聯想與推理遊戲。兩隊的「間諜首腦」必須給出單一詞語作為線索，引導他們的「外勤人員」找出所有的己方代理人，同時避開敵方人員並絕對不能觸碰殺手。</p>
+            <div class="grid">
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">👥</span><br>2-8+ 人
+                </div>
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">⏱️</span><br>15-30 分鐘
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>遊戲設置</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><b>分隊</b>：分成紅隊與藍隊。每隊選出一名「間諜首腦」坐在桌子一側。</li>
+                <li><b>擺放代號</b>：隨機抽出 <span class="highlight-red">25 張</span> 代號卡，排成 5x5 的矩陣。</li>
+                <li><b>關鍵名單</b>：兩名首腦隨機抽一張關鍵名單，插入卡架。這張圖標示了這 25 張卡片的真實身份。</li>
+                <li><b>決定起始隊伍</b>：關鍵名單邊緣的顏色決定哪隊先開始。先手隊伍需多找一個代理人（共 9 個）。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2>遊戲流程</h2>
+        <div class="card">
+            <p>每回合由首腦給出線索，解題者進行指認：</p>
+            <ol class="rules-list">
+                <li><b>給予線索</b>：首腦給出一個「詞語」和一個「數字」（例如：「動物，3」）。數字代表有多少張代號卡與此詞語相關。</li>
+                <li><b>進行討論</b>：外勤人員討論並依序指認卡片。</li>
+                <li><b>接觸結果</b>：
+                    <ul>
+                        <li><span class="badge badge-red">己方代理人</span>：繼續回合或停止。</li>
+                        <li><span class="badge badge-neutral">無辜平民</span>：回合立即結束。</li>
+                        <li><span class="badge-blue badge">敵方代理人</span>：幫對手加分，回合立即結束。</li>
+                        <li><span class="badge badge-assassin">殺手</span>：遊戲立即結束，我方落敗。</li>
+                    </ul>
+                </li>
+                <li><b>額外猜測</b>：每回合最多可以多猜一次（即「數字 + 1」）。</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="rules">
+        <h2>線索規範</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li>線索必須是 <span class="highlight-red">單一個詞</span>。</li>
+                <li>不能包含場上任何「代號」的部分或發音。</li>
+                <li>禁止任何額外的提示（如表情、聲調、手勢）。</li>
+                <li>首腦可以給出「0」或「無限」作為數字。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="end">
+        <h2>遊戲結束</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><span class="highlight-red">勝利</span>：一隊率先找齊所有己方代理人。</li>
+                <li><span class="highlight-blue">即刻落敗</span>：若指認到殺手，該隊立即輸掉遊戲。</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-nav">
+    <a href="#overview">概述</a>
+    <a href="#setup">設置</a>
+    <a href="#flow">流程</a>
+    <a href="#rules">規範</a>
+    <a href="#end">結束</a>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.footer-nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獨家暗語 (Just One) 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --card-bg: #ffffff;
+            --accent-color: #3498db;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --text-primary: #333;
+            --text-secondary: #7f8c8d;
+            --whiteboard-border: #bdc3c7;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: var(--accent-color);
+            background-image: linear-gradient(120deg, #3498db 0%, #8e44ad 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-hub {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        h2::before {
+            content: "•";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 2px solid var(--whiteboard-border);
+            position: relative;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .rules-list {
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 2px solid #eee;
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-nav a.active {
+            color: var(--accent-color);
+        }
+
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .marker-red {
+            color: var(--error-color);
+            font-weight: bold;
+            text-decoration: line-through;
+        }
+
+        .marker-green {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>獨家暗語</h1>
+    <div class="subtitle">Just One: A Cooperative Word Game</div>
+</header>
+
+<div class="container">
+    <a href="../index.html" class="nav-hub">🏠 返回首頁</a>
+
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <div class="card">
+            <p>《獨家暗語》（Just One）是一款有趣的合作派對遊戲。玩家們必須齊心協力，為一位「活躍玩家」提供線索，幫助他猜出神秘詞語。但要小心：所有重複的線索都會被取消！</p>
+            <div class="grid">
+                <div class="stat-item">
+                    <span style="font-size: 2rem;">👥</span><br>3-7 人
+                </div>
+                <div class="stat-item">
+                    <span style="font-size: 2rem;">⏱️</span><br>20 分鐘
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>遊戲設置</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><b>準備卡牌</b>：從牌庫中隨機抽出 <span class="highlight">13 張</span> 卡牌。</li>
+                <li><b>領取裝備</b>：每位玩家拿取一個畫板和一支彩色筆。</li>
+                <li><b>起始玩家</b>：選擇一名玩家擔任第一回合的活躍玩家。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2>遊戲流程</h2>
+        <div class="card">
+            <ol class="rules-list">
+                <li><b>選擇詞語</b>：活躍玩家抽一張牌放至畫板（不可自視），報出一個 1 到 5 的數字。</li>
+                <li><b>撰寫線索</b>：其餘玩家在不溝通的情況下，於畫板寫下一個「單一詞語」線索。</li>
+                <li><b>過濾線索</b>：活躍玩家閉眼，其餘玩家互看畫板。<span class="marker-red">相同或無效</span> 的線索全部蓋掉。</li>
+                <li><b>嘗試猜測</b>：活躍玩家睜眼，根據剩餘線索進行猜測。</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="scoring">
+        <h2>判定與計分</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><span class="marker-green">猜對了</span>：保留該卡牌（1 分）。</li>
+                <li><span class="marker-red">猜錯了</span>：捨棄該卡牌，且牌庫頂額外再捨棄一張牌。<span class="highlight">（損失 2 分）</span></li>
+                <li><b>Pass/跳過</b>：若不猜，僅捨棄該卡牌。<span class="highlight">（損失 1 分）</span></li>
+            </ul>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); text-align: center; margin-top: 20px;">
+                最終目標：挑戰接近 13 分的完美成績！
+            </p>
+        </div>
+    </section>
+
+    <section id="invalid">
+        <h2>無效線索範例</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li>與答案發音相同（如：王子、王紫）。</li>
+                <li>同一詞族（如：王子、公主 - 共同包含「王」字部分）。</li>
+                <li>翻譯词（如：Apple、蘋果）。</li>
+                <li>胡亂拼讀或捏造。</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-nav">
+    <a href="#overview">概述</a>
+    <a href="#setup">設置</a>
+    <a href="#flow">流程</a>
+    <a href="#scoring">計分</a>
+    <a href="#invalid">規範</a>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.footer-nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

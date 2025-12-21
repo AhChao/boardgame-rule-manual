@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和諧之森 (Harmonies) 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #f7f9f3;
+            --card-bg: #fff;
+            --accent-green: #2ecc71;
+            --accent-brown: #d35400;
+            --accent-blue: #3498db;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --leaf-color: #27ae60;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            border-bottom: 4px solid var(--accent-brown);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-hub {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--leaf-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--leaf-color);
+        }
+
+        h2::before {
+            content: "🌿";
+            margin-right: 10px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-bottom: 3px solid #eee;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .rules-list {
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 12px;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-nav a.active {
+            color: var(--leaf-color);
+            font-weight: bold;
+        }
+
+        .habitat-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tag-tree { background: #27ae60; }
+        .tag-water { background: #3498db; }
+        .tag-mtn { background: #95a5a6; }
+        .tag-field { background: #f1c40f; color: #333; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>和諧之森</h1>
+    <div class="subtitle">Harmonies: Create Your Own Ecosystem</div>
+</header>
+
+<div class="container">
+    <a href="../index.html" class="nav-hub">🏠 返回首頁</a>
+
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <div class="card">
+            <p>《和諧之森》（Harmonies）是一個充滿策略與美感的板塊放置遊戲。玩家要在個人圖板上構築微型生態系：種植森林、引導流水、堆疊山脈，最終吸引小動物進駐，打造最高分的自然榮景。</p>
+            <div class="grid">
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">👥</span><br>1-4 人
+                </div>
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">⏱️</span><br>30-45 分鐘
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>遊戲設置</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><b>個人圖板</b>：每位玩家拿取一個對應人數規模的面。</li>
+                <li><b>中央區域</b>：放置 5 個板塊供應點。</li>
+                <li><b>動物卡</b>：翻開 5 張動物卡供玩家選取。</li>
+                <li><b>板塊袋</b>：將所有彩色木質板塊放入袋中。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2>遊戲流程</h2>
+        <div class="card">
+            <p>玩家輪流執行回合，每回合必須執行 <span style="font-weight: bold; color: var(--accent-brown);">必須動作</span>：</p>
+            <ol class="rules-list">
+                <li><b>拿取並放置板塊</b>（必須）：從 5 個區域擇一，拿走全部 3 個板塊，並依規則放置在個人圖板。</li>
+                <li><b>拿取動物卡</b>（可選）：選一張卡片放在面前（上限 4 張）。</li>
+                <li><b>放置動物方塊</b>（可選）：若圖板上的地形符合動物卡的「棲息地模式」，即可將方塊移至該地形。</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="habitat">
+        <h2>棲息地規則</h2>
+        <div class="card">
+            <p>不同顏色的板塊代表不同的自然景觀：</p>
+            <div class="grid">
+                <div>
+                    <span class="habitat-tag tag-tree">樹林</span>
+                    <p>疊放在樹幹上（最高 3 層）。</p>
+                </div>
+                <div>
+                    <span class="habitat-tag tag-water">流水</span>
+                    <p>連接成河流可獲得更多分數。</p>
+                </div>
+                <div>
+                    <span class="habitat-tag tag-mtn">山脈</span>
+                    <p>堆疊後可模擬山峰地勢。</p>
+                </div>
+                <div>
+                    <span class="habitat-tag tag-field">草地</span>
+                    <p>平鋪於空地吸引草原動物。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="end">
+        <h2>遊戲結束</h2>
+        <div class="card">
+            <p>當符合以下任一條件，遊戲在該輪結束後停止：</p>
+            <ul class="rules-list">
+                <li>板塊袋已抽完，中央區域無法補滿。</li>
+                <li>任一玩家圖板上的空位剩下 2 個或更少。</li>
+            </ul>
+            <p>最後統計 <span style="font-weight: bold;">地形分</span> 與 <span style="font-weight: bold;">動物卡分</span>，總分最高者勝出！</p>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-nav">
+    <a href="#overview">概述</a>
+    <a href="#setup">設置</a>
+    <a href="#flow">流程</a>
+    <a href="#habitat">棲息地</a>
+    <a href="#end">結束</a>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.footer-nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
