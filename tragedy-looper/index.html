@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慘劇輪迴 (Tragedy Looper) 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #0d0d12;
+            --card-bg: #1a1a24;
+            --accent-color: #7d5fff;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0b0;
+            --danger: #ff4d4d;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --intrigue-color: #9b59b6;
+            --goodwill-color: #27ae60;
+            --paranoia-color: #e67e22;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1e2f 0%, #0d0d12 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(125, 95, 255, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-hub {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .stat-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-intrigue { background: var(--intrigue-color); color: white; }
+        .badge-goodwill { background: var(--goodwill-color); color: white; }
+        .badge-paranoia { background: var(--paranoia-color); color: white; }
+
+        .rules-list {
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 12px;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(26, 26, 36, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid var(--accent-color);
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-nav a.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .script-link {
+            display: block;
+            background: linear-gradient(90deg, #c0392b, #8e44ad);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .script-link:hover {
+            transform: scale(1.02);
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid var(--danger);
+            padding: 15px;
+            border-radius: 8px;
+            color: var(--danger);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>慘劇輪迴</h1>
+    <div class="subtitle">Tragedy Looper Rules & Reference</div>
+</header>
+
+<div class="container">
+    <a href="../index.html" class="nav-hub">🏠 返回首頁</a>
+
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <div class="card">
+            <p>《慘劇輪迴》是一款時空跳躍演繹桌面遊戲。一名<b>劇本家 (Mastermind)</b> 將展開一場謎團，而<b>主角們 (Protagonists)</b> 則試圖查明真相。</p>
+            <p>主角們擁有回到過去的能力，可以多次重玩同一個腳本！腳本保持不變，唯一改變的是你掌握的知識。</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: var(--goodwill-color)">主角目標</h3>
+                <p>在至少一個輪迴中，<b>不達成</b>當前陰謀案的失敗條件，且<b>沒有主角死亡</b>。或在最後的「最終推理」中猜對所有角色的身分。</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--danger)">劇本家目標</h3>
+                <p>在每一個輪迴中都讓主角們失敗。劇本家掌握所有資訊，必須根據主角獲得的知識調整策略。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>初始設置 (Initial Setup)</h2>
+        <div class="card">
+            <p>並非所有的角色都會出現在每一場遊戲中。角色設置完全依照<b>腳本 (Script)</b> 的指示：</p>
+            <ul class="rules-list">
+                <li><b>角色清單</b>：劇本家根據腳本卡面，挑選出本次遊戲需要的角色。</li>
+                <li><b>起始位置</b>：腳本會指定每個角色的起始地點（醫院、神社、城市或學校）。</li>
+                <li><b>剩餘角色</b>：未被腳本提到的角色<b>不會</b>放上版圖，直接收回盒子裡。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="locations">
+        <h2>地點與數值</h2>
+        <div class="card">
+            <p>遊戲主要圍繞四個地點：<b>醫院、神社、城市、學校</b>。</p>
+            <div class="grid">
+                <div>🏥 醫院 / ⛩️ 神社</div>
+                <div>🏙️ 城市 / 🏫 學校</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>重要數值</h3>
+            <p><span class="stat-badge badge-goodwill">友好度 (Goodwill)</span>：代表角色對主角的友善程度。達到門檻可使用角色的友好度能力。</p>
+            <p><span class="stat-badge badge-paranoia">疑心 (Paranoia)</span>：代表角色的恐懼程度。達到疑心臨界值時，角色會陷入恐慌並觸發<b>事件 (Incident)</b>。</p>
+            <p><span class="stat-badge badge-intrigue">陰謀 (Intrigue)</span>：代表地點或角色周邊的秘密。由劇本家放置，通常會導致主角失敗。</p>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2>遊戲流程 (單日)</h2>
+        <div class="card">
+            <ol class="rules-list">
+                <li><b>早晨</b>：開始新的一天。</li>
+                <li><b>劇本家出牌</b>：覆蓋放 3 張牌在角色或地點上。</li>
+                <li><b>主角出牌</b>：每位主角覆蓋放 1 張牌。</li>
+                <li><b>翻開並結算卡片</b>。</li>
+                <li><b>劇本家能力</b>：結算不需要消耗友好度的角色能力。</li>
+                <li><b>主角領袖能力</b>：目前的領袖可以使用友好度能力。</li>
+                <li><b>結算事件</b>：若角色疑心達標且當天有預定事件，則觸發事件。</li>
+                <li><b>更換領袖</b>：將領袖卡傳給下一位玩家。</li>
+                <li><b>夜晚</b>：檢查是否達成失敗條件。</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="cards">
+        <h2>卡片效果</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>主角卡片</h3>
+                <p>• <b>疑心 +1/-1</b>：增減角色疑心。</p>
+                <p>• <b>友好度 +1/+2</b>：增加角色友好度。</p>
+                <p>• <b>移動 (水平/垂直)</b>：移動角色。</p>
+                <p>• <b>禁止陰謀</b>：使當天的陰謀卡無效。</p>
+                <p>• <b>禁止移動</b>：使移動效果無效。</p>
+            </div>
+            <div class="card">
+                <h3>劇本家卡片</h3>
+                <p>• <b>陰謀 +1/+2</b>：增加地點或角色的陰謀值。</p>
+                <p>• <b>疑心 +1/-1 / 禁止友好度</b>。</p>
+                <p>• <b>移動 (水平/垂直/對角線)</b>。</p>
+                <p>• <b>禁止疑心</b>：防止主角降低疑心。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="scripts">
+        <div class="warning-box">
+            ⚠️ <b>下方的腳本資訊僅供劇本家 (Mastermind) 閱讀！</b> 主角閱讀後會嚴重影響遊戲體驗與樂趣。
+        </div>
+        <a href="scripts.html" class="script-link">進入腳本頁面 (Mastermind Only)</a>
+    </section>
+
+</div>
+
+<div class="footer-nav">
+    <a href="#overview">概述</a>
+    <a href="#locations">地點</a>
+    <a href="#flow">流程</a>
+    <a href="#cards">卡片</a>
+</div>
+
+<script>
+    // Simple scroll spy logic
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.footer-nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

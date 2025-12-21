@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>劇本資訊 (Mastermind Only) - 慘劇輪迴</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0d;
+            --card-bg: #15151e;
+            --accent-color: #e74c3c;
+            --text-primary: #e0e0e0;
+            --text-secondary: #9090a0;
+            --gold: #f1c40f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #confirmation-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .confirm-box {
+            max-width: 500px;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-confirm {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-confirm:hover {
+            transform: scale(1.05);
+            background: #ff5252;
+        }
+
+        .btn-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        #main-content {
+            display: none;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 { color: var(--accent-color); }
+
+        .script-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .script-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .section-header {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(231, 76, 60, 0.3);
+            margin-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th { color: var(--text-secondary); }
+
+        .hint-box {
+            background: rgba(241, 196, 15, 0.05);
+            border: 1px dashed var(--gold);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Script Index Styles */
+        .script-index {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .index-item {
+            background: #252535;
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .index-item:hover {
+            background: #303045;
+            border-color: var(--accent-color);
+        }
+
+        .index-item.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .script-card {
+            display: none; /* Hidden by default */
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .script-card.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="confirmation-screen">
+    <div class="confirm-box">
+        <h2 style="color: var(--accent-color)">警告：劇本家專用</h2>
+        <p>此頁面包含腳本真相、角色分配與事件安排。主角閱讀後將無法體驗後續的推理樂趣。</p>
+        <p><b>你確定你是劇本家 (Mastermind) 嗎？</b></p>
+        <button class="btn-confirm" onclick="showContent()">是的，我是劇本家</button>
+        <br>
+        <a href="index.html" class="btn-back">我想起來我不是，帶我回去</a>
+    </div>
+</div>
+
+<div id="main-content">
+    <header>
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: none; float: left;">⬅ 回規則頁</a>
+        <h1>劇本管理中心</h1>
+    </header>
+
+    <div class="script-index">
+        <div class="index-item" onclick="switchScript('script-1')">第一個劇本</div>
+        <div class="index-item" onclick="switchScript('script-2')">教學腳本 v2</div>
+    </div>
+
+    <section>
+        <!-- The First Script (教學劇本) -->
+        <div id="script-1" class="script-card">
+            <div class="script-title">第一個劇本 (The First Script)</div>
+            <p>這是一個專為初學者設計的腳本，使用了「第一步 (First Steps)」慘劇組。</p>
+            
+            <div class="section-header">基本資訊</div>
+            <table>
+                <tr><th>慘劇組</th><td>第一步 (First Steps)</td></tr>
+                <tr><th>輪迴數</th><td>3</td></tr>
+                <tr><th>每日天數</th><td>7</td></tr>
+            </table>
+
+            <div class="section-header">陰謀與角色</div>
+            <table>
+                <tr><th>角色</th><th>身分</th></tr>
+                <tr><td>男子板 (Boy Student)</td><td>關鍵人物 (Key Person)</td></tr>
+                <tr><td>女子板 (Girl Student)</td><td>殺人鬼 (Killer)</td></tr>
+                <tr><td>豪商之女 (Rich Man's Daughter)</td><td>黑幕 (Brain)</td></tr>
+            </table>
+            <p><small style="color: var(--text-secondary)">其餘角色均為「一般人」。</small></p>
+
+            <div class="section-header">事件時程</div>
+            <table>
+                <tr><th>日期</th><th>事件名稱</th><th>犯人</th></tr>
+                <tr><td>第 3 天</td><td>不安的視線 (Uneasy Rumors)</td><td>豪商之女</td></tr>
+                <tr><td>第 5 天</td><td>殺人事件 (Murder)</td><td>女子板</td></tr>
+            </table>
+
+            <div class="hint-box">
+                <b>劇本家策略建議：</b><br>
+                在第一輪中，嘗試增加角色的疑心以觸發第 3 天的事件。利用「殺人鬼」的能力在合適時機殺死主角。注意保護「關鍵人物」不被殺死（除非那是你的計畫）。
+            </div>
+        </div>
+
+        <!-- Teaching Script v2 (教學腳本 v2) -->
+        <div id="script-2" class="script-card">
+            <div class="script-title">教學腳本 v2 (Teaching Script v2)</div>
+            <p>這是一個假設你正在教授「第一步」場景的腳本。</p>
+
+            <div class="section-header">背景故事</div>
+            <p style="font-style: italic; color: #bbb;">「你們都擁有穿越時空的能力...但這一次，事情有點不同。無論你們做什麼，慘劇似乎執意要發生...」</p>
+
+            <div class="section-header">角色起點配置</div>
+            <table>
+                <tr><th>地點</th><th>角色</th></tr>
+                <tr><td>🏥 醫院</td><td>醫生、病人</td></tr>
+                <tr><td>⛩️ 神社</td><td>巫女</td></tr>
+                <tr><td>🏫 學校</td><td>男子板、女子板、豪商之女</td></tr>
+                <tr><td>🏙️ 城市</td><td>情報通、刑警、上班族</td></tr>
+            </table>
+
+            <div class="hint-box">
+                <b>教學重點：</b><br>
+                - 解釋這是一個 2-4 人的遊戲（通常是 3 主角 vs 1 劇本家）。<br>
+                - 強調主角在失敗後會回溯時間，但劇本家的配置不變。<br>
+                - 展示友好度能力（如：情報通可以揭露角色身分）。
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; color: var(--text-secondary); margin: 40px 0;">
+        <p>慘劇輪迴 劇本家速查工具</p>
+    </footer>
+</div>
+
+<script>
+    function showContent() {
+        document.getElementById('confirmation-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+    }
+
+    function switchScript(scriptId) {
+        // Hide all cards
+        document.querySelectorAll('.script-card').forEach(card => {
+            card.classList.remove('active');
+        });
+        // Remove active class from index items
+        document.querySelectorAll('.index-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // Show selected card
+        const selectedCard = document.getElementById(scriptId);
+        if (selectedCard) {
+            selectedCard.classList.add('active');
+        }
+
+        // Highlight selected index item
+        const activeItem = Array.from(document.querySelectorAll('.index-item')).find(item => 
+            item.getAttribute('onclick').includes(scriptId)
+        );
+        if (activeItem) {
+            activeItem.classList.add('active');
+        }
+    }
+
+    // Default to first script on entry
+    // window.onload = () => switchScript('script-1'); 
+    // Or keep none selected initially. Let's select the first one for better UX after click "I am Mastermind"
+</script>
+</body>
+</html>
