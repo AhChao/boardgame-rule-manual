@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索姆大陸 - 航行日誌</title>
+    <style>
+        :root {
+            --primary-color: #005f73;
+            --accent-color: #ae2012;
+            --bg-color: #e9d8a6;
+            --card-bg: #f1faee;
+            --text-color: #001219;
+            --done-color: #94d2bd;
+        }
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 15px;
+        }
+        .crew-setup {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .crew-input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        @media (min-width: 768px) {
+            .mission-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .mission-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            position: relative;
+        }
+        .mission-card.completed {
+            background-color: var(--done-color);
+        }
+        .mission-num {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .mission-info { flex-grow: 1; }
+        .mission-title { font-weight: bold; margin-bottom: 5px; display: block; }
+        .difficulty {
+            display: inline-block;
+            background: #ee9b00;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        .attempts { display: flex; gap: 5px; margin-top: 10px; }
+        .attempt-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .attempt-dot.active { background: var(--accent-color); border-color: var(--accent-color); }
+        .mission-controls {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .score-input { width: 40px; text-align: center; border-radius: 4px; border: 1px solid #ccc; }
+        .reset-btn {
+            background: var(--accent-color); color: white; border: none; padding: 10px 20px;
+            border-radius: 5px; cursor: pointer; display: block; margin: 30px auto;
+        }
+        
+        /* Slot Switcher */
+        .slot-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 6px;
+            border-radius: 30px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .slot-btn {
+            padding: 8px 18px;
+            border: none;
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+        .slot-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .slot-btn.active {
+            background: var(--primary-color);
+            color: white;
+            opacity: 1;
+            box-shadow: 0 4px 12px rgba(0, 95, 115, 0.3);
+            transform: translateY(-1px);
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .footer-link { text-decoration: none; color: #666; font-size: 0.9rem; }
+        .key-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        .key-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📝 姆大陸航行日誌</h1>
+    <p>THE CREW: MISSION DEEP SEA - MISSION SHEET</p>
+</div>
+
+<div class="slot-switcher">
+    <button class="slot-btn active" data-slot="1">存檔 1</button>
+    <button class="slot-btn" data-slot="2">存檔 2</button>
+    <button class="slot-btn" data-slot="3">存檔 3</button>
+</div>
+
+<div class="crew-setup">
+    <strong>探險隊員：</strong>
+    <div class="crew-grid">
+        <input type="text" class="crew-input" placeholder="隊員 1" id="crew1">
+        <input type="text" class="crew-input" placeholder="隊員 2" id="crew2">
+        <input type="text" class="crew-input" placeholder="隊員 3" id="crew3">
+        <input type="text" class="crew-input" placeholder="隊員 4" id="crew4">
+        <input type="text" class="crew-input" placeholder="隊員 5" id="crew5">
+    </div>
+</div>
+
+<div class="mission-grid" id="missionGrid">
+    <!-- Missions will be generated here -->
+</div>
+
+<div class="key-section">
+    <strong>符號說明 (KEY)：</strong>
+    <div class="key-grid">
+        <span>🔴 抽與總分 X 相等的任務小牌</span>
+        <span>🕒 計時任務；抽與總分 X 相等的任務牌</span>
+        <span>🛰️ 隊長</span>
+        <span>⚓ 標記求救信號</span>
+        <span>❓ 水流規則 (Currents)</span>
+        <span>📉 深海迷航 (Rapture of the Deep)</span>
+    </div>
+</div>
+
+<button class="reset-btn" id="resetBtn">🗑️ 清除所有進度</button>
+
+<footer>
+    <a href="index.html" class="footer-link">📖 回規則</a>
+    <a href="#" class="footer-link active" onclick="location.reload()">📝 日誌</a>
+    <a href="../index.html" class="footer-link">🏠 回首頁</a>
+</footer>
+
+<script>
+    const missionData = [
+        { id: 1, diff: 1, desc: "標準探索任務" },
+        { id: 2, diff: 2, desc: "標準探索任務" },
+        { id: 3, diff: 3, desc: "標準探索任務" },
+        { id: 4, diff: 4, desc: "標準探索任務" },
+        { id: 5, diff: 5, desc: "標準探索任務" },
+        { id: 6, diff: 5, desc: "所有任務交由一位隊員執行。共同決定人選，但不能討論手牌。" },
+        { id: 7, diff: 6, desc: "標準探索任務" },
+        { id: 8, diff: 6, desc: "任何隊員贏得的「9」號牌數量差距不能超過 2 張。" },
+        { id: 9, diff: 7, desc: "使用水流規則 (Currents)。" },
+        { id: 10, diff: 4, desc: "隊長承擔所有任務或轉交。轉交需在第一墩前完成通訊。" },
+        { id: 11, diff: 8, desc: "使用深海迷航規則 (Rapture of the Deep)。" },
+        { id: 12, diff: 6, desc: "不能以粉紅色牌或潛艇牌開墩。" },
+        { id: 13, diff: 5, desc: "隊長承擔所有任務或轉交。同任務 10。" },
+        { id: 14, diff: 6, desc: "三分鐘半內完成。若不計時，則使用水流規則。" },
+        { id: 15, diff: 6, desc: "三分鐘內完成。若不計時，則使用深海迷航規則。" },
+        { id: 16, diff: 6, desc: "兩分鐘半內完成。若不計時，則禁止通訊。" },
+        { id: "Q1", diff: 1, desc: "隊長若有全 4 張潛艇牌則重發。A) 贏 2 墩不含 7,8,9；B) 成功後，再贏 3 墩不含 7,8,9。" },
+        { id: "Q2", diff: 3, desc: "任務牌蓋放。玩家抽到的任務牌難度總和即為需贏得的墩數。" },
+        { id: 17, diff: 9, desc: "標準探索任務" },
+        { id: 18, diff: 9, desc: "標準探索任務" },
+        { id: 19, diff: 9, desc: "隊長在第一墩必須贏得場上最高難度的任務。" },
+        { id: 20, diff: 10, desc: "陌生領域規則：抽色牌決定通訊限制。" },
+        { id: 21, diff: 6, desc: "任何隊員贏得的「1」號牌數量差距不能超過 2 張。" },
+        { id: 22, diff: 11, desc: "標準探索任務" },
+        { id: 23, diff: 11, desc: "首墩贏家在整場遊戲中贏墩數必須始終領先。第二墩前禁止通訊。" },
+        { id: 24, diff: 12, desc: "標準探索任務" },
+        { id: 25, diff: 12, desc: "潛艇牌被運走。隊長不領取任何任務。" },
+        { id: 26, diff: 10, desc: "五分鐘內完成。若不計時，難度提升至 12。" },
+        { id: 27, diff: 6, desc: "黃色 5 號牌必須在最後一墩的最後一張打出。" },
+        { id: 28, diff: 14, desc: "標準探索任務" },
+        { id: 29, diff: 15, desc: "標準探索任務" },
+        { id: 30, diff: 16, desc: "標準探索任務" },
+        { id: 31, diff: 17, desc: "標準探索任務" },
+        { id: 32, diff: 0, desc: "挑戰任務：分別贏得 0, 3, 2 墩，以及首墩與末墩。" },
+        { id: 33, diff: 18, desc: "深海極限挑戰" },
+        { id: 34, diff: 19, desc: "深海極限挑戰" },
+        { id: 35, diff: 20, desc: "深海極限挑戰" },
+        { id: 36, diff: 21, desc: "深海極限挑戰" },
+        { id: 37, diff: 22, desc: "深海極限挑戰" },
+        { id: 38, diff: 23, desc: "深海極限挑戰" },
+        { id: 39, diff: 24, desc: "深海極限挑戰" },
+        { id: 40, diff: 25, desc: "深海極限挑戰" },
+        { id: 41, diff: 26, desc: "深海極限挑戰" }
+    ];
+
+    const missionGrid = document.getElementById('missionGrid');
+    let currentSlot = localStorage.getItem('crew_active_slot') || '1';
+    const storageKeyBase = 'crew_deep_sea_slot_';
+
+    function getStorageKey() {
+        return storageKeyBase + currentSlot;
+    }
+
+    function loadProgress() {
+        const saved = localStorage.getItem(getStorageKey());
+        return saved ? JSON.parse(saved) : { crew: [], missions: {} };
+    }
+
+    function saveProgress(data) {
+        localStorage.setItem(getStorageKey(), JSON.stringify(data));
+    }
+
+    let progress = loadProgress();
+
+    function renderBoard() {
+        missionGrid.innerHTML = '';
+        
+        // Update crew inputs
+        for(let i=1; i<=5; i++) {
+            const el = document.getElementById('crew' + i);
+            el.value = progress.crew[i-1] || '';
+        }
+
+        missionData.forEach(m => {
+            const card = document.createElement('div');
+            card.className = 'mission-card';
+            if (progress.missions[m.id]?.done) card.classList.add('completed');
+
+            const mState = progress.missions[m.id] || { attempts: 0, final: '', done: false };
+
+            card.innerHTML = `
+                <div class="mission-num">${m.id}</div>
+                <div class="mission-info">
+                    <span class="difficulty">難度: ${m.diff}</span>
+                    <span class="mission-title">${m.desc}</span>
+                    <div class="attempts" id="attempts-${m.id}">
+                        ${[1,2,3,4,5].map(i => `<div class="attempt-dot ${i <= mState.attempts ? 'active' : ''}" data-idx="${i}"></div>`).join('')}
+                    </div>
+                    <div class="mission-controls">
+                        <span>最終得分:</span>
+                        <input type="text" class="score-input" value="${mState.final}" id="score-${m.id}">
+                        <label style="margin-left:auto"><input type="checkbox" ${mState.done ? 'checked' : ''} id="done-${m.id}"> 完成</label>
+                    </div>
+                </div>
+            `;
+
+            missionGrid.appendChild(card);
+
+            // Events
+            const dots = card.querySelectorAll('.attempt-dot');
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.idx);
+                    const current = progress.missions[m.id]?.attempts || 0;
+                    const newVal = (current === idx) ? idx - 1 : idx;
+                    
+                    if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false };
+                    progress.missions[m.id].attempts = newVal;
+                    
+                    dots.forEach((d, i) => d.classList.toggle('active', i < newVal));
+                    saveProgress(progress);
+                });
+            });
+
+            const scoreInput = card.querySelector(`#score-${m.id}`);
+            scoreInput.addEventListener('input', () => {
+                if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false };
+                progress.missions[m.id].final = scoreInput.value;
+                saveProgress(progress);
+            });
+
+            const doneCheck = card.querySelector(`#done-${m.id}`);
+            doneCheck.addEventListener('change', () => {
+                if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false };
+                progress.missions[m.id].done = doneCheck.checked;
+                card.classList.toggle('completed', doneCheck.checked);
+                saveProgress(progress);
+            });
+        });
+    }
+
+    // Init crew input listeners once
+    for(let i=1; i<=5; i++) {
+        const el = document.getElementById('crew' + i);
+        el.addEventListener('input', () => {
+            progress.crew[i-1] = el.value;
+            saveProgress(progress);
+        });
+    }
+
+    // Slot Switching
+    const slotBtns = document.querySelectorAll('.slot-btn');
+    slotBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentSlot = btn.dataset.slot;
+            localStorage.setItem('crew_active_slot', currentSlot);
+            
+            slotBtns.forEach(b => b.classList.toggle('active', b === btn));
+            progress = loadProgress();
+            renderBoard();
+        });
+    });
+
+    // Set active button on load
+    slotBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.slot === currentSlot));
+
+    // Initial Render
+    renderBoard();
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+        if(confirm(`確定要清除存檔 ${currentSlot} 的所有進度嗎？`)) {
+            localStorage.removeItem(getStorageKey());
+            progress = loadProgress();
+            renderBoard();
+        }
+    });
+</script>
+
+</body>
+</html>

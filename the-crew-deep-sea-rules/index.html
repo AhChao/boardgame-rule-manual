@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星際探險隊：深海任務 - 規則速查</title>
+    <style>
+        :root {
+            --primary-color: #1a2a6c;
+            --accent-color: #b21f1f;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --deep-sea: #001f3f;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--deep-sea) 0%, #003366 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .nav-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .nav-link:hover {
+            transform: scale(1.05);
+        }
+        section {
+            background: var(--card-bg);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 0;
+        }
+        .rule-card {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .footer-link {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-link i { font-size: 1.2rem; margin-bottom: 4px; }
+        .footer-link.active { color: var(--primary-color); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>星際探險隊：深海任務</h1>
+    <p>The Crew: Mission Deep Sea</p>
+    <a href="log.html" class="nav-link">📝 前往任務日誌</a>
+</header>
+
+<div class="container">
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <p>這是一款合作類的吃墩遊戲。玩家們扮演深海探險隊員，共同合作尋找傳說中的「姆大陸」。遊戲過程不允許直接討論手牌，必須透過有限的通訊標記來協作。</p>
+        <div class="rule-card">
+            <strong>核心目標：</strong> 完成當前任務規定的所有目標，且不能讓任何隊員「爆炸」或失敗。
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>遊戲設置</h2>
+        <ol>
+            <li>洗勻 <span class="highlight">大牌（36張花色牌 + 4張潛艇牌）</span> 並平分給所有玩家。</li>
+            <li>每人拿取 1 個 <span class="highlight">聲納標記</span>（綠色面朝上）。</li>
+            <li>每人拿取 1 張 <span class="highlight">提醒牌</span>。</li>
+            <li>將 <span class="highlight">求救信號標記</span> 蓋放在桌上。</li>
+            <li>根據任務難度，抽取對應總分值的 <span class="highlight">任務小牌</span>。</li>
+        </ol>
+        <div class="rule-card">
+            <strong>隊長：</strong> 拿到數字 4 潛艇牌的人成為隊長。隊長優先選擇任務牌。
+        </div>
+    </section>
+
+    <section id="gameplay">
+        <h2>遊戲流程</h2>
+        <p>遊戲採取「吃墩」機制：</p>
+        <ul>
+            <li>由隊長開始打出第一張牌（帶領）。</li>
+            <li>其他玩家必須 <span class="highlight">跟打</span> 同色牌。若無同色牌，可打出其他色或潛艇牌。</li>
+            <li>潛艇牌 (1-4) 是王牌，數字最大者贏得該墩。若無潛艇牌，則帶領花色數字最高者贏。</li>
+        </ul>
+    </section>
+
+    <section id="communication">
+        <h2>通訊規則</h2>
+        <p>每墩遊戲間，你可以花費聲納標記來提供資訊：</p>
+        <ul>
+            <li>將一張 <span class="highlight">花色牌</span> 放在面前。</li>
+            <li>標記放在 <strong>頂部</strong>：這是你該色唯一一張牌。</li>
+            <li>標記放在 <strong>中間</strong>：這是你該色最高數字的牌。</li>
+            <li>標記放在 <strong>底部</strong>：這是你該色最低數字的牌。</li>
+        </ul>
+        <p>⚠️ 潛艇牌不能進行通訊。</p>
+    </section>
+
+    <section id="mission-log">
+        <h2>任務日誌</h2>
+        <p>深海任務引入了靈活的任務系統，透過將任務卡背後的難度值加總來決定關卡強度。玩家可以使用我們提供的互動式任務日誌來記錄冒險過程。</p>
+    </section>
+</div>
+
+<footer>
+    <a href="../index.html" class="footer-link">🏠 回首頁</a>
+    <a href="#overview" class="footer-link active">📖 規則</a>
+    <a href="log.html" class="footer-link">📝 日誌</a>
+</footer>
+
+</body>
+</html>
