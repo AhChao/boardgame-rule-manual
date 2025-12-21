@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest (阿瓦隆續作) - 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --container-bg: #1c2128;
+            --text-color: #adbac7;
+            --accent-blue: #539bf5;
+            --accent-red: #f47067;
+            --accent-gold: #c69026;
+            --card-border: #444c56;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background-color: var(--container-bg);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--container-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .team-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .team {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .team-good { background: rgba(83, 155, 245, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue); }
+        .team-evil { background: rgba(244, 112, 103, 0.1); border: 1px solid var(--accent-red); color: var(--accent-red); }
+
+        .magic-token {
+            background: rgba(198, 144, 38, 0.1);
+            border: 2px dashed var(--accent-gold);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .nav-home {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--container-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .highlight { color: #fff; font-weight: bold; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗡️ QUEST (阿瓦隆續作)</h1>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="nav-home">🏠 返回首頁</a>
+
+        <div id="overview" class="section">
+            <h2>遊戲概覽</h2>
+            <p>Quest 是《阿瓦隆》的經典續作，是一款隱藏陣營的社交演繹遊戲。正義方與邪惡方在「無投票機制」下展開更快速的對決。</p>
+            <div class="team-box">
+                <div class="team team-good">正義 (3次成功)</div>
+                <div class="team team-evil">邪惡 (3次失敗)</div>
+            </div>
+        </div>
+
+        <div id="diff" class="section">
+            <h2>與阿瓦隆的主要不同</h2>
+            <ul>
+                <li><span class="highlight">取消團隊投票：</span> 隊長選定隊員後直接出發，不需玩家投票表決（除非使用特殊規則）。</li>
+                <li><span class="highlight">魔力標記 (Magic Token)：</span> 隊長可交給一名隊員，該隊員該次任務不能出「失敗」卡（除非其角色有特殊豁免）。</li>
+                <li><span class="highlight">背水一戰 (The Blind Quest)：</span> 若正義方三次成功，邪惡方仍有刺殺梅林的機會。</li>
+            </ul>
+        </div>
+
+        <div id="flow" class="section">
+            <h2>遊戲流程</h2>
+            <ol>
+                <li><strong>領袖指定：</strong> 當前玩家作為領袖，選擇參予任務的人選。</li>
+                <li><strong>任務執行：</strong> 領袖可選擇是否發放「魔力標記」。</li>
+                <li><strong>出牌：</strong> 隊員秘密打出「成功」或「失敗」。正義方必出成功。</li>
+                <li><strong>結算：</strong> 只要有一張失敗，任務即宣告失敗。</li>
+            </ol>
+        </div>
+
+        <div id="magic" class="section">
+            <h2>魔力標記規則</h2>
+            <div class="magic-token">
+                <span class="highlight">✨ 魔力標記效果：</span><br>
+                持有標記的玩家在任務中必須選擇「成功」卡，即使是邪惡方也是如此。這讓隊長可以「鎖定」某名可疑玩家。
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#overview">概覽</a>
+        <a href="#diff">不同之處</a>
+        <a href="#flow">流程</a>
+        <a href="#magic">魔力標記</a>
+    </div>
+</body>
+</html>

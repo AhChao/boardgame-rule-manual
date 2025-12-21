@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厄運食譜清單 - 爆炸貓</title>
+    <style>
+        :root {
+            --bg: #f4f4f4;
+            --accent: #ea4335;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .nav-back {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .recipe-card {
+            background: #fff;
+            border: 2px solid #000;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .recipe-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .ingredients {
+            font-size: 0.85rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredients li {
+            padding: 3px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .qty { font-weight: bold; color: #000; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">🔙 返回規則頁</a>
+    <h1 style="text-align: center;">📜 15 種厄運食譜設置</h1>
+    <p style="text-align: center; color: #666; font-size: 0.9rem;">※ 以下均為 2-5 人設置參考（部分模式人數略有增減）</p>
+
+    <div class="recipe-grid" id="recipeGrid">
+        <!-- Recipes filled by JS -->
+    </div>
+
+    <script>
+        const recipes = [
+            { name: "心機對決 (MIND GAMES)", players: "2 Players", time: "15 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["掩埋", 4], ["預見未來", 6], ["跳過", 4], ["標記", 4], ["反轉行動", 4]] },
+            { name: "卡牌收藏家 (CARD HOARDERS)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["黑洞貓", 1], ["預見未來 (3x)", 4], ["分享未來", 4], ["改寫未來", 4]] },
+            { name: "貓咪大亂鬥 (CAT FIGHT)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["好意 (Favor)", 4], ["把它拿走", 4], ["塔可貓 (Taco Cat)", 4], ["活屍貓 (Zombie Cat)", 4]] },
+            { name: "攻擊之襲 (ATTACK OF THE ATTACKS)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["攻擊", 8], ["指定攻擊", 4], ["個人攻擊", 4]] },
+            { name: "黑洞模式 (BLACK HOLE)", players: "2 Players", time: "10 MIN", items: [["拆彈", 2], ["黑洞貓", 2], ["裸奔貓", 1], ["洗牌", 4], ["跳過", 4]] },
+            { name: "極限危險 (DANGER MODE)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["裸奔貓", 1], ["黑洞貓", 1], ["反擊/過招 (Nope)", 4]] },
+            { name: "經典模式 (CLASSIC MODE)", players: "2 Players", time: "15 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["攻擊", 4], ["好意 (Favor)", 4], ["反擊/過招 (Nope)", 5], ["預見未來", 5]] },
+            { name: "以牙還牙 (EYE FOR AN EYE)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["預見未來", 8], ["改寫未來", 4], ["洗牌", 4]] },
+            { name: "閃電貓 (LIGHTNING KITTENS)", players: "2 Players", time: "2 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["預見未來", 4], ["跳過", 4], ["反轉行動", 4]] },
+            { name: "不之醬汁 (NOPE SAUCE)", players: "2 Players", time: "15 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["反擊/過招 (Nope)", 10], ["洗牌", 4], ["跳過", 4]] },
+            { name: "強者對決 (POWER PLAY)", players: "3 Players", time: "15 MIN", items: [["爆炸貓", 2], ["拆彈", 5], ["我沒事 (I'm Okay)", 4], ["超級跳過", 4], ["改寫未來", 4]] },
+            { name: "分享即關愛 (SHARING IS CARING)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["分享未來", 12], ["好意 (Favor)", 4], ["洗牌", 4]] },
+            { name: "三隻手 (STICKY FINGERS)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["把它拿走", 12], ["好意 (Favor)", 4], ["混種貓 (Feral Cat)", 4]] },
+            { name: "貓咪大清洗 (THE PURRRGE)", players: "2 Players", time: "15 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["指定攻擊", 4], ["預見未來", 4], ["洗牌", 4]] },
+            { name: "喵虐狂 (MEOWSOCHIST)", players: "2 Players", time: "10 MIN", items: [["爆炸貓", 1], ["拆彈", 2], ["裸奔貓", 1], ["黑洞貓", 1], ["反擊/過招 (Nope)", 2]] }
+        ];
+
+        const grid = document.getElementById('recipeGrid');
+        recipes.forEach(r => {
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            let itemsHtml = r.items.map(i => `<li><span>${i[0]}</span><span class="qty">${i[1]}</span></li>`).join('');
+            card.innerHTML = `
+                <div class="recipe-name">${r.name}</div>
+                <div class="meta">👥 ${r.players} | ⏱️ ${r.time}</div>
+                <ul class="ingredients">${itemsHtml}</ul>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔戒：中洲對決 (LOTR: Duel) - 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #1a1410;
+            --container-bg: #2a2018;
+            --text-color: #e5d3b3;
+            --accent-gold: #d4af37;
+            --ring-color: #ffcc00;
+            --expansion-color: #7accff;
+            --card-border: #4a3b2a;
+            --fellowship: #4a90e2;
+            --sauron: #d0021b;
+        }
+
+        body {
+            font-family: "Palatino", "Georgia", "Noto Serif TC", serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--container-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 5px;
+        }
+
+        .victory-condition {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .expansion-rule {
+            border: 2px solid var(--expansion-color);
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(122, 204, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .expansion-rule h3 {
+            margin-top: 0;
+            color: var(--expansion-color);
+            font-size: 1.1rem;
+        }
+
+        .expansion-tag {
+            background: var(--expansion-color);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .nav-home {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--container-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 2px solid var(--accent-gold);
+        }
+
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .faction-box {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .faction {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .faction.fell { background: rgba(74, 144, 226, 0.2); border: 1px solid var(--fellowship); }
+        .faction.sau { background: rgba(208, 2, 27, 0.2); border: 1px solid var(--sauron); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗡️ 魔戒：中洲對決 (LOTR Duel)</h1>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="nav-home">🏠 返回首頁</a>
+
+        <div id="overview" class="section">
+            <h2>遊戲簡介</h2>
+            <p>這是一款基於《七大奇蹟：對決》系統改編的 2 人對戰遊戲。玩家分別扮演<strong>護戒同盟</strong>或<strong>索倫勢力</strong>，爭奪中洲世界的命運。</p>
+            <div class="faction-box">
+                <div class="faction fell">同盟 (摧毀戒指)</div>
+                <div class="faction sau">索倫 (征服中洲)</div>
+            </div>
+        </div>
+
+        <div id="victory" class="section">
+            <h2>三大勝利條件 (立即獲勝)</h2>
+            <div class="victory-condition">
+                <strong>1. 戒指遠征：</strong> 完成魔戒遠征任務（摧毀或奪回戒指）。
+            </div>
+            <div class="victory-condition">
+                <strong>2. 同盟種族：</strong> 獲得 6 個不同種族的盟友符號。
+            </div>
+            <div class="victory-condition">
+                <strong>3. 中洲統治：</strong> 統治中洲所有 7 個區域。
+            </div>
+        </div>
+
+        <div id="setup" class="section">
+            <h2>遊戲設置</h2>
+            <ul>
+                <li>將卡牌按照三個時期（章節）排列成金字塔形。</li>
+                <li>放置圖板、棋子與標記。</li>
+                <li>每位玩家抽取初始地標卡與資源標記。</li>
+            </ul>
+        </div>
+
+        <div id="expansion" class="section">
+            <h2 style="color: var(--expansion-color);">同盟擴充包 (Allies Booster) <span class="expansion-tag">EXPANSION</span></h2>
+            <div class="expansion-rule">
+                <h3>權力 token (Power Tokens)</h3>
+                <p>擴充包引入了全新的<strong>權力標記</strong>系統，玩家可透過特定行動獲得。這些標記能讓玩家與中洲的隱藏盟友建立聯繫，解鎖強大的單次或持續性能力，而不影響基本的勝利路徑。</p>
+                <ul>
+                    <li style="color: var(--expansion-color);">新增了更多盟友符號標記。</li>
+                    <li style="color: var(--expansion-color);">修改了部分基礎章節卡牌的互動效果。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#overview">簡介</a>
+        <a href="#victory">勝利</a>
+        <a href="#setup">設置</a>
+        <a href="#expansion">擴充</a>
+    </div>
+</body>
+</html>

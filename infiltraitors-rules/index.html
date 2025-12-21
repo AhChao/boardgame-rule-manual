@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滲透因子 (Infiltraitors) - 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --container-bg: #161b22;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --danger-color: #f85149;
+            --success-color: #3fb950;
+            --card-border: #30363d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background-color: var(--container-bg);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--container-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            color: #fff;
+        }
+
+        .action-card {
+            background: #21262d;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .action-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            background: #30363d;
+            margin-right: 5px;
+        }
+
+        .nav-home {
+            display: block;
+            text-decoration: none;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--container-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .connection-upright {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .connection-horizontal {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 滲透因子 (Infiltraitors)</h1>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="nav-home">🏠 返回首頁</a>
+
+        <div id="overview" class="section">
+            <h2>遊戲概述</h2>
+            <p>這是一款 2-5 人的合作推理遊戲。玩家扮演特工，必須在子彈耗盡或時間結束前，共同指認出中央所有的「嫌疑人」（叛徒）。</p>
+            <div class="highlight-box">
+                <strong>勝利條件：</strong> 指認出所有中央的嫌疑人卡。<br>
+                <strong>失敗條件：</strong> 子彈耗盡、抽牌堆用完、或指認錯誤次數過多。
+            </div>
+        </div>
+
+        <div id="setup" class="section">
+            <h2>遊戲設置</h2>
+            <ul>
+                <li><strong>發放手牌：</strong> 每人發放 7 張數字牌。</li>
+                <li><strong>嫌疑人：</strong> 中央放置若干張面朝下的嫌疑人卡（叛徒）。</li>
+                <li><strong>個人特務卡：</strong> 每人抽一張放在支架上，<strong>只有自己看不到</strong>（其他人都看得到）。</li>
+                <li><strong>配件：</strong> 準備好子彈板塊、白板筆與提示版圖。</li>
+            </ul>
+        </div>
+
+        <div id="flow" class="section">
+            <h2>行動 (五選一)</h2>
+            
+            <div class="action-card">
+                <span class="action-title">1. 給予提示 (Give a Clue)</span>
+                從手牌出一張牌放在<strong>自己的卡架旁</strong>。
+                <ul>
+                    <li><span class="connection-upright">直立：</span> 手牌與特務卡有聯繫（同顏色、同數字、或因數倍數關係）。</li>
+                    <li><span class="connection-horizontal">橫置：</span> 手牌與特務卡無任何聯繫。</li>
+                </ul>
+            </div>
+
+            <div class="action-card">
+                <span class="action-title">2. 交換情報 (Exchange Information)</span>
+                從手牌出一張牌放在<strong>其他玩家的卡架旁</strong>。
+                <p>該玩家決定該牌是「直立」或「橫置」，然後該玩家抽一張牌。</p>
+            </div>
+
+            <div class="action-card">
+                <span class="action-title">3. 揪出嫌疑人 (Identify Suspect)</span>
+                抽出一張新的嫌疑人卡放在自己的卡架上。
+            </div>
+
+            <div class="action-card">
+                <span class="action-title">4. 等待時機 (Bide Time)</span>
+                捨棄抽牌堆頂的一張牌，並將手牌補滿至 7 張。
+            </div>
+
+            <div class="action-card">
+                <span class="action-title">5. 剷除叛徒 (Eliminate Traitor)</span>
+                消耗一顆「子彈」，指認一名嫌疑人的<strong>顏色與數字</strong>。
+                <ul>
+                    <li><strong>正確：</strong> 剷除成功，移除該嫌疑人。</li>
+                    <li><strong>錯誤：</strong> 該回合結束，損失一顆子彈。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="rules" class="section">
+            <h2>聯繫判定規則</h2>
+            <p>只要符合以下<strong>任一</strong>條件，即為「直立」(Connected)：</p>
+            <ul>
+                <li><strong>同顏色</strong> (Same Color)</li>
+                <li><strong>同數字</strong> (Same Number)</li>
+                <li><strong>因數關係</strong> (Factor): 手牌數字是特務卡的因數。</li>
+                <li><strong>倍數關係</strong> (Multiple): 手牌數字是特務卡的倍數。</li>
+            </ul>
+            <p>※ 數字範疇通常為 2-15。</p>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#overview">概述</a>
+        <a href="#setup">設置</a>
+        <a href="#flow">行動</a>
+        <a href="#rules">聯繫</a>
+    </div>
+</body>
+</html>

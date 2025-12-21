@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip 7 分數計算器</title>
+    <style>
+        :root {
+            --bg-color: #000428;
+            --card-bg: #004e92;
+            --accent: #f8ff00;
+            --text: #fff;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { color: var(--accent); }
+
+        .player-list {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .player-row {
+            background: rgba(255,255,255,0.1);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .player-info {
+            flex-grow: 1;
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .player-score {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .score-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-player-box {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .nav-back {
+            text-decoration: none;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">🔙 返回規則頁</a>
+    <h1>Flip 7 記分板</h1>
+
+    <div class="add-player-box">
+        <input type="text" id="playerName" placeholder="玩家名稱">
+        <button onclick="addPlayer()">新增玩家</button>
+    </div>
+
+    <div class="player-list" id="playerList">
+        <!-- 玩家會顯示在這裡 -->
+    </div>
+
+    <script>
+        let players = JSON.parse(localStorage.getItem('flip7_players') || '[]');
+
+        function render() {
+            const list = document.getElementById('playerList');
+            list.innerHTML = '';
+            players.forEach((p, index) => {
+                const row = document.createElement('div');
+                row.className = 'player-row';
+                row.innerHTML = `
+                    <div class="player-info">
+                        <div class="player-name">${p.name}</div>
+                        <div class="player-score">${p.score}</div>
+                    </div>
+                    <div class="score-controls">
+                        <input type="number" id="pts-${index}" placeholder="+/-">
+                        <button onclick="updateScore(${index})">更新</button>
+                        <button style="background:#ff416c; color:white;" onclick="removePlayer(${index})">❌</button>
+                    </div>
+                `;
+                list.appendChild(row);
+            });
+            localStorage.setItem('flip7_players', JSON.stringify(players));
+        }
+
+        function addPlayer() {
+            const nameInput = document.getElementById('playerName');
+            if (nameInput.value) {
+                players.push({ name: nameInput.value, score: 0 });
+                nameInput.value = '';
+                render();
+            }
+        }
+
+        function updateScore(index) {
+            const ptsInput = document.getElementById(`pts-${index}`);
+            const val = parseInt(ptsInput.value);
+            if (!isNaN(val)) {
+                players[index].score += val;
+                ptsInput.value = '';
+                render();
+            }
+        }
+
+        function removePlayer(index) {
+            if (confirm('確定要移除此玩家嗎？')) {
+                players.splice(index, 1);
+                render();
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>

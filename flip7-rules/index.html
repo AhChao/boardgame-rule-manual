@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip 7 - 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #000428;
+            --container-bg: #004e92;
+            --text-color: #ffffff;
+            --accent-yellow: #f8ff00;
+            --danger-red: #ff416c;
+            --card-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 3px solid var(--accent-yellow);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--accent-yellow);
+            text-shadow: 2px 2px 10px rgba(248, 255, 0, 0.5);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: var(--accent-yellow);
+            border-bottom: 1px solid var(--accent-yellow);
+            padding-bottom: 10px;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent-yellow);
+        }
+
+        .nav-home, .nav-calc {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .btn-calc {
+            background: var(--accent-yellow);
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(248, 255, 0, 0.3);
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #000428;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 2px solid var(--accent-yellow);
+        }
+
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        
+        strong { color: var(--accent-yellow); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FLIP 7</h1>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="nav-home">🏠 返回首頁</a>
+        
+        <a href="calculator.html" class="btn-calc">🧮 開啟計分計算器</a>
+
+        <div id="overview" class="section">
+            <h2>遊戲目標</h2>
+            <p>第一位總分達到 <strong>200 分</strong> 的玩家獲勝。這是一款結合推運氣 (Push Your Luck) 與數字組合的卡牌遊戲。</p>
+        </div>
+
+        <div id="actions" class="section">
+            <h2>玩家回合 (二選一)</h2>
+            <div class="highlight-card">
+                <strong>1. 抽牌 (Hit):</strong> 繼續翻開一張牌。
+                <ul>
+                    <li>若數字與已有的卡重複 -> <strong style="color:var(--danger-red)">爆掉 (Bust)</strong>，該輪 0 分。</li>
+                    <li>若不重複 -> 該卡加入手中，回合結束換下一人。</li>
+                </ul>
+            </div>
+            <div class="highlight-card">
+                <strong>2. 收手 (Stay):</strong> 停止抽牌。
+                <ul>
+                    <li>將目前的卡片翻面。</li>
+                    <li>該輪結束後結算目前卡片的點數。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="scoring" class="section">
+            <h2>結算規則</h2>
+            <ul>
+                <li><strong>數字卡：</strong> 點數相加。</li>
+                <li><strong>倍增卡：</strong> 先處理倍數運算。</li>
+                <li><strong>加號卡：</strong> 最後加上固定點數。</li>
+                <li><strong>Flip 7 獎勵：</strong> 收集 7 張不同數字卡，該輪結束，額外加 <strong>15 分</strong>。</li>
+            </ul>
+        </div>
+
+        <div id="special" class="section">
+            <h2>特殊功能卡</h2>
+            <ul>
+                <li><strong>Freeze:</strong> 指定一人強制收手結算。</li>
+                <li><strong>Flip 3:</strong> 指定一人連續翻三張牌。</li>
+                <li><strong>Second Chance:</strong> 免死金牌，爆掉時可以棄掉此卡來繼續。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#overview">目標</a>
+        <a href="#actions">回合</a>
+        <a href="#scoring">結算</a>
+        <a href="#special">特殊卡</a>
+    </div>
+</body>
+</html>

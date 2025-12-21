@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刀與薔薇 (Blades and Rose) - 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #1a0f0f;
+            --container-bg: #2d1b1b;
+            --text-color: #e0caca;
+            --accent-rose: #ff4d6d;
+            --accent-blade: #8d99ae;
+            --card-border: #4a3030;
+            --white-rose: #f8f9fa;
+            --blood-red: #c9184a;
+        }
+
+        body {
+            font-family: "Noto Serif TC", serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c9184a 0%, #1a0f0f 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-rose);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--white-rose);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--container-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--accent-rose);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: '⚔️';
+            margin-right: 10px;
+        }
+
+        .team-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .team {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .white-rose-team {
+            background: rgba(248, 249, 250, 0.1);
+            border: 1px solid var(--white-rose);
+        }
+
+        .blood-blade-team {
+            background: rgba(201, 24, 74, 0.1);
+            border: 1px solid var(--blood-red);
+        }
+
+        .nav-home {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--accent-rose);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--container-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 2px solid var(--accent-rose);
+        }
+
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .role-card {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid var(--accent-blade);
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        
+        strong { color: var(--accent-rose); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌹 刀與薔薇 (Blades and Rose)</h1>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="nav-home">🏠 返回首頁</a>
+
+        <div id="overview" class="section">
+            <h2>遊戲背景與目標</h2>
+            <p>在白薔薇魔女即將復活之際，玩家分為兩個陣營：</p>
+            <div class="team-box">
+                <div class="team white-rose-team">
+                    <strong>白薔薇陣營</strong><br>
+                    目標：將追隨者送往地下聖所，協助魔女復活。
+                </div>
+                <div class="team blood-blade-team">
+                    <strong>血刃陣營</strong><br>
+                    目標：阻止復活。若殺死白薔薇本人，立即獲勝。
+                </div>
+            </div>
+        </div>
+
+        <div id="setup" class="section">
+            <h2>遊戲設置</h2>
+            <ul>
+                <li><strong>玩家人數：</strong> 5 - 10 人。</li>
+                <li><strong>分配角色：</strong> 每位玩家持有 3 張角色卡（顏色決定陣營）。</li>
+                <li><strong>配件：</strong> 規則書、玩家面板、魔法書效果卡、金幣指示物、白水晶。</li>
+            </ul>
+        </div>
+
+        <div id="flow" class="section">
+            <h2>核心機制</h2>
+            <ul>
+                <li><strong>隱藏身份：</strong> 同時持有不同陣營的卡片，需靈活運用欺騙策略。</li>
+                <li><strong>技能發動：</strong> 透過出牌或討論來發動角色專屬技能。</li>
+                <li><strong>資源管理：</strong> 謹慎使用金幣與水晶，任何錯誤舉動都可能導致崩盤。</li>
+            </ul>
+        </div>
+
+        <div id="victory" class="section">
+            <h2>勝利條件</h2>
+            <ul>
+                <li><strong>白薔薇：</strong> 成功完成復活儀式（追隨者達標）。</li>
+                <li><strong>血刃：</strong> 儀式失敗，或成功刺殺白薔薇本人。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#overview">目標</a>
+        <a href="#setup">設置</a>
+        <a href="#flow">機制</a>
+        <a href="#victory">勝利</a>
+    </div>
+</body>
+</html>
