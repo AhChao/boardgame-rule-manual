@@ -76,6 +76,10 @@
             background: linear-gradient(135deg, #1a1a24 0%, #7d5fff 100%);
             color: white;
         }
+        .medium-icon {
+            background: linear-gradient(135deg, #2d2d44 0%, #9b59b6 100%);
+            color: white;
+        }
         .card-content {
             flex-grow: 1;
         }
@@ -102,13 +106,58 @@
             .icon-box { width: 50px; height: 50px; font-size: 1.2rem; }
             .game-title { font-size: 1.1rem; }
         }
+
+        /* Search Bar Styles */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            font-size: 1rem;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .clear-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: none;
+            padding: 5px;
+        }
+        .clear-btn:hover {
+            color: #666;
+        }
     </style>
 </head>
 <body>
 
     <h1>桌遊規則速查</h1>
 
-    <div class="container">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜尋遊戲名字 (中/英)..." autocomplete="off">
+        <button id="clearBtn" class="clear-btn">&times;</button>
+    </div>
+
+    <div class="container" id="gameContainer">
         
         <a href="two-rooms-rules/index.html" class="game-card">
             <div class="icon-box trb-icon">💣</div>
@@ -137,6 +186,15 @@
             <div class="arrow">›</div>
         </a>
 
+        <a href="medium-rules/index.html" class="game-card">
+            <div class="icon-box medium-icon">🔮</div>
+            <div class="card-content">
+                <span class="game-title">超感官同步</span>
+                <p class="game-subtitle">Medium</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
     </div>
 
     <footer style="margin-top: 3rem; text-align: center; color: #999; font-size: 0.8rem;">
@@ -146,6 +204,35 @@
     <script>
         // Update icon for SH to Spy
         document.querySelector('.sh-icon').innerHTML = '🕵️';
+
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            // Show/hide clear button
+            clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const subtitle = card.querySelector('.game-subtitle').textContent.toLowerCase();
+                
+                if (title.includes(query) || subtitle.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            searchInput.focus();
+            this.style.display = 'none';
+            gameCards.forEach(card => card.style.display = 'flex');
+        });
     </script>
 </body>
 </html>

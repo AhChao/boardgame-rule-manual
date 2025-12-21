@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超感官同步 (Medium) 規則速查</title>
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #2d2d44;
+            --accent-color: #9b59b6;
+            --accent-secondary: #8e44ad;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0cf;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --esp-color: #3498db;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 80px;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-hub {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .stat-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-esp { background: var(--esp-color); color: white; }
+        .badge-success { background: var(--success); color: white; }
+
+        .rules-list {
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 12px;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid var(--accent-color);
+            z-index: 1000;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .footer-nav a.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>超感官同步</h1>
+    <div class="subtitle">Medium Rules & Quick Reference</div>
+</header>
+
+<div class="container">
+    <a href="../index.html" class="nav-hub">🏠 返回首頁</a>
+
+    <section id="overview">
+        <h2>遊戲概述</h2>
+        <div class="card">
+            <p>《超感官同步》（Medium）是一款考驗默契的派對遊戲。玩家們與搭檔合作，從兩張牌的詞語中聯想出一個「靈媒詞」，並嘗試在倒數後同時說出相同的詞語。</p>
+            <div class="grid">
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">👥</span><br>2-8 人
+                </div>
+                <div style="text-align: center;">
+                    <span style="font-size: 2rem;">⏱️</span><br>30-45 分鐘
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup">
+        <h2>遊戲設置</h2>
+        <div class="card">
+            <ul class="rules-list">
+                <li><b>選擇牌組</b>：依人數選擇牌組數量（通常為 <span class="highlight">人數 - 1</span> 組）。每組 18 張。</li>
+                <li><b>水晶球牌</b>：將牌庫分三等份，將 3 張水晶球牌洗入最底部的三分之一，其餘放在上方。</li>
+                <li><b>發牌</b>：每位玩家發 <span class="highlight">6 張</span> 手牌。</li>
+                <li><b>心靈標記</b>：將「首次」、「第二次」、「第三次」嘗試標記分類放好，點數朝下。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="flow">
+        <h2>遊戲流程</h2>
+        <div class="card">
+            <p>每回合你將與 <span class="highlight">左手邊</span> 的玩家搭檔：</p>
+            <ol class="rules-list">
+                <li><b>出牌</b>：搭檔先出一張，你再出一張。大聲讀出兩張牌上的詞（例如：「海」與「藍色」）。</li>
+                <li><b>聯想「靈媒詞」</b>：兩人都思考一個能連接這兩個詞的字（例如：「天空」）。</li>
+                <li><b>同時說出</b>：倒數「3、2、1」，兩人同時大喊。</li>
+                <li><b>判定與得分</b>：
+                    <ul>
+                        <li><span class="badge-success">成功</span>：兩人說的一樣！拿取對應次數的高分標記。</li>
+                        <li><span class="warning">失敗</span>：再試一次！以剛才說出的兩個不同詞語為新題目。</li>
+                        <li><span class="highlight">限制</span>：最多嘗試 3 次。不可說過重覆詞或牌面詞。</li>
+                    </ul>
+                </li>
+                <li><b>補牌</b>：回合結束後，將手牌補滿至 6 張。</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="scoring">
+        <h2>得分標記</h2>
+        <div class="card">
+            <div class="grid">
+                <div>
+                    <h4>第一次嘗試</h4>
+                    <p>5 或 6 分</p>
+                </div>
+                <div>
+                    <h4>第二次嘗試</h4>
+                    <p>3 或 4 分</p>
+                </div>
+                <div>
+                    <h4>第三次嘗試</h4>
+                    <p>1 或 2 分</p>
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 10px;">
+                * 標記點數為隨機抽取。
+            </p>
+        </div>
+    </section>
+
+    <section id="esp">
+        <h2>超感能力 (ESP) 牌</h2>
+        <div class="card">
+            <div class="stat-badge badge-esp">精神連結 (Psychic Link)</div>
+            <p>在別人的回合出牌，若你猜中的詞與該對伍相同，你也能得分。</p>
+            
+            <div class="stat-badge badge-esp">淨空思維 (Clear Mind)</div>
+            <p>在你的回合開始時出牌，可棄掉任意手牌並補滿至 6 張。</p>
+            
+            <p style="font-size: 0.9rem; margin-top: 10px;">* 每張 ESP 牌每場遊戲只能使用一次。</p>
+        </div>
+    </section>
+
+    <section id="end">
+        <h2>遊戲結束</h2>
+        <div class="card">
+            <p>當 <span class="highlight">第 3 張水晶球牌</span> 出現時，該輪結束後遊戲結束。所有搭檔計算標記總分，最高者勝出。</p>
+        </div>
+    </section>
+
+</div>
+
+<div class="footer-nav">
+    <a href="#overview">概述</a>
+    <a href="#setup">設置</a>
+    <a href="#flow">流程</a>
+    <a href="#esp">能力</a>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.footer-nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
