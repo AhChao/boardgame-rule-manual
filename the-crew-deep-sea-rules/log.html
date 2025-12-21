@@ -80,6 +80,22 @@
             justify-content: center;
             font-weight: bold;
             flex-shrink: 0;
+            position: relative;
+        }
+        .mission-symbol-overlay {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            font-size: 1.2rem;
+            background: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
         }
         .mission-info { flex-grow: 1; }
         .mission-title { font-weight: bold; margin-bottom: 5px; display: block; }
@@ -92,7 +108,12 @@
             font-size: 0.8rem;
             margin-bottom: 5px;
         }
-        .attempts { display: flex; gap: 5px; margin-top: 10px; }
+        .attempts { 
+            display: grid; 
+            grid-template-columns: repeat(5, 20px); 
+            gap: 8px; 
+            margin-top: 10px; 
+        }
         .attempt-dot {
             width: 20px;
             height: 20px;
@@ -101,6 +122,41 @@
             cursor: pointer;
         }
         .attempt-dot.active { background: var(--accent-color); border-color: var(--accent-color); }
+        .distress-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .distress-toggle:hover {
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .distress-toggle.active {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 2px 5px rgba(174, 32, 18, 0.4);
+        }
+        .rules-box {
+            background: #fdf0d5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .rules-box h3 { margin: 0 0 10px 0; font-size: 1rem; color: var(--accent-color); }
         .mission-controls {
             margin-top: 10px;
             display: flex;
@@ -111,6 +167,24 @@
         .reset-btn {
             background: var(--accent-color); color: white; border: none; padding: 10px 20px;
             border-radius: 5px; cursor: pointer; display: block; margin: 30px auto;
+        }
+        .ref-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .ref-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            filter: brightness(1.1);
         }
         
         /* Slot Switcher */
@@ -178,12 +252,24 @@
 <div class="header">
     <h1>📝 姆大陸航行日誌</h1>
     <p>THE CREW: MISSION DEEP SEA - MISSION SHEET</p>
+    <a href="reference-sheet.png" target="_blank" class="ref-btn">🔍 查看任務參考表 (Mission Page)</a>
 </div>
 
 <div class="slot-switcher">
     <button class="slot-btn active" data-slot="1">存檔 1</button>
     <button class="slot-btn" data-slot="2">存檔 2</button>
     <button class="slot-btn" data-slot="3">存檔 3</button>
+</div>
+
+<div class="rules-box">
+    <h3>📢 求救訊號 (Distress Signal) 規則</h3>
+    在所有任務牌分配完畢後，但在打出第一張牌或進行任何通訊之前，探險小隊可以決定發射求救訊號：
+    <ul>
+        <li>探險小隊共同決定方向（順時針或逆時針）。</li>
+        <li>每位隊員將手中 1 張牌傳給該方向的鄰居。</li>
+        <li><strong>注意：</strong> 潛艇牌（小艇）不能被傳送。</li>
+        <li><strong>代價：</strong> 使用求救訊號會使該任務的紀錄視為額外增加 1 次失敗嘗試。</li>
+    </ul>
 </div>
 
 <div class="crew-setup">
@@ -204,12 +290,12 @@
 <div class="key-section">
     <strong>符號說明 (KEY)：</strong>
     <div class="key-grid">
-        <span>🔴 抽與總分 X 相等的任務小牌</span>
-        <span>🕒 計時任務；抽與總分 X 相等的任務牌</span>
-        <span>🛰️ 隊長</span>
-        <span>⚓ 標記求救信號</span>
-        <span>❓ 水流規則 (Currents)</span>
-        <span>📉 深海迷航 (Rapture of the Deep)</span>
+        <span>🔴 抽與總分 X 相等的任務小牌，直到總和不低於 X。</span>
+        <span>🕒 計時任務；抽與總分 X 相等的任務小牌，並在限制時間內完成所有任務。若不計時，則執行括號內的替代規則。</span>
+        <span>🛰️ 隊長 (Commander) 專屬任務；隊長必須執行此任務，或依據任務說明進行分配。</span>
+        <span>⚓ 標記求救信號；該任務包含聲納通訊限制或特定的通訊標記放置規定。</span>
+        <span>❓ 水流規則 (Currents)；洗牌後將 1 張通訊卡面朝下放回盒中，整場遊戲該顏色不進行通訊。</span>
+        <span>📉 深海迷航 (Rapture of the Deep)；通訊標記只能放在卡片的中間（表示只有該數字），不可放頂部或底部。</span>
     </div>
 </div>
 
@@ -223,49 +309,49 @@
 
 <script>
     const missionData = [
-        { id: 1, diff: 1, desc: "標準探索任務" },
-        { id: 2, diff: 2, desc: "標準探索任務" },
-        { id: 3, diff: 3, desc: "標準探索任務" },
-        { id: 4, diff: 4, desc: "標準探索任務" },
-        { id: 5, diff: 5, desc: "標準探索任務" },
+        { id: 1, diff: 1, desc: "標準探索任務", symbol: "⚓" },
+        { id: 2, diff: 2, desc: "標準探索任務", symbol: "⚓" },
+        { id: 3, diff: 3, desc: "標準探索任務", symbol: "⚓" },
+        { id: 4, diff: 4, desc: "標準探索任務", symbol: "⚓" },
+        { id: 5, diff: 5, desc: "標準探索任務", symbol: "⚓" },
         { id: 6, diff: 5, desc: "所有任務交由一位隊員執行。共同決定人選，但不能討論手牌。" },
-        { id: 7, diff: 6, desc: "標準探索任務" },
+        { id: 7, diff: 6, desc: "標準探索任務", symbol: "⚓" },
         { id: 8, diff: 6, desc: "任何隊員贏得的「9」號牌數量差距不能超過 2 張。" },
-        { id: 9, diff: 7, desc: "使用水流規則 (Currents)。" },
-        { id: 10, diff: 4, desc: "隊長承擔所有任務或轉交。轉交需在第一墩前完成通訊。" },
-        { id: 11, diff: 8, desc: "使用深海迷航規則 (Rapture of the Deep)。" },
+        { id: 9, diff: 7, desc: "使用水流規則 (Currents)。", symbol: "❓" },
+        { id: 10, diff: 4, desc: "隊長承擔所有任務或轉交。轉交需在第一墩前完成通訊。", symbol: "🛰️" },
+        { id: 11, diff: 8, desc: "使用深海迷航規則 (Rapture of the Deep)。", symbol: "📉" },
         { id: 12, diff: 6, desc: "不能以粉紅色牌或潛艇牌開墩。" },
-        { id: 13, diff: 5, desc: "隊長承擔所有任務或轉交。同任務 10。" },
-        { id: 14, diff: 6, desc: "三分鐘半內完成。若不計時，則使用水流規則。" },
-        { id: 15, diff: 6, desc: "三分鐘內完成。若不計時，則使用深海迷航規則。" },
-        { id: 16, diff: 6, desc: "兩分鐘半內完成。若不計時，則禁止通訊。" },
-        { id: "Q1", diff: 1, desc: "隊長若有全 4 張潛艇牌則重發。A) 贏 2 墩不含 7,8,9；B) 成功後，再贏 3 墩不含 7,8,9。" },
-        { id: "Q2", diff: 3, desc: "任務牌蓋放。玩家抽到的任務牌難度總和即為需贏得的墩數。" },
-        { id: 17, diff: 9, desc: "標準探索任務" },
-        { id: 18, diff: 9, desc: "標準探索任務" },
-        { id: 19, diff: 9, desc: "隊長在第一墩必須贏得場上最高難度的任務。" },
+        { id: 13, diff: 5, desc: "隊長承擔所有任務或轉交。同任務 10。", symbol: "🛰️" },
+        { id: 14, diff: 6, desc: "三分鐘半內完成。若不計時，則使用水流規則。", symbol: "🕒" },
+        { id: 15, diff: 6, desc: "三分鐘內完成。若不計時，則使用深海迷航規則。", symbol: "🕒" },
+        { id: 16, diff: 6, desc: "兩分鐘半內完成。若不計時，則禁止通訊。", symbol: "🕒" },
+        { id: "Q1", diff: 1, desc: "隊長若有全 4 張潛艇牌則重發。A) 贏 2 墩不含 7,8,9；B) 成功後，再贏 3 墩不含 7,8,9。", symbol: "🛰️" },
+        { id: "Q2", diff: 3, desc: "任務牌蓋放。玩家抽到的任務牌難度總和即為需贏得的墩數。", symbol: "🔴" },
+        { id: 17, diff: 9, desc: "標準探索任務", symbol: "⚓" },
+        { id: 18, diff: 9, desc: "標準探索任務", symbol: "⚓" },
+        { id: 19, diff: 9, desc: "隊長在第一墩必須贏得場上最高難度的任務。", symbol: "🛰️" },
         { id: 20, diff: 10, desc: "陌生領域規則：抽色牌決定通訊限制。" },
         { id: 21, diff: 6, desc: "任何隊員贏得的「1」號牌數量差距不能超過 2 張。" },
-        { id: 22, diff: 11, desc: "標準探索任務" },
+        { id: 22, diff: 11, desc: "標準探索任務", symbol: "⚓" },
         { id: 23, diff: 11, desc: "首墩贏家在整場遊戲中贏墩數必須始終領先。第二墩前禁止通訊。" },
-        { id: 24, diff: 12, desc: "標準探索任務" },
-        { id: 25, diff: 12, desc: "潛艇牌被運走。隊長不領取任何任務。" },
-        { id: 26, diff: 10, desc: "五分鐘內完成。若不計時，難度提升至 12。" },
+        { id: 24, diff: 12, desc: "標準探索任務", symbol: "⚓" },
+        { id: 25, diff: 12, desc: "潛艇牌被運走。隊長不領取任何任務。", symbol: "🛰️" },
+        { id: 26, diff: 10, desc: "五分鐘內完成。若不計時，難度提升至 12。", symbol: "🕒" },
         { id: 27, diff: 6, desc: "黃色 5 號牌必須在最後一墩的最後一張打出。" },
-        { id: 28, diff: 14, desc: "標準探索任務" },
-        { id: 29, diff: 15, desc: "標準探索任務" },
-        { id: 30, diff: 16, desc: "標準探索任務" },
-        { id: 31, diff: 17, desc: "標準探索任務" },
+        { id: 28, diff: 14, desc: "標準探索任務", symbol: "⚓" },
+        { id: 29, diff: 15, desc: "標準探索任務", symbol: "⚓" },
+        { id: 30, diff: 16, desc: "標準探索任務", symbol: "⚓" },
+        { id: 31, diff: 17, desc: "標準探索任務", symbol: "⚓" },
         { id: 32, diff: 0, desc: "挑戰任務：分別贏得 0, 3, 2 墩，以及首墩與末墩。" },
-        { id: 33, diff: 18, desc: "深海極限挑戰" },
-        { id: 34, diff: 19, desc: "深海極限挑戰" },
-        { id: 35, diff: 20, desc: "深海極限挑戰" },
-        { id: 36, diff: 21, desc: "深海極限挑戰" },
-        { id: 37, diff: 22, desc: "深海極限挑戰" },
-        { id: 38, diff: 23, desc: "深海極限挑戰" },
-        { id: 39, diff: 24, desc: "深海極限挑戰" },
-        { id: 40, diff: 25, desc: "深海極限挑戰" },
-        { id: 41, diff: 26, desc: "深海極限挑戰" }
+        { id: 33, diff: 18, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 34, diff: 19, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 35, diff: 20, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 36, diff: 21, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 37, diff: 22, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 38, diff: 23, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 39, diff: 24, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 40, diff: 25, desc: "深海極限挑戰", symbol: "⚓" },
+        { id: 41, diff: 26, desc: "深海極限挑戰", symbol: "⚓" }
     ];
 
     const missionGrid = document.getElementById('missionGrid');
@@ -301,15 +387,23 @@
             card.className = 'mission-card';
             if (progress.missions[m.id]?.done) card.classList.add('completed');
 
-            const mState = progress.missions[m.id] || { attempts: 0, final: '', done: false };
+            const mState = progress.missions[m.id] || { attempts: 0, final: '', done: false, distress: false };
 
             card.innerHTML = `
-                <div class="mission-num">${m.id}</div>
+                <div class="mission-num">
+                    ${m.id}
+                    ${m.symbol ? `<div class="mission-symbol-overlay">${m.symbol}</div>` : ''}
+                </div>
                 <div class="mission-info">
-                    <span class="difficulty">難度: ${m.diff}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <span class="difficulty">難度: ${m.diff}</span>
+                        <div class="distress-toggle ${mState.distress ? 'active' : ''}" id="distress-${m.id}" title="使用求救訊號">
+                            ⚓ 求救訊號
+                        </div>
+                    </div>
                     <span class="mission-title">${m.desc}</span>
                     <div class="attempts" id="attempts-${m.id}">
-                        ${[1,2,3,4,5].map(i => `<div class="attempt-dot ${i <= mState.attempts ? 'active' : ''}" data-idx="${i}"></div>`).join('')}
+                        ${[1,2,3,4,5,6,7,8,9,10].map(i => `<div class="attempt-dot ${i <= mState.attempts ? 'active' : ''}" data-idx="${i}"></div>`).join('')}
                     </div>
                     <div class="mission-controls">
                         <span>最終得分:</span>
@@ -346,9 +440,17 @@
 
             const doneCheck = card.querySelector(`#done-${m.id}`);
             doneCheck.addEventListener('change', () => {
-                if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false };
+                if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false, distress: false };
                 progress.missions[m.id].done = doneCheck.checked;
                 card.classList.toggle('completed', doneCheck.checked);
+                saveProgress(progress);
+            });
+
+            const distressBtn = card.querySelector(`#distress-${m.id}`);
+            distressBtn.addEventListener('click', () => {
+                if(!progress.missions[m.id]) progress.missions[m.id] = { attempts: 0, final: '', done: false, distress: false };
+                progress.missions[m.id].distress = !progress.missions[m.id].distress;
+                distressBtn.classList.toggle('active', progress.missions[m.id].distress);
                 saveProgress(progress);
             });
         });
