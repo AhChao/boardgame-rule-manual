@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心靈同步 (The Mind) 規則書</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="back-link">🏠 返回大廳</a>
+        <h1>The Mind 心靈同步</h1>
+        <p>讓我們合而為一... (Let us become one!)</p>
+    </header>
+
+    <div class="container">
+        
+        <section id="intro">
+            <h2>📜 遊戲概述</h2>
+            <p><strong>所有玩家組成一個團隊。</strong> 在第一輪 (第 1 關)，每位玩家獲得 1 張牌；第二輪 (第 2 關) 獲得 2 張牌，依此類推。</p>
+            <p>在每一關，團隊成員必須將手中的牌<strong>依升序 (由小到大)</strong> 出牌到桌面中央的棄牌堆上。</p>
+            <div class="highlight-box">
+                例如 (4 人局，第 1 關)：18 - 34 - 41 - 73
+            </div>
+            <p>玩家<strong>不需要</strong>依照特定順序出牌。誰覺得自己的牌是當前最小的，就打出它。</p>
+            <p class="danger-box">
+                ⚠️ <strong>注意：</strong> 玩家<strong>嚴禁</strong>透露自己手牌的任何資訊——不可說話、不可打暗號。
+            </p>
+        </section>
+
+        <section id="setup">
+            <h2>🎲 遊戲設置</h2>
+            <ul>
+                <li><strong>數字牌：</strong> 1-100 號</li>
+                <li><strong>關卡牌：</strong> 1-12 級</li>
+                <li><strong>生命牌 (Lives)：</strong> 用於抵扣錯誤</li>
+                <li><strong>飛鏢牌 (Throwing Stars)：</strong> 特殊技能</li>
+            </ul>
+            
+            <h3>人數配置表</h3>
+            <p>根據玩家人數，拿取對應數量的生命牌與飛鏢牌，並設置關卡堆疊 (第 1 關在最上面)。</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>人數</th>
+                        <th>關卡數</th>
+                        <th>生命牌 🤍</th>
+                        <th>飛鏢牌 🌟</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2 人</td>
+                        <td>1 - 12</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>3 人</td>
+                        <td>1 - 10</td>
+                        <td>3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>4 人</td>
+                        <td>1 - 8</td>
+                        <td>4</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>剩餘的生命牌與飛鏢牌放置一旁備用。將 100 張數字牌洗勻，發給每位玩家對應關卡數量的牌 (第 1 關發 1 張)。</p>
+        </section>
+
+        <section id="gameplay">
+            <h2>🧠 遊戲流程</h2>
+            <h3>1. 集中精神 (Concentration)</h3>
+            <p>每當準備好挑戰當前關卡時，所有玩家將一隻手平放在桌面上。當大家都準備好後，將手移開，遊戲隨即開始。</p>
+            <p><em>這是為了讓團隊在時間感上同步！</em></p>
+
+            <h3>2. 出牌規則</h3>
+            <p>玩家需將手牌依<strong>升序</strong>打出到桌面中央形成棄牌堆。</p>
+            <ul>
+                <li><strong>沒有固定順序：</strong> 誰認為自己手上有目前最小的牌，誰就出牌。</li>
+                <li><strong>一次一張：</strong> 即使你有 36 和 37，也要分兩次打出。</li>
+                <li><strong>嚴禁交流：</strong> 不可報數、不可眼神示意。這是一個依靠時間感同步的遊戲。</li>
+            </ul>
+            <p>當該關卡所有手牌都依正確順序打出後，該關卡完成！</p>
+        </section>
+
+        <section id="mistakes">
+            <h2>❌ 出錯與扣血</h2>
+            <p>如果有人打出的牌<strong>不是</strong>當前所有玩家手中最小的 (例如：場上有 17，A 打出了 28，但 B 手中還有 26)：</p>
+            <ol>
+                <li>持有比打出牌 (28) 更小牌 (26) 的玩家大喊「暫停 (Stop)」。</li>
+                <li>團隊失去 1 張<strong>生命牌</strong> (移出一張生命牌到旁邊)。</li>
+                <li>所有比打出牌 (28) 更小的手牌 (此處為 26) 都必須被棄掉。</li>
+                <li>團隊重新<strong>集中精神</strong>，然後繼續該關卡 (不需要重來)。</li>
+            </ol>
+        </section>
+
+        <section id="stars">
+            <h2>🌟 飛鏢牌 (Throwing Star)</h2>
+            <p>在關卡進行中任何時候，玩家可以舉手建議使用飛鏢牌。</p>
+            <ul>
+                <li>若所有玩家<strong>點頭同意</strong>，則消耗 1 張飛鏢牌。</li>
+                <li>每位玩家棄掉自己<strong>手中最小</strong>的一張牌 (面朝上移出遊戲，不進入中央堆疊)。</li>
+                <li>團隊重新<strong>集中精神</strong>，繼續遊戲。</li>
+            </ul>
+        </section>
+
+        <section id="rewards">
+            <h2>🎁 過關獎勵</h2>
+            <p>完成特定關卡後，團隊會獲得獎勵 (從備用堆拿取)：</p>
+            <ul>
+                <li><strong>第 2 關：</strong> +1 飛鏢牌</li>
+                <li><strong>第 3 關：</strong> +1 生命牌</li>
+                <li><strong>第 5 關：</strong> +1 飛鏢牌</li>
+                <li><strong>第 6 關：</strong> +1 生命牌</li>
+                <li><strong>第 8 關：</strong> +1 飛鏢牌</li>
+                <li><strong>第 9 關：</strong> +1 生命牌</li>
+            </ul>
+            <p><em>注意：團隊最多持有 5 條命和 3 個飛鏢。</em></p>
+        </section>
+
+        <section id="blind-mode">
+            <h2>😎 盲玩模式 (Blind Mode)</h2>
+            <p>如果團隊成功通過所有關卡，恭喜獲勝！如果還想挑戰，可以進入盲玩模式。</p>
+            <p>保留剩餘的生命與飛鏢，從第 1 關重新開始，但所有牌必須<strong>面朝下</strong>打出。關卡結束後才翻開檢查順序。</p>
+        </section>
+
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="#intro" class="nav-item">規則</a>
+        <a href="#setup" class="nav-item">設置</a>
+        <a href="#gameplay" class="nav-item">流程</a>
+        <a href="#mistakes" class="nav-item">扣血</a>
+        <a href="#stars" class="nav-item">飛鏢</a>
+    </nav>
+
+    <script>
+        // Scroll Spy Implementation
+        const  sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Remove active class from all
+                    navItems.forEach(item => item.classList.remove('active'));
+                    
+                    // Add active class to matching nav item
+                    const activeItem = document.querySelector(`.nav-item[href="#${id}"]`);
+                    if (activeItem) {
+                        activeItem.classList.add('active');
+                        // Auto scroll nav to keep active item in view
+                        activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
