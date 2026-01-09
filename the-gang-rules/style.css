@@ -1,0 +1,278 @@
+:root {
+    --primary-bg: #1a1a1a;
+    --card-bg: #ffffff;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --accent-success: #27ae60;
+    --accent-failure: #e74c3c;
+    --accent-blue: #3498db;
+    --card-width: 140px;
+    --card-height: 200px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    touch-action: manipulation;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.title-group h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-reset {
+    background-color: var(--accent-failure);
+    color: white;
+}
+
+.btn-home {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Counters */
+.counter-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.counter-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.counter-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.counter-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.counter-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.success .counter-value {
+    color: var(--accent-success);
+}
+
+.failure .counter-value {
+    color: var(--accent-failure);
+}
+
+/* Decks */
+.deck-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.deck-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.deck-column h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    text-align: center;
+    color: var(--accent-blue);
+}
+
+.deck-cards {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 12px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+/* Card Style */
+.poker-card {
+    width: var(--card-width);
+    height: var(--card-height);
+    background: var(--card-bg);
+    border-radius: 12px;
+    color: var(--text-dark);
+    position: absolute;
+    /* Stacked by default */
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: none;
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.poker-card:active {
+    cursor: grabbing;
+    z-index: 2000 !important;
+}
+
+/* Specific stacking offsets for a "deck" feel */
+.poker-card:nth-child(n) {
+    transform: translateY(calc(var(--stack-index, 0) * -1px)) translateX(calc(var(--stack-index, 0) * 0.5px));
+}
+
+.card-num {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card-num.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.card-num.bottom-right {
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(180deg);
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.card-description {
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Discard Zones Container */
+.discards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.drop-zone {
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.discard-zone {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-align: center;
+    min-height: calc(var(--card-height) + 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    position: relative;
+}
+
+.discard-zone span {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
+.drop-zone.drag-over {
+    background: rgba(52, 152, 219, 0.15) !important;
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+}
+
+.drop-zone.can-drop:not(.drag-over) {
+    border-color: rgba(52, 152, 219, 0.4);
+}
+
+.discard-pile {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+}
+
+.discard-pile .poker-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+    /* Reverse stacking or just overlap */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 400px) {
+    :root {
+        --card-width: 120px;
+        --card-height: 170px;
+    }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紙牌幫 (The Gang) - 牌型強度</title>
+    <style>
+        :root {
+            --primary-bg: #1a1a1a;
+            --card-bg: #2d3436;
+            --info-bg: #3d4648;
+            --accent-gold: #d4a017;
+            --text-color: #f5f5f5;
+            --text-dim: #b2bec3;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(212, 160, 23, 0.3);
+            margin-bottom: 20px;
+        }
+        h1 { color: var(--accent-gold); font-size: 1.5rem; margin: 0; }
+        h2 { font-size: 1.2rem; color: var(--accent-gold); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-top: 30px; }
+        
+        .nav-box {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .content-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Basic Rule Section */
+        .basic-rule-box {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .card-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .scale-arrow { flex-grow: 1; height: 2px; background: var(--accent-gold); margin: 0 15px; position: relative; }
+        .scale-arrow::before { content: '◀'; position: absolute; left: -5px; top: -10px; color: var(--accent-gold); }
+        .scale-arrow::after { content: '▶'; position: absolute; right: -5px; top: -10px; color: var(--accent-gold); }
+
+        /* Ranking Section */
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .rank-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .rank-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .rank-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+
+        .rank-details {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-left: 5px;
+        }
+
+        .rank-description {
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .strength-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(212, 160, 23, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Explanation Boxes */
+        .info-box {
+            background: var(--info-bg);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .info-box h3 { margin: 0 0 10px 0; font-size: 1rem; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        .highlight-text { color: var(--accent-gold); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>紙牌幫 牌型強度詳解</h1>
+        <div class="nav-box">
+            <a href="index.html" class="nav-btn">🏠 返回規則</a>
+            <a href="play-aid.html" class="nav-btn">📱 遊戲輔助</a>
+        </div>
+    </header>
+
+    <main class="content-container">
+        <section class="basic-rule-box">
+            <h3>基本規則：單牌強弱</h3>
+            <p>最強的單牌是 <span class="highlight-text">A</span>，然後依序是 <span class="highlight-text">K、Q、J</span>，之後是從大到小的數字牌：<span class="highlight-text">10、9、8、7、6、5、4、3、2</span>。</p>
+            <p>不同花色的強度相同（例如，黑桃A與紅心A強度相同）。</p>
+            <div class="card-scale">
+                <span>弱牌 (2)</span>
+                <div class="scale-arrow"></div>
+                <span>強牌 (A)</span>
+            </div>
+        </section>
+
+        <h2>牌型詳解 (由弱到強)</h2>
+        
+        <div class="ranking-list">
+            <!-- 1. 高牌 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">1. 高牌 (High Card)</span>
+                </div>
+                <div class="rank-description">
+                    如果手牌中連對子也沒有，則只計算其中最強的單牌。<br>
+                    如果有相同點數的高牌，則比較<span class="highlight-text">第二強、第三強...以此類推</span>直到分出勝負。
+                </div>
+            </div>
+
+            <!-- 2. 對子 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">2. 對子 (One Pair)</span>
+                </div>
+                <div class="rank-description">
+                    2張點數相同的牌。點數越大就越強。<br>
+                    如果對子點數相同，則比較剩下的最強<span class="highlight-text">腳牌</span>。
+                </div>
+            </div>
+
+            <!-- 3. 兩對 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">3. 兩對 (Two Pair)</span>
+                </div>
+                <div class="rank-description">
+                    兩組點數相同的牌。比較最高點數的那一對，若相同則比較第二對，若仍相同則由<span class="highlight-text">第5張腳牌</span>決定。
+                </div>
+            </div>
+
+            <!-- 4. 三條 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">4. 三條 (Three of a Kind)</span>
+                </div>
+                <div class="rank-description">
+                    3張點數相同的牌。點數越大越強。若相同則比較<span class="highlight-text">腳牌</span>。
+                </div>
+            </div>
+
+            <!-- 5. 順子 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">5. 順子 (Straight)</span>
+                </div>
+                <div class="rank-description">
+                    5張點數連續的牌。比較中點數最大的牌。<br>
+                    <span class="highlight-text">A 可以當作最大 (10-J-Q-K-A) 或最小 (A-2-3-4-5)</span>。<br>
+                    但 A <span style="text-decoration: underline;">不能</span> 作為中間牌（例如 K-A-2-3-4 是無效的）。
+                </div>
+            </div>
+
+            <!-- 6. 同花 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">6. 同花 (Flush)</span>
+                </div>
+                <div class="rank-description">
+                    5張花色相同的牌。比較點數最大的牌，若相同則依序比較後續腳牌。
+                </div>
+            </div>
+
+            <!-- 7. 葫蘆 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">7. 葫蘆 (Full House)</span>
+                </div>
+                <div class="rank-description">
+                    3張點數相同的牌加上1對點數相同的牌。先比較<span class="highlight-text">三條的部分</span>，若相同再比較對子的部分。
+                </div>
+            </div>
+
+            <!-- 8. 四條 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">8. 四條 (Four of a Kind)</span>
+                </div>
+                <div class="rank-description">
+                    4張點數相同的牌。點數越大越強。若相同則由<span class="highlight-text">第5張腳牌</span>決定。
+                </div>
+            </div>
+
+            <!-- 9. 同花順 -->
+            <div class="rank-card">
+                <div class="rank-header">
+                    <span class="rank-name">9. 同花順 (Straight Flush)</span>
+                </div>
+                <div class="rank-description">
+                    相同花色的順子。
+                </div>
+            </div>
+
+            <!-- 10. 皇家同花順 -->
+            <div class="rank-card" style="border-color: var(--accent-gold);">
+                <div class="rank-header">
+                    <span class="rank-name">10. 皇家同花順 (Royal Flush)</span>
+                    <span class="strength-badge">最強</span>
+                </div>
+                <div class="rank-description">
+                    同花色的 10 到 A，是遊戲中最強的牌型。
+                </div>
+            </div>
+        </div>
+
+        <section class="info-box">
+            <h3>關於「腳牌」(Kicker)</h3>
+            <p>「腳牌」是指手牌中不構成牌型的牌。評定手牌強度時，<span class="highlight-text">至多會有 5 張牌</span>參與比較。不足 5 張的牌型（如對子、三條等），都需要由腳牌湊足 5 張參與比較。</p>
+        </section>
+
+        <section class="info-box">
+            <h3>「平手」情況</h3>
+            <p>有時多位玩家的手牌組合（含腳牌）可能完全相同（例如最強組合是由 5 張公共牌組成）。在這種情況下玩家平手，選籌碼的順序不影響結果。但平手玩家在與其他玩家比較時，依然必須確保強度順序正確，否則視為失敗。</p>
+        </section>
+    </main>
+
+    <div class="footer">
+        2026 桌遊規則速查 Hub
+    </div>
+</body>
+</html>

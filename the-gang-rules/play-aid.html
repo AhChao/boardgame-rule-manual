@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>紙牌幫 (The Gang) - 遊戲輔助</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="title-group">
+            <h1>紙牌幫 輔助工具</h1>
+        </div>
+        <div class="nav-controls">
+            <button id="resetBtn" class="btn btn-reset">重設 (Reset)</button>
+            <a href="index.html" class="btn btn-home">🏠 返回</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="counter-section">
+            <div class="counter-card success">
+                <h2>成功 (Success)</h2>
+                <div id="successValue" class="counter-value">0</div>
+                <div class="counter-controls">
+                    <button class="btn-circle" onclick="updateCounter('success', -1)">-</button>
+                    <button class="btn-circle" onclick="updateCounter('success', 1)">+</button>
+                </div>
+            </div>
+            <div class="counter-card failure">
+                <h2>失敗 (Failure)</h2>
+                <div id="failureValue" class="counter-value">0</div>
+                <div class="counter-controls">
+                    <button class="btn-circle" onclick="updateCounter('failure', -1)">-</button>
+                    <button class="btn-circle" onclick="updateCounter('failure', 1)">+</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="deck-container">
+            <div class="deck-column">
+                <h3>挑戰牌堆 (Challenge)</h3>
+                <div id="challengeDeck" class="deck-cards drop-zone" data-type="challenge" data-zone="deck"></div>
+            </div>
+            <div class="deck-column">
+                <h3>專家牌堆 (Expert)</h3>
+                <div id="expertDeck" class="deck-cards drop-zone" data-type="expert" data-zone="deck"></div>
+            </div>
+        </section>
+
+        <section class="discards-container">
+            <div id="challengeDiscardZone" class="discard-zone drop-zone" data-type="challenge" data-zone="discard">
+                <span>挑戰棄牌堆</span>
+                <div id="challengeDiscardPile" class="discard-pile"></div>
+            </div>
+            <div id="expertDiscardZone" class="discard-zone drop-zone" data-type="expert" data-zone="discard">
+                <span>專家棄牌堆</span>
+                <div id="expertDiscardPile" class="discard-pile"></div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { CHALLENGE_CARDS, EXPERT_CARDS } from './logic.js';
+        import { setupDraggable } from './dnd-logic.js';
+
+        let gameState = {
+            success: 0,
+            failure: 0,
+            challengeDiscards: [],
+            expertDiscards: []
+        };
+
+        window.updateCounter = (type, delta) => {
+            gameState[type] = Math.max(0, gameState[type] + delta);
+            document.getElementById(`${type}Value`).innerText = gameState[type];
+            saveState();
+        };
+
+        function renderCards() {
+            const cDeck = document.getElementById('challengeDeck');
+            const eDeck = document.getElementById('expertDeck');
+            const cdPile = document.getElementById('challengeDiscardPile');
+            const edPile = document.getElementById('expertDiscardPile');
+            
+            cDeck.innerHTML = '';
+            eDeck.innerHTML = '';
+            cdPile.innerHTML = '';
+            edPile.innerHTML = '';
+
+            // Render Decks (Stacked, 1 on top)
+            const remainingChallenge = CHALLENGE_CARDS.filter(c => !gameState.challengeDiscards.includes(c.id));
+            remainingChallenge.forEach((card, index) => {
+                const isTop = index === 0;
+                const zIndex = remainingChallenge.length - index;
+                const el = createCard(card, isTop, 'challenge');
+                el.style.setProperty('--stack-index', zIndex);
+                el.style.zIndex = zIndex;
+                cDeck.appendChild(el);
+            });
+
+            const remainingExpert = EXPERT_CARDS.filter(e => !gameState.expertDiscards.includes(e.id));
+            remainingExpert.forEach((card, index) => {
+                const isTop = index === 0;
+                const zIndex = remainingExpert.length - index;
+                const el = createCard(card, isTop, 'expert');
+                el.style.setProperty('--stack-index', zIndex);
+                el.style.zIndex = zIndex;
+                eDeck.appendChild(el);
+            });
+
+            // Render Discards (Stacked, top one draggable)
+            gameState.challengeDiscards.forEach((id, index) => {
+                const card = CHALLENGE_CARDS.find(c => c.id === id);
+                if (card) {
+                    const isTop = index === gameState.challengeDiscards.length - 1;
+                    const el = createCard(card, isTop, 'challenge', true);
+                    el.classList.add('in-discard');
+                    el.style.setProperty('--stack-index', index);
+                    el.style.zIndex = index;
+                    cdPile.appendChild(el);
+                }
+            });
+
+            gameState.expertDiscards.forEach((id, index) => {
+                const card = EXPERT_CARDS.find(e => e.id === id);
+                if (card) {
+                    const isTop = index === gameState.expertDiscards.length - 1;
+                    const el = createCard(card, isTop, 'expert', true);
+                    el.classList.add('in-discard');
+                    el.style.setProperty('--stack-index', index);
+                    el.style.zIndex = index;
+                    edPile.appendChild(el);
+                }
+            });
+        }
+
+        function createCard(data, isDraggable, type, fromDiscard = false) {
+            const div = document.createElement('div');
+            div.className = 'poker-card';
+            div.id = data.id;
+            div.innerHTML = `
+                <div class="card-num top-left">${data.num}</div>
+                <div class="card-title">${data.title}</div>
+                <div class="card-description">${data.text}</div>
+                <div class="card-num bottom-right">${data.num}</div>
+            `;
+            
+            if (isDraggable) {
+                setupDraggable(div, (el, zone) => {
+                    const targetZoneType = zone.dataset.zone; // 'deck' or 'discard'
+                    const cardType = type; // 'challenge' or 'expert'
+                    const targetCardType = zone.dataset.type; // 'challenge' or 'expert'
+
+                    if (!fromDiscard) {
+                        // Dragging from DECK
+                        if (targetZoneType === 'discard' && cardType === targetCardType) {
+                            if (cardType === 'challenge') gameState.challengeDiscards.push(el.id);
+                            if (cardType === 'expert') gameState.expertDiscards.push(el.id);
+                        } else {
+                            // Snap back to deck if dropped elsewhere (handled by renderCards in setupDraggable's onCancel)
+                            saveState();
+                            renderCards();
+                            return;
+                        }
+                    } else {
+                        // Dragging from DISCARD
+                        if (targetZoneType === 'deck' && cardType === targetCardType) {
+                            if (cardType === 'challenge') {
+                                gameState.challengeDiscards = gameState.challengeDiscards.filter(id => id !== el.id);
+                            }
+                            if (cardType === 'expert') {
+                                gameState.expertDiscards = gameState.expertDiscards.filter(id => id !== el.id);
+                            }
+                        } else {
+                            // Snap back to discard if dropped elsewhere
+                            saveState();
+                            renderCards();
+                            return;
+                        }
+                    }
+                    saveState();
+                    renderCards();
+                }, () => renderCards());
+            }
+            
+            return div;
+        }
+
+        function saveState() {
+            localStorage.setItem('the_gang_state_v2', JSON.stringify(gameState));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('the_gang_state_v2');
+            if (saved) {
+                gameState = JSON.parse(saved);
+                document.getElementById('successValue').innerText = gameState.success;
+                document.getElementById('failureValue').innerText = gameState.failure;
+            }
+            renderCards();
+        }
+
+        document.getElementById('resetBtn').onclick = () => {
+            gameState = { success: 0, failure: 0, challengeDiscards: [], expertDiscards: [] };
+            document.getElementById('successValue').innerText = 0;
+            document.getElementById('failureValue').innerText = 0;
+            saveState();
+            renderCards();
+        };
+
+        loadState();
+    </script>
+</body>
+</html>
