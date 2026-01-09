@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar (月色之境) 規則速查</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <a href="../index.html" class="back-home">🏠 返回首頁</a>
+        <h1>LUNAR</h1>
+        <div style="width: 80px;"></div> <!-- Spacer for centering title -->
+    </header>
+
+    <div class="container">
+        <!-- 1. Overview -->
+        <section id="overview" class="card">
+            <h2>🌙 遊戲概述</h2>
+            <p>在《Lunar》中，玩家將月相與夜行動物結合，以此組成卡牌，並進行吃墩 (Tricks) 遊戲。這是一款由 <strong>上杉正 (Masato Uesugi)</strong> 設計的精巧對戰卡牌遊戲。
+            </p>
+            <div class="icon-grid">
+                <div class="icon-item">👥 2 或 4 人</div>
+                <div class="icon-item">⏳ 30 分鐘</div>
+                <div class="icon-item">🌙 現代吃墩</div>
+                <div class="icon-item">🐾 動物花色</div>
+            </div>
+            <h3>配件內容</h3>
+            <ul>
+                <li>24 張花色牌（狼、貓頭鷹、山貓、蝙蝠各 6 張）</li>
+                <li>24 張數字牌（點數 1-8 各 3 張）</li>
+                <li>4 片王牌板塊、4 片隊伍板塊</li>
+                <li>吃墩計分板、總計分板、標記與白板筆</li>
+            </ul>
+        </section>
+
+        <!-- 2. Setup -->
+        <section id="setup" class="card">
+            <h2>⚙️ 遊戲設置</h2>
+            <h3>4 人模式 (隊伍制)</h3>
+            <ol>
+                <li>玩家分成兩隊，每隊 2 人，隊友面對面坐。</li>
+                <li>每隊拿取 2 片相同顏色的隊伍板塊。</li>
+                <li>將吃墩計分板置於中央，標記放在 0。</li>
+                <li>持有 <span class="emphasis">黑色 Lead (帶牌)</span> 板塊的人為起始玩家。</li>
+            </ol>
+            <h3>2 人模式</h3>
+            <p>每人拿取一片標示「Lead」的板塊。規則詳見底部「2 人模式」。</p>
+        </section>
+
+        <!-- 3. Pre-round -->
+        <section id="pre-round" class="card">
+            <h2>🃏 準備階段 (發牌與選王牌)</h2>
+            <h3>發牌</h3>
+            <ol>
+                <li>將數字牌與花色牌分開洗勻。</li>
+                <li>每人分發 <span class="emphasis">6 張數字牌</span> 與 <span class="emphasis">6 張花色牌</span>。</li>
+                <li><span class="tag">傳牌</span>：每位玩家從手牌中選出 2 張數字與 2 張花色，同時傳給隊友。</li>
+            </ol>
+            <h3>決定王牌花色</h3>
+            <ol>
+                <li>將 4 片王牌板塊翻開。</li>
+                <li>從起始玩家開始順時針，每人輪流將一片板塊翻至背面。</li>
+                <li>最後留下的那片即為該輪的 <span class="tag tag-trump">王牌花色 (Trump)</span>。</li>
+            </ol>
+        </section>
+
+        <!-- 4. Trick Rules -->
+        <section id="trick-rules" class="card">
+            <h2>⚔️ 出牌規則 (吃墩流程)</h2>
+            <p>起始玩家打出第一張牌後，其餘玩家順時針跟出。</p>
+            <div class="highlight-box">
+                <strong>關鍵限制：隊友間的配合</strong><br>
+                如果你是隊伍中 <span class="emphasis">第一個</span> 出牌的人，你可以自由選擇出「數字」或「花色」。<br>
+                如果你的 <span class="emphasis">隊友已經出過牌</span>，你必須出與隊友 <span class="tag">相反類型</span> 的牌（即數字配花色，花色配數字）。
+            </div>
+            <h3>跟隨花色 (Follow Suit)</h3>
+            <ul>
+                <li>第一張被打出的 <span class="tag tag-suit">花色</span> 稱為「帶牌花色 (Lead Suit)」。</li>
+                <li>如果你要打出花色牌，且手中有同花色，則 <span class="emphasis">必須</span> 跟著打出同花色。</li>
+                <li>如果你沒有同花色，則可隨意打出任何花色。</li>
+            </ul>
+        </section>
+
+        <!-- 5. Winner -->
+        <section id="winner" class="card">
+            <h2>🏆 勝負判定</h2>
+            <p>一墩結束後，依下列順序判斷勝出的隊伍：</p>
+            <ol>
+                <li><span class="emphasis">王牌領先</span>：若一隊出了王牌而另一隊沒出，出王牌的隊伍獲勝。</li>
+                <li><span class="emphasis">數字比拚</span>：若兩隊出的花色相同（皆為同花色或皆非王牌），則由 <span class="emphasis">數字較高</span>
+                    的團隊獲勝。</li>
+                <li><span class="emphasis">平手判定</span>：若數字也相同，則由 <span class="emphasis">最後出牌</span> 的隊伍獲勝。</li>
+                <li><span class="emphasis">先出獲勝</span>：若兩隊出不同花色且皆非王牌，則由打出 <span class="emphasis">第一張花色</span> 的隊伍獲勝。
+                </li>
+            </ol>
+            <p>獲勝團隊將計分板標記前移 1 格。若該墩包含有月亮 🌙 圖示的牌，由獲勝方保留計分。</p>
+        </section>
+
+        <!-- 6. Scoring -->
+        <section id="scoring" class="card">
+            <h2>📊 計分與結束</h2>
+            <h3>輪次結束</h3>
+            <p>當手牌耗盡時，每隊獲得：</p>
+            <ul>
+                <li>吃墩計分板上目前位置對應的分數。</li>
+                <li>保留的卡牌上每個月亮 🌙 圖示 +1 分。</li>
+            </ul>
+            <h3>遊戲獲勝</h3>
+            <p>若有隊伍超過 <span class="emphasis">30 分</span> 且領先，該隊獲勝。否則，將所有隊伍板塊順時針移給下一人，開始新的一輪。</p>
+        </section>
+
+        <!-- 7. Two Player -->
+        <section id="two-player" class="card">
+            <h2>👤 2 人模式</h2>
+            <ul>
+                <li><span class="tag">設置</span>：發 6 數 6 花色。桌面翻開 3 數 3 花色作為「天空區 (Sky)」。不傳牌。</li>
+                <li><span class="tag">選王牌</span>：起始玩家翻兩片，對手翻一片，剩下一片為王牌。</li>
+                <li><span class="tag">出牌</span>：每人每墩輪流出兩次牌。一次用手牌，一次用天空區的牌（順序自選）。</li>
+                <li><span class="tag">限制</span>：兩張牌必須分別是數字與花色。一墩結束後補滿天空區。</li>
+                <li><span class="tag">提示</span>：判定是否必須跟花色時，只考慮你選擇出牌的區域（手牌或天空區）。</li>
+            </ul>
+        </section>
+
+        <!-- 8. Notes -->
+        <section id="notes" class="card">
+            <h2>⚠️ 注意事項</h2>
+            <ul>
+                <li><span class="emphasis">禁止溝通 (Table Talk)</span>：輪次進行中，不能告訴隊友手牌內容或討論策略。</li>
+                <li><span class="emphasis">起始玩家</span>：每輪結束後，總分較低的隊伍持有 Lead 板塊者成為新的起始玩家。</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Floating Nav -->
+    <nav class="floating-nav">
+        <a href="#overview" class="nav-item active">概述</a>
+        <a href="#setup" class="nav-item">設置</a>
+        <a href="#pre-round" class="nav-item">準備</a>
+        <a href="#trick-rules" class="nav-item">規則</a>
+        <a href="#winner" class="nav-item">勝負</a>
+        <a href="#scoring" class="nav-item">計分</a>
+        <a href="#two-player" class="nav-item">2人</a>
+    </nav>
+
+    <script>
+        // Scroll Spy Functionality
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if(item.getAttribute('href') === `#${id}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Smooth Scrolling
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>

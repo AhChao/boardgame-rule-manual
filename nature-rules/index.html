@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《自然 Nature》規則速查</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <a href="../index.html" class="back-btn">🏠</a>
+        <h1>《自然 Nature》核心規則書</h1>
+    </header>
+
+    <div class="container">
+        <!-- 簡介 -->
+        <section id="intro" class="game-intro">
+            <h2><span class="nav-icon">🌿</span>遊戲簡介</h2>
+            <p>《自然》模擬了一個小水坑周圍動態的生態系統。你的目標是在面臨飢餓與掠食兩大威脅的同時，壯大你的物種族群。透過策略性地適應環境變化，讓你的物種繁衍生息。</p>
+            <div class="rule-highlight">
+                <strong>遊戲目標：</strong>在遊戲結束時獲得最高分。
+                <ul>
+                    <li><strong>食物分數：</strong>存入屏風後的每顆食物得 1 分。</li>
+                    <li><strong>生存獎勵：</strong>遊戲結束時，每個存活的物種得 2 分。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 配件 -->
+        <section id="components">
+            <h2><span class="nav-icon">📦</span>遊戲配件</h2>
+            <div class="tab-grid">
+                <div class="tab-card"><strong>族群 (Population)</strong>：代表需要餵養與保護的動物數量。</div>
+                <div class="tab-card"><strong>食物 (Food)</strong>：分為植物（綠色）與肉類（紅色）。</div>
+                <div class="tab-card"><strong>體型轉盤 (Size)</strong>：追蹤物種體型大小，影響覓食量與防護力。</div>
+                <div class="tab-card"><strong>特性牌 (Traits)</strong>：賦予物種特殊能力的卡牌（共 8 種）。</div>
+            </div>
+        </section>
+
+        <!-- 流程 -->
+        <section id="flow">
+            <h2><span class="nav-icon">⏳</span>遊戲流程</h2>
+            <p>遊戲共進行 <strong>4 個回合</strong>，每回合包含以下階段：</p>
+
+            <h3>1. 準備階段 (Preparation)</h3>
+            <ul>
+                <li><strong>增加食物</strong>：向水坑加入預定的植物量。</li>
+                <li><strong>獲得新物種</strong>：獲得體型 1、族群 1 的新物種。</li>
+                <li><strong>抽取卡牌</strong>：從牌堆抽取 5 張牌。</li>
+            </ul>
+
+            <h3>2. 適應階段 (Adapting Phase)</h3>
+            <p>每回合僅一次輪換，但可執行多個動作：</p>
+            <ul>
+                <li><strong>增加族群</strong>：棄一張牌，族群量 +1。</li>
+                <li><strong>增加體型</strong>：棄一張牌，體型轉盤 +1 (最大 4)。</li>
+                <li><strong>放置特性</strong>：放置面朝下卡牌 (每物種最多 3 個)。</li>
+                <li><strong>轉變為獵食者</strong>：拿取獵食者牌並翻轉體型轉盤。</li>
+            </ul>
+
+            <h3>3. 覓食階段 (Feeding Phase)</h3>
+            <p>由起始玩家開始，輪流執行覓食動作：</p>
+            <div class="rule-highlight">
+                <strong>草食性：</strong>拿取 [體型 + 修正] 的植物。
+            </div>
+            <div class="rule-highlight">
+                <strong>獵食者：</strong>若 [攻擊值 ≥ 目標防護值]，則目標族群 -1，獵食者獲得等同於 [目標體型] 的肉類。
+            </div>
+        </section>
+
+        <!-- 特殊規則 -->
+        <section id="special">
+            <h2><span class="nav-icon">⚖️</span>規則細節</h2>
+            <ul>
+                <li><strong>絕種 (Extinction)</strong>：最後一個族群失去時。補償會加到下回合的新物種上。</li>
+                <li><strong>觸發特性 (!)</strong>：強制執行，滿足條件時自動激活。</li>
+                <li><strong>飢餓 (Starvation)</strong>：無法進食時，必須移除 1 個族群。</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- 浮動導航 -->
+    <nav class="floating-nav">
+        <a href="#intro" class="nav-item active">
+            <span class="nav-icon">🌿</span>
+            <span>簡介</span>
+        </a>
+        <a href="#components" class="nav-item">
+            <span class="nav-icon">📦</span>
+            <span>配件</span>
+        </a>
+        <a href="#flow" class="nav-item">
+            <span class="nav-icon">⏳</span>
+            <span>流程</span>
+        </a>
+        <a href="#special" class="nav-item">
+            <span class="nav-icon">⚖️</span>
+            <span>細節</span>
+        </a>
+    </nav>
+
+    <script>
+        // Scroll Spy Logic
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if(item.getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

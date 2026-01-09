@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             --accent-color: #3498db;
             --hover-color: #2980b9;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--primary-bg);
@@ -22,14 +24,17 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding-bottom: 100px; /* Space for fixed footer */
+            padding-bottom: 100px;
+            /* Space for fixed footer */
         }
+
         h1 {
             text-align: center;
             margin-bottom: 2rem;
             color: #2c3e50;
             font-size: 2rem;
         }
+
         .container {
             width: 100%;
             max-width: 600px;
@@ -38,30 +43,35 @@
             gap: 20px;
             transition: max-width 0.3s ease;
         }
+
         .container.grid-2 {
             max-width: 900px;
             grid-template-columns: 1fr 1fr;
         }
+
         .container.grid-3 {
             max-width: 1200px;
             grid-template-columns: 1fr 1fr 1fr;
         }
+
         .game-card {
             background: var(--card-bg);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             color: inherit;
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             align-items: center;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
+
         .game-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
+
         .icon-box {
             width: 60px;
             height: 60px;
@@ -73,96 +83,141 @@
             margin-right: 20px;
             flex-shrink: 0;
         }
+
         .trb-icon {
             background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
             color: white;
         }
+
         .sh-icon {
             background-color: #2c2925;
             color: #f1c40f;
             border: 2px solid #c0392b;
         }
+
         .tl-icon {
             background: linear-gradient(135deg, #1a1a24 0%, #7d5fff 100%);
             color: white;
         }
+
         .medium-icon {
             background: linear-gradient(135deg, #2d2d44 0%, #9b59b6 100%);
             color: white;
         }
+
         .decrypto-icon {
             background-color: #2c3e50;
             color: #e74c3c;
             border: 1px solid #e74c3c;
         }
+
         .codenames-icon {
             background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
             color: white;
         }
+
         .just-one-icon {
             background-color: #3498db;
             color: white;
         }
+
         .harmonies-icon {
             background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
             color: white;
         }
+
         .infiltraitors-icon {
             background-color: #161b22;
             color: #58a6ff;
             border: 1px solid #30363d;
         }
+
         .blades-rose-icon {
             background: linear-gradient(135deg, #c9184a 0%, #1a0f0f 100%);
             color: #f8f9fa;
         }
+
         .lotr-duel-icon {
             background-color: #2a2018;
             color: #d4af37;
             border: 1px solid #4a3b2a;
         }
+
         .flip7-icon {
             background: linear-gradient(135deg, #000428 0%, #004e92 100%);
             color: #f8ff00;
         }
+
         .quest-icon {
             background-color: #1c2128;
             color: #c69026;
             border: 1px solid #444c56;
         }
+
         .hanabi-icon {
             background-color: #050a1e;
             color: #ff9e00;
         }
+
         .exploding-kittens-icon {
             background-color: #ea4335;
             color: white;
             border: 1px solid black;
         }
+
         .the-crew-icon {
             background: radial-gradient(circle at center, #1a2a6c 0%, #001219 100%);
             color: #94d2bd;
             border: 1px solid #94d2bd;
         }
+
         .the-mind-icon {
             background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
             color: #d4a017;
             border: 1px solid #d4a017;
         }
+
+        .bloody-inn-icon {
+            background: linear-gradient(135deg, #4b0000 0%, #8b0000 100%);
+            color: #fff;
+            border: 1px solid #c5a059;
+        }
+
+        .molly-house-icon {
+            background: linear-gradient(135deg, #1a1a1a 0%, #d4af37 100%);
+            color: #fff;
+            border: solid #d4af37 1px;
+        }
+
+        .nature-icon {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: 1px solid #1e8449;
+        }
+
+        .lunar-icon {
+            background: radial-gradient(circle at center, #0a0f1d 0%, #001219 100%);
+            color: #f39c12;
+            border: 1px solid #f39c12;
+        }
+
         .card-content {
             flex-grow: 1;
         }
+
         .game-title {
             font-size: 1.25rem;
             font-weight: bold;
             margin: 0 0 5px 0;
             display: block;
         }
+
         .game-subtitle {
             font-size: 0.9rem;
             color: #666;
             margin: 0;
         }
+
         .arrow {
             color: #ccc;
             font-weight: bold;
@@ -174,6 +229,7 @@
         .game-card {
             position: relative;
         }
+
         .pin-btn {
             position: absolute;
             top: 10px;
@@ -190,22 +246,26 @@
             transition: all 0.2s;
             opacity: 0;
             color: #ccc;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
+
         .game-card:hover .pin-btn {
             opacity: 1;
         }
+
         .pin-btn:hover {
             transform: scale(1.1);
             background: #fff;
             color: #f1c40f;
         }
+
         .pin-btn.pinned {
             opacity: 1;
             color: #f1c40f;
             background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .game-card.is-pinned {
             border: 1px solid #f1c40f;
             background: #fffdf5;
@@ -220,13 +280,14 @@
             z-index: 2000;
             pointer-events: none;
         }
+
         .toast {
             background: #333;
             color: white;
             padding: 12px 24px;
             border-radius: 30px;
             font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             margin-top: 10px;
             display: flex;
             align-items: center;
@@ -235,17 +296,34 @@
             transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
             transform: translateY(20px);
         }
+
         .toast.show {
             opacity: 1;
             transform: translateY(0);
         }
-        .toast-icon { color: #f1c40f; }
-        
+
+        .toast-icon {
+            color: #f1c40f;
+        }
+
         @media (max-width: 480px) {
-            h1 { font-size: 1.5rem; }
-            .game-card { padding: 15px; }
-            .icon-box { width: 50px; height: 50px; font-size: 1.2rem; }
-            .game-title { font-size: 1.1rem; }
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .game-card {
+                padding: 15px;
+            }
+
+            .icon-box {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .game-title {
+                font-size: 1.1rem;
+            }
         }
 
         /* Search and Layout Controls */
@@ -258,26 +336,30 @@
             margin-bottom: 20px;
             transition: max-width 0.3s ease;
         }
+
         .search-container {
             flex-grow: 1;
             position: relative;
         }
+
         .search-input {
             width: 100%;
             padding: 12px 45px 12px 15px;
             border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             background: var(--card-bg);
             font-size: 1rem;
             box-sizing: border-box;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: border-color 0.2s, box-shadow 0.2s;
         }
+
         .search-input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .clear-btn {
             position: absolute;
             right: 15px;
@@ -291,6 +373,7 @@
             display: none;
             padding: 5px;
         }
+
         .clear-btn:hover {
             color: #666;
         }
@@ -299,11 +382,12 @@
         .layout-controls {
             display: flex;
             gap: 5px;
-            background: rgba(0,0,0,0.05);
+            background: rgba(0, 0, 0, 0.05);
             padding: 4px;
             border-radius: 12px;
             flex-shrink: 0;
         }
+
         .layout-btn {
             background: none;
             border: none;
@@ -317,11 +401,13 @@
             align-items: center;
             justify-content: center;
         }
+
         .layout-btn.active {
             background: var(--card-bg);
             color: var(--accent-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .layout-btn:hover:not(.active) {
             color: #666;
         }
@@ -335,15 +421,17 @@
             backdrop-filter: blur(8px);
             padding: 15px 20px;
             text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             z-index: 1000;
         }
+
         .footer-disclaimer {
             font-size: 0.75rem;
             color: #e74c3c;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         .footer-info {
             font-size: 0.8rem;
             color: #999;
@@ -356,17 +444,23 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
         @media (max-width: 480px) {
-            .container.grid-2, .container.grid-3 {
+
+            .container.grid-2,
+            .container.grid-3 {
                 max-width: 600px;
                 grid-template-columns: 1fr;
             }
+
             .layout-controls {
-                display: none; /* Hide switcher on mobile if it's too cramped, or keep it if it fits */
+                display: none;
+                /* Hide switcher on mobile if it's too cramped, or keep it if it fits */
             }
         }
     </style>
 </head>
+
 <body>
 
     <h1>桌遊規則速查</h1>
@@ -379,19 +473,34 @@
 
         <div class="layout-controls">
             <button class="layout-btn active" data-grid="1" title="1 欄">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" opacity="0.3"/><rect x="3" y="3" width="18" height="5" rx="1"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="2" opacity="0.3" />
+                    <rect x="3" y="3" width="18" height="5" rx="1" />
+                </svg>
             </button>
             <button class="layout-btn" data-grid="2" title="2 欄">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="18" rx="2" opacity="0.3"/><rect x="13" y="3" width="8" height="18" rx="2" opacity="0.3"/><rect x="3" y="3" width="8" height="18" rx="2"/><rect x="13" y="3" width="8" height="18" rx="2"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="3" width="8" height="18" rx="2" opacity="0.3" />
+                    <rect x="13" y="3" width="8" height="18" rx="2" opacity="0.3" />
+                    <rect x="3" y="3" width="8" height="18" rx="2" />
+                    <rect x="13" y="3" width="8" height="18" rx="2" />
+                </svg>
             </button>
             <button class="layout-btn" data-grid="3" title="3 欄">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="3" width="6" height="18" rx="1" opacity="0.3"/><rect x="9" y="3" width="6" height="18" rx="1" opacity="0.3"/><rect x="16" y="3" width="6" height="18" rx="1" opacity="0.3"/><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="3" width="6" height="18" rx="1"/><rect x="16" y="3" width="6" height="18" rx="1"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="2" y="3" width="6" height="18" rx="1" opacity="0.3" />
+                    <rect x="9" y="3" width="6" height="18" rx="1" opacity="0.3" />
+                    <rect x="16" y="3" width="6" height="18" rx="1" opacity="0.3" />
+                    <rect x="2" y="3" width="6" height="18" rx="1" />
+                    <rect x="9" y="3" width="6" height="18" rx="1" />
+                    <rect x="16" y="3" width="6" height="18" rx="1" />
+                </svg>
             </button>
         </div>
     </div>
 
     <div class="container" id="gameContainer">
-        
+
         <a href="two-rooms-rules/index.html" class="game-card" data-id="two-rooms">
             <div class="pin-btn" title="釘選到最上方">📌</div>
             <div class="icon-box trb-icon">💣</div>
@@ -554,7 +663,8 @@
 
         <a href="the-gang-rules/index.html" class="game-card" data-id="the-gang">
             <div class="pin-btn" title="釘選到最上方">📌</div>
-            <div class="icon-box sh-icon" style="background: linear-gradient(135deg, #d4a017 0%, #000 100%); color: #fff;">帮</div>
+            <div class="icon-box sh-icon"
+                style="background: linear-gradient(135deg, #d4a017 0%, #000 100%); color: #fff;">帮</div>
             <div class="card-content">
                 <span class="game-title">紙牌幫</span>
                 <p class="game-subtitle">The Gang</p>
@@ -568,6 +678,46 @@
             <div class="card-content">
                 <span class="game-title">心靈同步</span>
                 <p class="game-subtitle">The Mind</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+        <a href="bloody-inn-rules/index.html" class="game-card" data-id="bloody-inn">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
+            <div class="icon-box bloody-inn-icon">🩸</div>
+            <div class="card-content">
+                <span class="game-title">血腥旅店</span>
+                <p class="game-subtitle">The Bloody Inn</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+        <a href="molly-house-rules/index.html" class="game-card" data-id="molly-house">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
+            <div class="icon-box molly-house-icon">👑</div>
+            <div class="card-content">
+                <span class="game-title">摩立屋</span>
+                <p class="game-subtitle">Molly House</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+        <a href="nature-rules/index.html" class="game-card" data-id="nature">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
+            <div class="icon-box nature-icon">🌿</div>
+            <div class="card-content">
+                <span class="game-title">自然</span>
+                <p class="game-subtitle">Nature</p>
+            </div>
+            <div class="arrow">›</div>
+        </a>
+
+        <a href="lunar-rules/index.html" class="game-card" data-id="lunar">
+            <div class="pin-btn" title="釘選到最上方">📌</div>
+            <div class="icon-box lunar-icon">🌙</div>
+            <div class="card-content">
+                <span class="game-title">月色之境</span>
+                <p class="game-subtitle">Lunar</p>
             </div>
             <div class="arrow">›</div>
         </a>
@@ -588,17 +738,17 @@
         const clearBtn = document.getElementById('clearBtn');
         const gameCards = document.querySelectorAll('.game-card');
 
-        searchInput.addEventListener('input', function() {
+        searchInput.addEventListener('input', function () {
             const query = this.value.toLowerCase().trim();
-            
+
             // Show/hide clear button
             clearBtn.style.display = query.length > 0 ? 'block' : 'none';
 
             gameCards.forEach(card => {
                 const title = card.querySelector('.game-title').textContent.toLowerCase();
                 const subtitle = card.querySelector('.game-subtitle').textContent.toLowerCase();
-                
-                if (title.includes(query) || subtitle.includes(query)) {
+
+                if(title.includes(query) || subtitle.includes(query)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
@@ -606,7 +756,7 @@
             });
         });
 
-        clearBtn.addEventListener('click', function() {
+        clearBtn.addEventListener('click', function () {
             searchInput.value = '';
             searchInput.focus();
             this.style.display = 'none';
@@ -622,16 +772,16 @@
             gameContainer.classList.remove('grid-2', 'grid-3');
             topBar.style.maxWidth = '600px';
 
-            if (cols === 2) {
+            if(cols === 2) {
                 gameContainer.classList.add('grid-2');
                 topBar.style.maxWidth = '900px';
-            } else if (cols === 3) {
+            } else if(cols === 3) {
                 gameContainer.classList.add('grid-3');
                 topBar.style.maxWidth = '1200px';
             }
-            
+
             layoutBtns.forEach(btn => {
-                if (btn.dataset.grid === cols.toString()) {
+                if(btn.dataset.grid === cols.toString()) {
                     btn.classList.add('active');
                 } else {
                     btn.classList.remove('active');
@@ -649,7 +799,7 @@
 
         // Load saved layout
         const savedLayout = localStorage.getItem('hub_layout');
-        if (savedLayout) {
+        if(savedLayout) {
             setLayout(parseInt(savedLayout));
         }
 
@@ -662,10 +812,10 @@
             toast.className = 'toast';
             toast.innerHTML = `<span class="toast-icon">⚠️</span><span>${message}</span>`;
             toastContainer.appendChild(toast);
-            
+
             // Trigger animation
             setTimeout(() => toast.classList.add('show'), 10);
-            
+
             // Remove after 3s
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -676,14 +826,14 @@
         function updateCardOrder() {
             const container = document.getElementById('gameContainer');
             const cards = Array.from(gameCards);
-            
+
             // Sort: pinned first, then original order (by data-id or appearance)
             // Actually, easier to just move pinned ones to top
             cards.sort((a, b) => {
                 const aPinned = pinnedGames.includes(a.dataset.id);
                 const bPinned = pinnedGames.includes(b.dataset.id);
-                if (aPinned && !bPinned) return -1;
-                if (!aPinned && bPinned) return 1;
+                if(aPinned && !bPinned) return -1;
+                if(!aPinned && bPinned) return 1;
                 return 0; // Keep relative order
             });
 
@@ -700,16 +850,16 @@
             pinBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 const gameId = card.dataset.id;
                 const index = pinnedGames.indexOf(gameId);
 
-                if (index > -1) {
+                if(index > -1) {
                     // Unpin
                     pinnedGames.splice(index, 1);
                 } else {
                     // Pin
-                    if (pinnedGames.length >= 3) {
+                    if(pinnedGames.length >= 3) {
                         showToast('最多只能釘選 3 個遊戲，請先取消釘選其他遊戲');
                         return;
                     }
@@ -725,4 +875,5 @@
         updateCardOrder();
     </script>
 </body>
+
 </html>

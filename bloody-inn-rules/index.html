@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血腥旅店 (The Bloody Inn) 規則書</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <a href="../index.html" class="back-link">🏠 返回首頁</a>
+        <h1>The Bloody Inn<br>血腥旅店</h1>
+        <p>1831年，法國阿爾代什省... 一場致富的陰謀正在醞釀。</p>
+    </header>
+
+    <div class="container">
+
+        <section id="intro">
+            <h2>📜 遊戲概述</h2>
+            <p>1831 年，在法國阿爾代什省一個偏僻的角落，佩爾貝伊小村莊見證了無數旅行者的往來...
+                一個貪婪的農民家庭決心發財，並設計了一個邪惡的策略：<strong>投資一家旅店，搶劫旅客，在不引起警察懷疑的情況下致富！</strong></p>
+            <p>並非所有旅客都能活著離開這家旅店... 在遊戲結束時，最富有的店主將獲得勝利！</p>
+
+            <h3>遊戲組件</h3>
+            <ul>
+                <li>78 張旅客卡 (70 位旅行者和 8 位農民)</li>
+                <li>4 張玩家幫助卡 (兼作「穀倉」)</li>
+                <li>1 個旅店遊戲版圖</li>
+                <li>30 張 10 法郎 (10F) 支票</li>
+                <li>32 個鑰匙 / 客房服務標記 (四色)</li>
+                <li>4 個中立白色鑰匙</li>
+                <li>1 張起始玩家卡</li>
+            </ul>
+        </section>
+
+        <section id="setup">
+            <h2>🎲 遊戲設置</h2>
+            <ol>
+                <li><strong>起始物資：</strong> 每人拿取 2 張農民卡 (起始手牌) 和 1 張幫助卡 (穀倉)。</li>
+                <li><strong>財富軌跡：</strong> 將各色圓盤放在版圖財富軌跡的 <strong>5F</strong> 位置。每人拿取 1 張 <strong>10F 支票</strong>。</li>
+                <li><strong>準備卡庫：</strong> 根據玩家人數移除對應數量的卡片 (分短局/長局)，洗勻剩餘卡片形成<strong>入口堆疊</strong>。</li>
+                <li><strong>開放房間：</strong> 每人在一個房間放置自己的鑰匙。在 2/3/4 人局中，分別放置 3/3/4 個白色中立鑰匙。</li>
+                <li><strong>起始玩家：</strong> 最貪婪的玩家獲得起始玩家卡。</li>
+            </ol>
+            <div class="info-box">
+                💡 <strong>財富上限：</strong> 財富軌跡最高為 40F。若超過，需透過「洗錢」行動換成支票，否則無法持有更多現金。
+            </div>
+        </section>
+
+        <section id="gameplay">
+            <h2>🧠 遊戲流程</h2>
+            <p>遊戲分為兩個「季節」和若干回合。每個回合分為三個階段：</p>
+
+            <h3>第一階段：傍晚 - 歡迎旅客</h3>
+            <p>起始玩家從入口堆疊抽卡，依次填滿所有<strong>有鑰匙標記</strong>且<strong>空閒</strong>的房間。</p>
+
+            <h3>第二階段：夜晚 - 玩家行動</h3>
+            <p>從起始玩家開始順時針，每人進行<strong>兩次行動</strong> (先每人一次，再每人第二次)。可選行動如下：</p>
+            <div class="action-grid">
+                <div class="action-card">
+                    <h4>1. 賄賂旅客</h4>
+                    <p>將房間內的旅客納入手牌成為<strong>共犯</strong>。需支付等同於該卡等級的手牌。</p>
+                </div>
+                <div class="action-card">
+                    <h4>2. 建造設施</h4>
+                    <p>將手牌中的共犯打出到面前(面朝上)。需支付等同於該卡等級的手牌。</p>
+                </div>
+                <div class="action-card">
+                    <h4>3. 殺害旅客</h4>
+                    <p>殺掉房間或小酒館的旅客(面朝下放在面前)。需支付等量手牌。</p>
+                </div>
+                <div class="action-card">
+                    <h4>4. 埋葬屍體</h4>
+                    <p>將面前的屍體塞進設施下領取賞金。設施可埋葬數量等同於設施等級。</p>
+                </div>
+            </div>
+            <p><strong>5. 跳過 / 洗錢：</strong> 若不執行上述行動，可將現金與支票互換 (10F = 1 張支票)。</p>
+        </section>
+
+        <section id="actions-detail">
+            <h2>⚔️ 行動規則細節</h2>
+            <p>執行行動 1-4 時，需從手牌打出等同於目標卡片<strong>等級 (Rank 0-3)</strong> 的共犯：</p>
+            <ul>
+                <li>打出的卡片若有對應行動的<strong>圖示 (專長)</strong>，則可回收到手牌。</li>
+                <li>若無專長卡片，則需棄掉至<strong>出口堆疊</strong> (農民則回小酒館)。</li>
+            </ul>
+
+            <h3>職業專長</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><span class="type-tag type-merchants">商人 (藍)</span>：擅長 <strong>賄賂</strong></li>
+                <li><span class="type-tag type-artisans">工匠 (紅)</span>：擅長 <strong>建造</strong></li>
+                <li><span class="type-tag type-police">警察 (灰)</span>：擅長 <strong>殺害</strong></li>
+                <li><span class="type-tag type-religious">聖職者 (紫)</span>：擅長 <strong>埋葬</strong></li>
+                <li><span class="type-tag type-nobles">貴族 (綠)</span>：無專長，但價值極高</li>
+            </ul>
+        </section>
+
+        <section id="round-end">
+            <h2>🌅 第三階段：清晨 - 回合結束</h2>
+            <ol>
+                <li><strong>警察調查：</strong> 若旅店房間內仍有<strong>警察</strong>，觸發調查。面前留有屍體的玩家必須賄賂掘墓人：每具屍體支付 <strong>10F</strong>
+                    並將屍體移除。沒錢付也得移除。</li>
+                <li><strong>旅客離開：</strong>
+                    <ul>
+                        <li>玩家根據自己顏色鑰匙房間內的旅客人數，每人獲得 <strong>1F</strong>。</li>
+                        <li>清空旅店：所有房間內的旅客移至<strong>出口堆疊</strong>。</li>
+                    </ul>
+                </li>
+                <li><strong>支付工資：</strong> 欠債還錢！每張手牌需支付 <strong>1F</strong> 工資。若沒錢付，該共犯離開(回棄牌堆/小酒館)。</li>
+            </ol>
+            <p>最後，將起始玩家卡傳給左手邊玩家。</p>
+        </section>
+
+        <section id="end-game">
+            <h2>🏆 遊戲結束與計分</h2>
+            <p>當入口堆疊第二次用盡時，完成該回合即結束。最終計分：</p>
+            <ul>
+                <li><strong>現金 + 支票價值</strong></li>
+                <li>加上某些<strong>設施 (等級 3)</strong> 提供的結算獎勵。</li>
+                <li>若財富相同，埋葬屍體較多者獲勝。</li>
+            </ul>
+            <div class="danger-box">
+                ⚠️ <strong>注意：</strong> 遊戲最後結算時，財富軌跡依然<strong>不可超過 40F</strong>！超過的部分不算分。
+            </div>
+        </section>
+
+        <section id="special-rules">
+            <h2>🕯️ 特殊機制</h2>
+            <h3>共用埋葬</h3>
+            <p>你可以把屍體埋在<strong>其他玩家</strong>的設施下。此時你與設施主人<strong>平分</strong>該屍體的賞金 (若為單數，你拿較多)。</p>
+
+            <h3>穀倉 (幫助卡)</h3>
+            <p>你的幫助卡本身就是一個<strong>等級 1</strong> 的設施，可以埋葬 1 具屍體。</p>
+
+            <h3>特殊設施效果 (範例)</h3>
+            <ul>
+                <li><strong>屠宰場 (Butcher's Shop)</strong>：殺害行動中可一次殺害多名旅客(需付總等級卡片)。</li>
+                <li><strong>工作坊 (Workshop)</strong>：建造行動所需支付的卡片減手 1 張。</li>
+                <li><strong>小客廳 (Parlor)</strong>：賄賂行動所需支付的卡片減少 1 張。</li>
+                <li><strong>地窖 (Cellar)</strong>：埋葬行動所需支付的卡片減少 1 張。</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="#intro" class="nav-item">概述</a>
+        <a href="#setup" class="nav-item">設置</a>
+        <a href="#gameplay" class="nav-item">流程</a>
+        <a href="#round-end" class="nav-item">結算</a>
+        <a href="#end-game" class="nav-item">計分</a>
+    </nav>
+
+    <script>
+        // Scroll Spy Implementation
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Adjusted for better mobile trigger
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if(item.getAttribute('href') === `#${id}`) {
+                            item.classList.add('active');
+                            item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll for nav items
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,716 @@
+--- Page 1 ---
+1
+butcher
+From now on, you can kill as 
+many travelers as you want 
+in one Kill a Guest action.
+Butcher’s Shop
+Nicolas Robert
+ 
+France 1831: In a remote corner of Ardèche, the little village of Peyrebeille sees numerous travelers pass through… A family 
+of greedy rural farmers is determined to make its fortune, and has devised a diabolical stratagem to achieve this goal: Invest 
+in an inn so they can rob traveling guests, getting rich without arousing the suspicions of the police! Whether or not their plan 
+will work out, one thing is certain: Not every guest will leave this inn alive…
+Important Elements of the Game
+Guest cards
+Each card represents a guest. The front of the card depicts the guest alive; the back depicts the guest dead. 
+Here are the two sides:
+Living Side
+Contents
+•	 78 Guest cards (70 travelers and 8 peasants)
+•	 4 Player aid cards
+•	 An Inn gameboard
+•	 1 First Player card
+•	 30 10F (10-franc) Check tiles
+•	 32 Key / Room Service tokens in the four player colors 
+(8 red, 8 green, 8 blue, and 8 yellow)
+•	 4 white Key tokens 
+•	 4 wooden discs in the four player colors
+•	 1 rulebook
+Objective
+In this family, it’s every man for himself! At the end 
+of the game, there will be a final tally: The richest of 
+the innkeepers will be proclaimed victorious!
+The color of the card indicates the 
+guest’s type. The travelers who come to 
+rent a room at the inn are divided into 5 
+types of guest: merchants (blue), artisans 
+(red), police (grey), religious (purple), and 
+nobles (green). Peasants (yellow) are a spe-
+cial kind of guest that spends a lot of time 
+in the bistro at the inn.
+The characters are sorted by rank, 
+from 0 to 3.
+The money the guest has in his poc-
+kets.
+The lower part of the card depicts the 
+annex that the Guest allows you to build. 
+The power of the annex is both depicted as 
+an icon and explained in text.
+Dead Side
+Reminder of the guest’s rank.
+The money the guest has in his 
+pockets.
+4 of the 6 types have a particular ap-
+titude for carrying out one action. This 
+icon is a reminder of this aptitude.
+
+
+--- Page 2 ---
+2
+The Inn Board
+Setup
+•	Give	each	player	two Peasant cards and one Player 
+Aid card . The peasants form your starting hand. 
+Place your Player Aid card on the table, in your 
+play area; it also serves as a barn. With fewer than 
+4 players, leave the unused Peasant and Player Aid 
+cards in the box.
+•	Build	the	Traveler	deck:	Depending	on	the	number	
+of players and the length of game you wish to play, 
+you will put a certain number of cards back in the 
+box, without looking at them.
+Short Game Long Game
+2 players remove 35 cards remove 25 cards
+3 players remove 28 cards remove 16 cards
+4 players remove 22 cards remove 6 cards
+Shuffle the rest of the cards to form a deck, and place 
+it at the entrance to the inn, at the left of the board. 
+Place the cards so the Living side is visible. These 
+cards form the Entrance Stack.
+•	Each	player	chooses	a	player	color	and	receives	the	
+8 Key / Room Service tokens and the disc of that 
+color. Place your disc on the 5F space of the Wealth 
+Track	on	the	Inn	board.
+•	Each	player	takes	one 10F Check tile. The other 
+Check tiles form a supply near the gameboard.
+•	You	will	now	determine	which	rooms	are	open:
+ - Each player places a Key token of his color on an 
+unclaimed room of his choice (the position of the 
+room makes no difference, so just choose a room 
+close to you).
+ - In a 2- or 3-player game, place a Key token of the 
+neutral color on each of 3 doors of the inn. In a 
+4-player game, place one on each of 4.
+•	The	greediest	player	takes	the	First Player card (as 
+everyone knows, the greediest person is the one with 
+the most coins in his pockets!).
+The Wealth Track indicates 
+how much liquid cash each 
+player has; the maximum is 40 
+francs (« 40F »).
+Each door to a room  
+in the inn, numbered 
+from 1 to 8, can accom-
+modate one Key token 
+and one Room Service 
+token. The color of the 
+Key token indicates which 
+player owns that room.
+At the entrance to the inn, 
+you will find the stack of cards 
+representing Guests that are en-
+tering the inn. We will call this 
+stack the Entrance Stack.
+At the exit from 
+the inn, you will find 
+the stack of cards re-
+presenting Guests that 
+are leaving the inn.We 
+will call this stack the 
+Exit Stack.
+Each door leads to a 
+room that can accommo-
+date one Traveler card.
+The bistro, where the 
+Peasant cards go.
+Concierge
+Immediately place a Room 
+Service token next to a  Key token. 
+From now on, when a Guest rents this room, he immediately pays a sum equal to his rank.
+room service
+brigadier chief
+butcher
+From now on, you can kill as many travelers as you want in one Kill a Guest action.
+Butcher’s Shop
+
+
+--- Page 3 ---
+3
+Playing the Game
+The game is divided into two seasons and a variable 
+number	of	rounds.	During	the	first	season,	travelers	
+arrive at the entrance to the inn for the first time, and 
+the lucky ones will continue their trek. They will be 
+in the entrance stack for the second season.
+Each round is divided into 3 phases: welcome 
+travelers (evening), player actions (night), and end 
+of round (morning).
+Phase 1: Welcome Travelers (evening)
+The First Player is responsible for welcoming travelers 
+for this round. He must perform the following steps:
+ - Draw	 the	 top	 card	 from	 the	 Entrance	 Stack	 
+(making the second traveler of the stack visible).
+ - Place the traveler in an open (i.e. has a Key to-
+ken), unoccupied (i.e. has no traveler) room of his 
+choice.
+ - Reiterate this process until there is a traveler in 
+each open room. 
+Note: the first time the Entrance Stack becomes empty, 
+shuffle the cards of the Exit Stack in order to form a 
+new Entrance Stack. The second time the Entrance Stack 
+becomes empty, do a normal final round, even if the inn 
+is not completely full (Exception: Don’t play the final 
+round if there are fewer travelers in the inn than the 
+number of players - see End of the Game).
+Example
+Phase 2: Player Actions (night)
+Starting with the first player, then going clockwise, 
+each player performs a first action. Then, each player 
+in turn must perform a second action.
+On your turn, you may:
+1.	Bribe	a	Guest
+2.	Build	an	Annex
+3. Kill a Guest 
+4.	Bury	a	Corpse
+5. Pass (and Launder Money)
+The first four actions in the list operate on the same 
+principle:
+ - When you take one of these actions, you choose a 
+Guest card in play (in your hand or in the inn, as 
+appropriate).
+ - You	must	play	a	number	of	cards	defined	by	the	
+rank of the chosen card.
+ - Then, you reclaim any cards you played that have 
+an aptitude for the chosen action; you lose the 
+other cards.
+ - You	perform	the	action.
+1. Bribe a Guest
+This action allows you to take a Guest card from the 
+inn into your hand. Guests in your hand are your 
+accomplices, who will help you in your macabre 
+enterprise.
+There are 4 steps to bribing a Traveler in a room of 
+the inn:
+ - Select	the	Traveler	you	want	to	bribe	from	among	
+those renting rooms at the inn, regardless of who 
+owns that room.
+ - Play on the table as many Guest cards from your 
+hand	as	the	rank	of	the	Traveler	you	just	chose	(e.g.	
+0	cards	for	a	rank-0	Traveler;	3	cards	for	a	rank-3	
+Traveler).
+ - From the cards you just played, return cards with 
+the 
+ icon to your hand (these guest have an 
+aptitude	for	the	Bribe	action);	put	the	other	cards	
+in the Exit Stack. (Exception: If you played any  
+Peasants, put them in the bistro of the inn, instead 
+of the Exit Stack.)
+ -  Add the bribed guest to your hand.
+In the same way, it is possible to bribe the peasants 
+that are in the bistro. If you choose to bribe peasants, 
+you can take one or two (your choice: it is easier to 
+corrupt peasants!). Peasants are rank 0, and thus do 
+not require playing any cards to bribe them.
+In a 3-player game, 
+Anna is responsible for 
+greeting the travelers 
+because she is the first 
+player. She takes the 
+first card of the Entrance 
+Stack, the landsca -
+per, into her hand. She 
+chooses to lodge him in 
+the yellow player’s room.
+Anna greets the next 5 travelers in a similar 
+fashion in order to fill the 6 open rooms of the inn. 
+count
+dining room
+Immediately earn 9F.
+LANDSCAPER
+Immediately earn 4F.
+At the end of the 
+game, earn 4F per red 
+card in the Exit Stack.park
+LANDSCAPER
+Immediately earn 4F.
+At the end of the 
+game, earn 4F per red 
+card in the Exit Stack.park
+
+
+--- Page 4 ---
+4
+Example
+Anna wants to bribe the rank-3 landscaper in Ma-
+deline’s room. To do this, she plays 3 cards from her 
+hand.  The peasant returns to the bistro because 
+peasants always return to the bistro.  The novice 
+continues on his journey because he has no apti-
+tude for bribery. 
+ The newsboy returns to An-
+na’s hand because he has an aptitude for bribery.  
+ Anna then takes the landscaper into her hand 
+as an accomplice. 
+2. Build an Annex
+This action allows you to place one of your accom-
+plices (one of the Guest cards from your hand) in 
+front	of	you	in	order	to	benefit	from	its	power.	You	
+will also need annexes in order to bury corpses, but 
+more on that topic later…. 
+Note: Your accomplice has allowed you to build this 
+annex, but you won’t be able to count on his abilities 
+thereafter, because he is too busy!
+There are 4 steps to building an annex:
+ - Choose	a	Traveler	card	from your hand that de-
+picts an annex.
+ - Play on the table as many other guest cards from 
+your hand as the rank of the card you chose.
+ - From the cards you just played, return cards with 
+the 
+ icon to your hand (these guest have an 
+aptitude	for	the	Build	an	Annex	action);	put	the	
+other cards in the Exit Stack. (Exception: If you 
+played any Peasants, put them in the bistro of the 
+inn, instead of the Exit Stack).
+ - Place	the	Traveler	card	chosen	in	front	of	you	on	
+the table, with its Living side visible; this now be-
+comes an annex. There is no limit to the number of 
+annexes you can have in front of you, and you can 
+have several copies of the same annex. The advan-
+tages of these cards are explained at the end of the 
+rulebook.
+Note: Police and Peasant cards cannot become an-
+nexes (notice that there is no house icon at the bottom 
+of these cards), so they cannot be chosen as the target 
+of the Build action.
+Example
+3. Kill a Guest
+When you kill a Guest of the inn, you put him in 
+front	of	you	Dead-side-up.	It	pains	you,	but	what	
+can you do? This is the life you have chosen! Keep in 
+mind	that	you	have	a	code	of	honor:	You	only	steal	
+money from a Guest when you bury him!
+There are 4 steps to killing a Guest:
+ - Select	the	Traveler	you	want	to	kill	from	the	inn	(in	
+a room of your choice or in the bistro; it’s possible 
+to kill the Peasants).
+ - Play on the table as many Guest cards from your 
+hand	as	the	rank	of	the	Traveler	you	just	chose.
+peasant
+LANDSCAPER
+Immediately earn 4F.
+At the end of the 
+game, earn 4F per red 
+card in the Exit Stack.
+park
+novice
+altar
+Immediately earn 1F per 
+purple annex you have built, 
+including this one. 
+Mechanic
+workshop
+From now on, play 1 accom-
+plice fewer to perform the 
+Build an Annex action.
+peasant
+newsboy
+kiosk
+Immediately earn 1F 
+per blue annex you have 
+built, including this one. 
+distiller
+At the end of each round, 
+do not pay the wages for 
+one of the accomplices in 
+your hand.
+distillery
+Mechanic
+workshop
+From now on, play 1 accom-
+plice fewer to perform the 
+Build an Annex action.
+barn
+player aid card
+This player aid card is a 
+rank-1 annex, so you can 
+bury a corpse under it.
+Phase 1 – Welcome Travelers
+Phase 2 – Player Actions (2 action rounds)
+BRIBE A GUEST: Take a traveler or two peasants 
+from the inn into your hand.
+BUILD AN ANNEX: Play an accomplice from your 
+hand to the table (living side).
+KILL A GUEST: Put a guest from the inn on the 
+table (dead side).
+BURY A CORPSE: Tuck a corpse under an annex.
+PASS:  Do nothing or launder money.
+Phase 3 – End of Round
+a. Police investigation
+b. Guests leave
+c. Pay wages
+novice
+altar
+Immediately earn 1F per 
+purple annex you have built, 
+including this one. 
+peasant
+VISCOUNT
+King Size Bed
+Immediately earn 6F.
+Madeline wants to build the distillery associa-
+ted with the distiller she has in her hand. Because 
+the distiller is rank 2, she plays 2 other cards from 
+her hand.  The viscount continues on his jour -
+ney because he has no aptitude for building an-
+nexes.
+ The mechanic returns to Madeline’s hand 
+because he has an aptitude for building annexes.
+ Madeline then places the distiller on the table, 
+in her play area, as an annex. From now on, she 
+can benefit from its effect. 
+
+--- Page 5 ---
+5
+ - From the cards you just played, return cards with 
+the 
+  icon to your hand (these guests have an 
+aptitude for the Kill a Guest action); put the other 
+cards in the Exit Stack. (Exception: If you played 
+any Peasants, put them in the bistro of the inn, 
+instead of the Exit Stack). 
+ - Place the Guest card in front of you on the table, 
+with	its	Dead	Guest	side	visible;	this	now	becomes	
+a corpse. There is no limit to the number of corpses 
+you can have in front of you, but watch out for the 
+police!
+ Example
+4. Bury a Corpse
+You	can	bury	the	corpse	of	a	guest	you	killed	in	a	
+previous action.
+There are 4 steps to burying a corpse:
+ - Select the corpse you want to bury from among 
+those in front of you.
+ - Play on the table as many accomplices as the rank 
+of the card you just chose.
+ - From the cards you just played, return cards with 
+the 
+ icon to your hand (these travelers have an 
+aptitude	for	the	Bury	a	Corpse	action);	put	the	
+other cards in the Exit Stack. (Exception: If you 
+played any Peasants, put them in the bistro of the 
+inn, instead of the Exit Stack).
+ - Place the corpse card under an annex of your 
+choice, regardless of who owns it, leaving enough 
+of the card sticking out so that you can see the 
+amount of money in the corpse’s pocket. The num-
+ber of bodies that can be buried under an annex 
+is equal to rank of the annex (e.g. you can bury 2 
+corpses in a rank-2 annex, and no corpses under 
+a	rank-0	annex).	You	and	the	owner	of	the	annex	
+share the money in the corpse’s pocket, by advan-
+cing	your	tokens	on	the	Wealth	Track	(if	you	bury	
+the corpse under one of your own annexes, you 
+take all the money for yourself, of course).
+Note: It is possible to bury a corpse under the barn.
+Important: It is impossible to have more than 40 
+francs on the Wealth Track. If your earnings would 
+take you over 40 francs, tough, you have nowhere 
+to keep the excess! However, 40 francs is not the 
+maximum score, as we will explain a little further 
+below.
+Example
+5. Pass (and Launder Money) 
+You	can	choose	not	to	do	any	of	the	above	actions	
+on your turn. In this case, you are allowed, but not 
+required, to meet the crooked village notary to laun-
+der	money.	You	can	then	either:
+ - Exchange a portion of your cash for 10F Checks 
+(for example, you can give up 20 francs on the 
+Wealth	Track	to	earn	two	10F	Checks).
+ - Cash Checks in order to increase your cash by 10 
+francs per Check.
+In order to bury 
+her rank-2 corpse, 
+Madeline plays 2 
+cards from her hand. 
+ The peasant re-
+turns to the bistro. 
+ The grocer goes on 
+the Exit Stack.  She 
+slips the corpse under her 
+own rank-3 annex, and 
+advances her disc 18F on 
+the Wealth Track. 
+prince
+At the end of the game, 
+ earn 3F per  check you have.
+GReenhouse
+cultivator
+Immediately earn 1F per 
+red annex you have built, 
+including this one. vegetable garden
+peasant
+ Shopkeeper
+From now on, you can bribe 
+as many travelers as you 
+want in one Bribe a Guest 
+action.
+store
+peasant
+Madeline wants to kill the baron in Anna’s room. 
+Because the baron is rank 0, Madeline does not 
+need to play any cards in order perform this action.  
+ Madeline takes the baron and places him on the 
+table, in her play area, with his Dead side visible.
+BARon
+large chandelier
+Immediately earn 4F.
+
+
+--- Page 6 ---
+6
+Phase 3: End of Round (morning)
+The end of the round is divided into 3 steps: police 
+investigation, travelers leave, and pay wages.
+a. Police Investigation
+If there is at least one Police card in an open room at 
+the inn, the police investigate! Each player having at 
+least one unburied corpse must appeal to the village 
+gravedigger, in order to avoid being arrested. Each 
+player must pay 10 francs per unburied corpse he has, 
+and then discard his unburied corpses (put them in 
+the box).
+Note: You can pay the gravedigger with a 10F Check. 
+If you are unable to pay the gravedigger, pay what you 
+can with coins and checks, and the gravedigger will 
+nevertheless assist you in getting rid of your corpses! 
+What a guy!
+b. Travelers Leave
+Each player earns 1F for each room of his color (i.e. 
+each door with a Key token of his color) occupied by 
+a Guest card. 
+Note: The rooms that are open due to white Key tokens 
+earn the players nothing.
+The	inn	is	then	emptied.	Place	all	the	Traveler	cards	
+from the inn rooms on the Exit Stack with their  
+Living side visible.
+c. Pay Wages
+Each player must pay his accomplices: Move your 
+disc	back	on	the	Wealth	Track	1F	per	Guest	card	in	
+your hand.
+Warning, your accomplices do not trust you enough 
+to accept checks! Once you drop to 0 on the Wealth 
+Track,	you	will	have	to	let	any	unpaid	accomplices	
+go; place them on the Exit Stack (except for Peasants, 
+who go to the bistro)!
+The first player gives the First Player card to the 
+player on his left and a new turn can begin.
+Example
+End of the Game
+The second time the Entrance Stack becomes empty, 
+finish the round, and the game ends.
+Note: Do not play the last round if there are fewer 
+Travelers in the inn than there are players. In this case, 
+put the rest of the Guests on the Exit Stack.
+Each player having at least one unburied corpse 
+must appeal to the village gravedigger, in order to 
+avoid being arrested. Each player must pay 10 francs 
+per unburied corpse he has, and then discard his 
+unburied corpses (to be paid with a check if needed).
+Evaluate the rank-3 annexes that earn you money.
+Note: Even now, you cannot have more than 40 francs 
+on the Wealth Track!
+Calculate each player’s booty by adding 10 francs per 
+Check	he	has	to	his	value	on	the	Wealth	Track.	The	
+richest player is declared victorious! In the event of a 
+tie, the winner is the richest player who has the most 
+corpses under his annexes. If there is still a tie, then 
+the game ends in a tie, and you must play again!!
+The players have done their two turns of actions. 
+One Police card remains in the inn, which triggers 
+a Police Investigation. Madeline, who still has an  
+unburied corpse, must rely upon the services of the village 
+gravedigger, paying 10F. Sebastien earns 2F because his 
+2 rooms are occupied. After having put the 4 Traveler 
+cards remaining in the inn into the Exit Stack, each 
+player pays 1F per Guest card in his hand.
+count
+Immediately earn 9F.
+dining room
+Shopkeeper
+From now on, you can bribe 
+as many travelers as you 
+want in one Bribe a Guest 
+action.store
+bishop
+Immediately earn 4F. At
+the end of the game, earn 
+4F per purple card 
+in the Exit Stack.bishopric
+distiller
+distillery
+At the end of each round, 
+do not pay the wages for 
+one of the accomplices in 
+your hand.
+peacekeeper
+LANDSCAPER
+Immediately earn 4F.
+At the end of the 
+game, earn 4F per red 
+card in the Exit Stack.park
+peasant
+
+
+--- Page 7 ---
+7
+Alternate Scenarios (variants)
+Unlimited Wealth (to discover the game)
+It is possible to gain more than 40F . Whenever you 
+have more than 40F , take four 10F Checks and start 
+your	disc	back	at	the	beginning	of	the	Wealth	Track.
+First Come, First Served (for beginners, or for a slightly 
+faster game)
+When welcoming travelers, the first player does not 
+decide in which room to lodge each of the travelers 
+who arrives, but instead lodges them according to the 
+order in which they arrive: The first traveler goes in 
+Room #1; the second in Room #2; etc.
+Solitaire Game
+The solitaire game is played the same way, with the 
+following exceptions:
+- Setup:
+1.	Build	the	Guest	deck	by	removing	34	cards	(short	
+game) or 26 cards (long game).
+2. Place 1 Key token of your color and 3 Key tokens of 
+a neutral color on the doors of the inn.
+3. In addition to the 2 Peasants in your hand, place 2 
+Peasants in the bistro.
+ - You	lose	the	game	if	you	have	any	unburied	corpses	
+either during a Police Investigation or at the end of 
+the game.
+ - Your	goal	is	to	get	the	best	score	you	can.	In	a	long	
+game, check your rank according to your score: 
+•	 110F-129F: worrying innkeeper
+•	 130F-149F: hazardous innkeeper
+•	 150F-169F: evil innkeeper
+•	 >170F: demonic innkeeper
+Designer: Nicolas Robert . Illustrations: Weberson Santiago 
+. Graphics: Luis Francisco . Editing of the French Rules: 
+Sébastien Dujardin & Nicolas Robert .  English	Translation: 
+Nathan Morse
+Thanks: The designer thanks his spouse Laureline and his 
+children Maë and Këo for their unfaltering support and 
+innumerable playtesting sessions since the first prototype, 
+and also Sébastien for his confidence, his advice, and his 
+always-relevant suggestions!
+Traveler (Annex) - effecT Tip /example/ClarifiCaTion
+0 Cultivator (Vegetable Garden) -  Immediately earn 1F per red 
+annex you have built, including this one.
+It is better to build a vegetable garden toward the end of 
+the game, because you cannot bury corpses under it.
+1 Mechanic (Workshop) - From now on, play 1 accomplice fewer 
+to perform the Build an Annex action.
+Example: You can build a rank-1 annex without playing 
+any cards from your hand. Y ou are not required to take 
+advantage of the workshop when you perform a Build 
+action.
+2 Distiller (Distillery) - At the end of the round, do not pay the 
+wages for one of the accomplices in your hand.
+Example: You only pay 1 franc if you have two accomplices 
+in your hand. If you have no cards in your hand at the end 
+of the round, you do not gain 1 franc.
+3 Gardener (Gardens) - At the end of each round, earn an additional 
+2F during the Travelers Leave phase. -
+3 Landscaper (park) - Immediately earn 4F . At the end of the 
+game, earn 4 francs per red card in the Exit Stack. -
+3 Butcher (Butcher’s shop) - From now on, you can kill as many 
+travelers as you want in one Kill a Guest action.
+Y ou must play a number of Guest cards from your hand 
+equal to the sum of the ranks of the killed travelers. 
+Example: Killing a rank-1 traveler and a rank-2 traveler 
+costs you 3 accomplices from your hand. Warning: This ef-
+fect only applies to Travelers in rooms, not to Peasants.
+0 NewsBoy (kiosk) - Immediately earn 1F per blue annex you 
+have built, including this one. 
+It is better to build a kiosk toward the end of the game, 
+because you cannot bury corpses under it.
+1 representative (parlor) - From now on, play 1 accomplice 
+fewer to perform the Bribe a Guest action.
+You can bribe a rank-2 traveler by playing merely one card 
+from your hand. Y ou are not required to take advantage of 
+the parlor when you perform a Bribe action.
+
+--- Page 8 ---
+8
+2
+Concierge (Room service) - Immediately place a Room Service to-
+ken next to a Key token. From now on, when a Guest rents 
+this room, he immediately pays a sum equal to his rank.
+There can only be one Room Service token per room. 
+Example: A rank-3 traveler pays 3F to the owner of the 
+Room Service token that is on his room.
+3 Grocer (Grocery) - Immediately earn 4F . At the end of the 
+game, earn 4 francs per blue card in the Exit Stack. -
+3 Shopkeeper (Store) - From now on, you can bribe as many 
+travelers as you want in one Bribe a Guest action.
+Y ou must play a number of Guest cards from your hand 
+equal to the sum of the ranks of the chosen cards. Example: 
+Bribing 2 rank-2 guests costs you 4 cards. Note: This effect 
+only applies to Travelers in rooms, not to Peasants.
+3 Brewer (Brewery) - From now on, you can bribe up to four 
+peasant simultaneously in one Bribe a Guest action. Careful, because you must pay your peasants’ wages!
+0 NoviCe (AltaR) - Immediately earn 1F per purple annex you 
+have built, including this one. 
+It is better to build an altar toward the end of the game, 
+because you cannot bury corpses under it.
+1 Monk (RooM)  - Immediately replace one of the white Key 
+tokens with one of your Key tokens.
+The Monk permits you to claim one of the neutral rooms 
+(the number of open rooms remains the same).
+2 AbBot (Cellar) - From now on, play 1 accomplice fewer to 
+perform the Bury a Corpse action.
+Example: You can bury a rank-3 corpse by playing merely 
+two cards from your hand. Y ou are not required to take 
+advantage of the cellar when you perform a Bury action.
+3
+prieSt (ChApel) - From now on, you are not required to dis-
+card accomplices of the other types when you use them 
+for a Bury a Corpse action.
+Example: You can take the Peasant, which you played to 
+bury a rank-1 corpse, back into your hand. 
+3 ArchBishop (Crypt) - From now on, you can bury as many 
+corpses as you want in one Bury a Corpse action.
+Y ou must play a number of accomplices, all at once, equal 
+to the sum of the ranks of the chosen corpses.
+Example: To bury 2 rank-1 corpses in a single action, you 
+must play 2 cards.
+3 Bishop (BishopriC) - Immediately earn 4 francs. At the end of 
+the game, earn 4 francs per purple card in the Exit Stack. -
+0 BaRon (GrAnd ChandelieR) - Immediately earn 4 francs. -
+1 Viscount (king Size Bed) - Immediately earn 6 francs. -
+2 Count (diniNg RooM) - Immediately earn 9 francs. -
+3 duke (Stables) - Immediately earn 4 francs. At the end of 
+the game, earn 4 francs per green card in the Exit Stack. -
+3 prinCe (GreeNhouse) - At the end of the game, earn 3 francs per 
+check you have. -
+3 Marquis (pavilion) - Immediately earn 18 francs. -
+Summary of a Game Round
+Phase 1: Welcome TRAVELERs
+Phase 2: Player Actions
+Starting with the first player and going clockwise, 
+each player performs a first action. Then each player 
+performs a second action in the same manner.
+On your turn, you may:
+1.	Bribe	a	guest	
+2.	Build	an	annex
+3. Kill a guest 
+4.	Bury	a	corpse
+5. Pass (and launder money).
+Phase 3: End of Round
+a. Police investigation
+b. Guests leave
+c. Pay wages
+

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摩立屋 (Molly House) 規則書</title>
+    <style>
+        :root {
+            --primary-bg: #121212;
+            --card-bg: #1e1e1e;
+            --accent-gold: #d4af37;
+            --accent-gold-glow: rgba(212, 175, 55, 0.4);
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --suit-pentacles: #5096f1;
+            /* Blue */
+            --suit-fans: #ffab40;
+            /* Orange */
+            --suit-hearts: #ff5252;
+            /* Red */
+            --suit-cups: #69f0ae;
+            /* Green */
+            --nav-bg: rgba(18, 18, 18, 0.85);
+            --danger: #ff4444;
+            --success: #00c851;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: var(--accent-gold);
+            box-shadow: 0 0 15px var(--accent-gold-glow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .home-link:hover {
+            color: var(--accent-gold);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 40px;
+            animation: fadeIn 0.8s ease-out both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background: var(--accent-gold);
+            margin-right: 15px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--accent-gold-glow);
+        }
+
+        h3 {
+            color: #fff;
+            margin-top: 35px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .flavor-text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border-left: 3px solid #444;
+            padding-left: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-block {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .suit-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+
+        .suit-pentacles-bg {
+            background: rgba(80, 150, 241, 0.2);
+            color: var(--suit-pentacles);
+            border: 1px solid var(--suit-pentacles);
+        }
+
+        .suit-fans-bg {
+            background: rgba(255, 171, 64, 0.2);
+            color: var(--suit-fans);
+            border: 1px solid var(--suit-fans);
+        }
+
+        .suit-hearts-bg {
+            background: rgba(255, 82, 82, 0.2);
+            color: var(--suit-hearts);
+            border: 1px solid var(--suit-hearts);
+        }
+
+        .suit-cups-bg {
+            background: rgba(105, 240, 174, 0.2);
+            color: var(--suit-cups);
+            border: 1px solid var(--suit-cups);
+        }
+
+        .action-card {
+            border-left: 4px solid var(--accent-gold);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(30, 30, 30, 0) 100%);
+        }
+
+        .floating-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 40px;
+            padding: 8px 15px;
+            display: flex;
+            gap: 5px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            max-width: 95vw;
+            overflow-x: auto;
+            scrollbar-width: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .floating-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .floating-nav a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-nav a.active {
+            background-color: var(--accent-gold);
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 0 15px var(--accent-gold-glow);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .badge-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .badge-info {
+            background: #2196F3;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 30px 15px;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .floating-nav {
+                padding: 6px 10px;
+                bottom: 20px;
+            }
+
+            .floating-nav a {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>摩立屋 (Molly House)</h1>
+        <a href="../index.html" class="home-link">🏠 返回首頁</a>
+    </header>
+
+    <main>
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>遊戲概述</h2>
+            <div class="card">
+                <div class="flavor-text">
+                    「在這個充滿可能性與變革的時代，摩立屋邀請玩家扮演這群性別開拓者，在追求內心渴望的同時，與風紀改良協會鬥智鬥勇。」
+                </div>
+                <p>《摩立屋》是一款關於 18 世紀倫敦地下社群的遊戲。玩家扮演一名尋求「喜悅」的摩立成員，透過舉辦與參與<strong>慶典 (Festivities)</strong>
+                    來得分。然而，你必須在個人得分與社群利益之間取得平衡。如果社群整體喜悅不足，或協會搜查太過嚴厲，所有人可能都會面臨被絞死的命運。</p>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components">
+            <h2>遊戲配件</h2>
+            <div class="card">
+                <div class="rules-grid">
+                    <div>
+                        <h3 style="margin-top:0">主要物件</h3>
+                        <ul>
+                            <li><span class="highlight">墮落卡 (Vice Cards)</span>：Desires, Threats, Mollies</li>
+                            <li><span class="highlight">玩家棋子 (Pawns)</span>：在板塊上移動</li>
+                            <li><span class="highlight">遭遇標記 (Encounter Tokens)</span>：決定你是忠誠還是線人</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="margin-top:0">標記物</h3>
+                        <ul>
+                            <li><span class="highlight">聲望方塊 (Cubes)</span>：永久增加特定花色的聲望</li>
+                            <li><span class="highlight">喜悅標記 (Joy)</span>：雙面設計（正常/受絞痕）</li>
+                            <li><span class="highlight">流言堆 (Gossip)</span>：蓋放暫存的威脅來源</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Types Section -->
+        <section id="card-types">
+            <h2>卡片類型</h2>
+            <div class="card">
+                <h3>慾望 (Desires) <span class="badge badge-info">得分核心</span></h3>
+                <p>數字 1-9 的基本牌。用於：
+                <ul>
+                    <li>組建慶典組合以賺取喜悅。</li>
+                    <li>增加在特定花色的聲望，強化後續行動。</li>
+                </ul>
+                </p>
+
+                <h3>威脅 (Threats) <span class="badge badge-danger">風險來源</span></h3>
+                <p>分為<strong>治安官 (C)</strong> 與<strong>無賴 (R)</strong>。
+                <ul>
+                    <li>如果在每週結束留存，會增加社群風險。</li>
+                    <li>如果出現在慶典且未被「化解」，會導致相關花色聲望最高的玩家<strong>暴露 (Exposed)</strong>。</li>
+                </ul>
+                </p>
+
+                <h3>摩立卡 (Mollies)</h3>
+                <p>傑克與皇后。如果你聲望中擁有與之匹配花色的慾望，會獲得額外喜悅獎勵。</p>
+            </div>
+        </section>
+
+        <!-- Setup Section -->
+        <section id="setup">
+            <h2>遊戲設置</h2>
+            <div class="card">
+                <ol>
+                    <li><strong>準備墮落牌堆</strong>：將摩立、威脅與指定數字範圍的慾望牌混合。</li>
+                    <li><strong>填充市場</strong>：翻開 4 張卡。</li>
+                    <li><strong>分配起始手牌</strong>：每人 4 張。</li>
+                    <li><strong>起始聲望</strong>：所有人選 1 張手牌同時翻開。如果是慾望，獲得該喜悅分；如果是威脅，放入安全堆。</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Rules Section -->
+        <section id="rules">
+            <h2>基本概念</h2>
+            <div class="card">
+                <h3>聲望 (Reputation)</h3>
+                <p>你的聲望等於你聲望區中<strong>該花色的卡片數 + 方塊數</strong>。聲望越高，相關行動越強烈，但房屋被搜查時，受到的起訴也越嚴重。</p>
+
+                <h3>流言與暴露 (Gossip & Exposure)</h3>
+                <p>當威脅卡進入流言堆時，該花色中<strong>最惡名昭彰 (Most Infamous)</strong> 的玩家會暴露。</p>
+                <div class="stat-block">
+                    <strong>最惡名昭彰判定：</strong>
+                    <p>比對所有玩家聲望中該花色卡片數值之總和。傑克 (J) 與皇后 (Q) 視為 10 點。總和最高者即為最惡名昭彰；若平手則一同暴露。</p>
+                </div>
+                <p>暴露的玩家必須將聲望中該花色的所有卡片移至流言堆，每張移出的卡片可換取一個永久聲望方塊。</p>
+            </div>
+        </section>
+
+        <!-- Turn Section -->
+        <section id="turn">
+            <h2>玩家回合</h2>
+            <div class="card">
+                <p>在你的回合，依序執行：</p>
+                <ol>
+                    <li><span class="highlight">擲骰</span>：擲 2 顆骰子。</li>
+                    <li><span class="highlight">流言判定</span>：若擲出「市場棄置」圖示，市場末端卡片移至安全堆（若是摩立/威脅則移至流言堆，可能引發暴露）。</li>
+                    <li><span class="highlight">移動</span>：選擇一顆骰子的數值（或加總），移動你的棋子。</li>
+                    <li><span class="highlight">行動</span>：執行 1 個基本行動或所在地點行動。</li>
+                    <li><span class="highlight">檢查手牌</span>：手牌上限 6 張。</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Actions Section -->
+        <section id="actions">
+            <h2>行動列表</h2>
+
+            <div class="card action-card">
+                <h3>基本行動</h3>
+                <ul>
+                    <li><strong>隱忍 (Lie Low)</strong>：從牌庫抽 1 張。</li>
+                    <li><strong>沉溺 (Indulge)</strong>：從市場拿取一張符合目前地點花色的卡。</li>
+                    <li><strong>指控 (Accuse)</strong>：若有別人在同地點，你可以揭漏他的一個遭遇標記。</li>
+                </ul>
+            </div>
+
+            <div class="card action-card">
+                <h3>地點行動</h3>
+                <ul>
+                    <li><strong>巡遊 (Cruise)</strong> <span
+                            class="badge badge-info">位於房屋旁</span>：從手牌出一張相符花色的慾望卡至聲望區，接著抽牌（抽牌數 = 該花色聲望，上限 4）。</li>
+                    <li><strong>購物 (Shop)</strong> <span class="badge badge-info">位於商店</span>：取得商店的物品卡。</li>
+                    <li><strong>舉辦慶典 (Throw a Festivity)</strong> <span class="badge badge-info">核心行動</span>：見下節詳解。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Festivity Section -->
+        <section id="festivity">
+            <h2>慶典詳解</h2>
+            <div class="card">
+                <p>舉辦慶典是得分的主要管道，分為五個階段：</p>
+                <ol>
+                    <li><strong>整頓 (Bring to Order)</strong>：拿取燭台，成為主持。</li>
+                    <li><strong>出牌 (Play Cards)</strong>：
+                        <ul>
+                            <li>進行<strong>兩輪</strong> (二人遊戲則為三輪)。</li>
+                            <li>每輪開始前，先從牌堆翻開一張作為<strong>社群牌</strong>。</li>
+                            <li>主持每輪<strong>必須</strong>出一張牌；其餘玩家可選擇出牌或跳過 (Pass)。一旦跳過，該場慶典剩餘輪次皆不能再出牌。</li>
+                        </ul>
+                    </li>
+                    <li><strong>判定與得分</strong>：從所有出的牌（含社群牌）選四張組成最強組合：
+                        <ul>
+                            <li><span class="highlight">驚喜舞會 (Surprise Ball)</span>：同花色順子。</li>
+                            <li><span class="highlight">洗禮式 (Christening)</span>：皇后 + 三張同數值。</li>
+                            <li><span class="highlight">舞蹈 (Dance)</span>：傑克 + 任意三張順子。</li>
+                            <li><span class="highlight">靜寂集會 (Quiet Gathering)</span>：若無法組成上述，選數值最低的四張（治安官視為 0）。</li>
+                        </ul>
+                    </li>
+                    <li><strong>處理威脅</strong>：
+                        <ul>
+                            <li>若組合中包含威脅，則成功「化解 (Foiled)」，該玩家可將聲望中同花色的卡片移至安全堆，並自由選擇每張換取一個方塊（Pride Rule）。</li>
+                            <li>若威脅未被選中且進入流言，則引發該花色持有者的<strong>暴露</strong>。</li>
+                        </ul>
+                    </li>
+                    <li><strong>獎勵</strong>：
+                        <ul>
+                            <li><strong>主持獎勵</strong>：若非靜寂集會，主持獲得等同於所在地點聲望的喜悅。若是靜寂集會，主持則扣除該數值。</li>
+                            <li><strong>社群喜悅</strong>：根據組合等級，社群喜悅增加 (+3/+2/+1) 或減少 (-1)。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- End of Week Section -->
+        <section id="eow">
+            <h2>每週結束 (End of the Week)</h2>
+            <div class="card">
+                <p>當牌庫耗盡時觸發：</p>
+                <ul>
+                    <li><strong>揭露威脅</strong>：所有人強迫打出手牌中的所有威脅卡進入流言堆。每增加一張威脅，該玩家拿取一個抽牌標記。</li>
+                    <li><strong>協會調查</strong>：
+                        <ol>
+                            <li><strong>清理：</strong>將流言堆混勻，隨機移除 1/3 的牌移至安全堆。</li>
+                            <li><strong>取證：</strong>翻開剩餘牌。每張威脅卡若匹配到同花色的數字卡或摩立卡，則對應的房屋增加一個證據 (Evidence)。</li>
+                        </ol>
+                    </li>
+                    <li><strong>房屋搜查 (Raids)</strong>：
+                        <ul>
+                            <li>若任一房屋證據達到 7，該屋遭查封。</li>
+                            <li><strong>起訴 (Indictments)：</strong>在該屋聲望第 1 名的玩家獲得<strong>重大起訴</strong>；第 2
+                                名獲得<strong>輕微起訴</strong>。</li>
+                        </ul>
+                    </li>
+                    <li><strong>面對社會：</strong>獲得起訴的玩家可放置一個祕密的<strong>遭遇標記 (Encounter Token)</strong> 到最近的開放房屋。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Informer Section -->
+        <section id="informer">
+            <h2>叛徒與線人 (Informers)</h2>
+            <div class="card">
+                <p>你可以透過放置<strong>線人標記</strong>來背叛社群。如果該標記所在的房屋在遊戲結束前被搜查，你的線人身份即為成功。</p>
+                <div class="rules-grid">
+                    <div class="stat-block">
+                        <h4 class="highlight">成功線人的好處</h4>
+                        <ul>
+                            <li><strong>赦免罪行：</strong>若社群倖存，成功線人可棄置所有起訴卡。</li>
+                            <li><strong>另一條生路：</strong>若社群潰敗，你是唯一能贏的人。</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>暴露線人 (Revealed Informers)</h3>
+                <p>若你的線人標記被其他玩家「指控 (Accuse)」揭露，你將面臨社群排擠：</p>
+                <ul>
+                    <li>不能再於對應花色房屋舉辦慶典或巡遊。</li>
+                    <li>別人舉辦慶典時你必須跳過。</li>
+                    <li>若手牌超限，多出的牌直接移入安全堆 (不增加流言)。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Items Section -->
+        <section id="items">
+            <h2>物品能力</h2>
+            <div class="card">
+                <div class="rules-grid">
+                    <div class="stat-block">
+                        <h4 class="highlight">琴酒 (Bottle of Gin)</h4>
+                        <p>慶典判定組合前使用。所有玩家再出一輪牌。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">賄賂 (Bribe)</h4>
+                        <p>在你的回合，不執行行動而是直接檢查流言堆，並祕密將一張牌加入手牌。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">假面 (Domino)</h4>
+                        <p>在調查階段使用。即便你的房屋被搜查，你的聲望也會被政府忽略（不拿起訴卡）。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">服飾 (Dress)</h4>
+                        <p>慶典出牌後使用。使「驚喜舞會」的達成條件降低為「該花色的任意四張慾望卡」，不再需要數字連續。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">報紙公告 (Newspaper Notice)</h4>
+                        <p>在你的回合，若於開放房屋：公開一個遭遇標記。若為忠誠，獲得市場中匹配卡片的喜悅分；若為線人，你立即成為<strong>暴露線人</strong>。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">小提琴 (Violin)</h4>
+                        <p>慶典判定前使用。社群額外多翻兩張牌（若牌庫空則自流言堆抽）。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Endings Section -->
+        <section id="end">
+            <h2>遊戲結局與勝負</h2>
+            <div class="card">
+                <div class="rules-grid">
+                    <div class="stat-block">
+                        <h4 style="color:var(--danger)">社群滲透 (Community Infiltration)</h4>
+                        <p>條件：4 間房屋皆遭查封，或證據過多。社群潰敗。</p>
+                        <p><strong>勝負：</strong>僅<strong>成功線人</strong>可比拼分數。計算方式：
+                            <br>(該屋證據 × 2) + (所有其他玩家在該屋的聲望 × 2) - (你自己的總聲望)。
+                            <br>分數最高者獲勝。
+                        </p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 style="color:var(--success)">社群倖存 (Community Survival)</h4>
+                        <p>條件：社群喜悅跨過門檻。社群度過危機。</p>
+                        <p><strong>勝負：</strong>進行<strong>審判 (Trials)</strong>。每張起訴卡需擲骰判定扣分或「絞死」。最後，仍存活且喜悅最高的玩家獲勝。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 style="color:var(--text-secondary)">社群萎縮 (Community Atrophy)</h4>
+                        <p>條件：第五週結束仍未達成上述。全體失敗。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Biographies Section -->
+        <section id="bios">
+            <h2>摩立人物誌</h2>
+            <div class="card">
+                <div class="flavor-text">「我們依照其在社群中的稱呼紀錄這些開拓者，以此向他們致敬。」</div>
+                <div class="rules-grid">
+                    <div class="stat-block">
+                        <h4 class="highlight">賽拉菲娜公主 (Princess Seraphina)</h4>
+                        <p>最著名的摩立之一。她以女性身份生活，經常穿著裙裝參加舞會，即便是在庭審中，鄰居們也以 "She" 稱呼她。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">漂亮克里斯 (Prety Criss)</h4>
+                        <p>記載中是一名第 2 團的士兵。在當時的秘密社群中，不乏像他這樣跨越階級與職業的成員。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">橘子黛伯 (Orange Deb)</h4>
+                        <p>因「意圖進行雞姦」被判處頸手枷與一年監禁。她是一家摩立屋的常客，最終因線人告發而被捕。</p>
+                    </div>
+                    <div class="stat-block">
+                        <h4 class="highlight">飛馬摩立 (Flying Horse Moll)</h4>
+                        <p>1725 年在一場私人化妝舞會中被捕。據說這群人多以賽馬的名字作為彼此的社群代碼。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Glossary Section -->
+        <section id="glossary">
+            <h2>術語對照</h2>
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>術語</th>
+                            <th>翻譯</th>
+                            <th>說明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Molly House</td>
+                            <td>摩立屋</td>
+                            <td>18 世紀倫敦的地下社群集會所。</td>
+                        </tr>
+                        <tr>
+                            <td>Gossip Pile</td>
+                            <td>流言堆</td>
+                            <td>蓋放的棄牌堆，會積累證據。</td>
+                        </tr>
+                        <tr>
+                            <td>Safe Pile</td>
+                            <td>安全堆</td>
+                            <td>開放的棄牌堆，不會對玩家造成傷害。</td>
+                        </tr>
+                        <tr>
+                            <td>Reputation</td>
+                            <td>聲望</td>
+                            <td>個人在各花色累積的卡片與方塊。</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure</td>
+                            <td>暴露</td>
+                            <td>因流言引發的聲望损失。</td>
+                        </tr>
+                        <tr>
+                            <td>Informer</td>
+                            <td>線人</td>
+                            <td>背叛者。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="floating-nav" id="floating-nav">
+        <a href="#overview">概述</a>
+        <a href="#components">配件</a>
+        <a href="#card-types">卡片</a>
+        <a href="#setup">設置</a>
+        <a href="#rules">概念</a>
+        <a href="#turn">回合</a>
+        <a href="#actions">行動</a>
+        <a href="#festivity">慶典</a>
+        <a href="#eow">結算</a>
+        <a href="#informer">線人</a>
+        <a href="#items">物品</a>
+        <a href="#glossary">術語</a>
+        <a href="#end">結局</a>
+        <a href="#bios">人物</a>
+    </nav>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.floating-nav a');
+
+        // Smooth scroll for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // ScrollSpy
+        const options = { threshold: 0.3 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if(link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, options);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+
+</body>
+
+</html>
